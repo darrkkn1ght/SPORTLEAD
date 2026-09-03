@@ -30,7 +30,7 @@ export default function OurApproach() {
               <div key={index} className="relative flex md:block items-start gap-6 md:gap-0 animate-fadeInUp" style={{ animationDelay: `${index * 100}ms` }}>
                 
                 <div className="md:mb-8 bg-brand-off-white relative z-10 w-16 h-16 md:w-auto md:h-auto shrink-0 flex items-center justify-center">
-                  <span className="numbered-label text-5xl md:text-7xl !text-brand-navy/10 font-bold block md:inline">
+                  <span className="numbered-label text-4xl md:text-6xl lg:text-7xl !text-brand-navy/10 font-bold block md:inline">
                     {String(index + 1).padStart(2, '0')}
                   </span>
                 </div>

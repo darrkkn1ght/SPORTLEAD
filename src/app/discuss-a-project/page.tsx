@@ -13,7 +13,7 @@ export default function DiscussProjectPage() {
       <section className="bg-brand-navy-light py-24 pt-32 border-b border-white/5">
         <Container>
           <div className="max-w-3xl mx-auto text-center">
-            <h1 className="text-5xl md:text-6xl font-bold mb-6 text-white tracking-tight">Discuss a Project</h1>
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-white tracking-tight">Discuss a Project</h1>
             <p className="text-xl text-gray-300 leading-relaxed">
               Tell us about your sport-sector challenge, facility need or institutional project. We'll review your inquiry and determine the right next step.
             </p>

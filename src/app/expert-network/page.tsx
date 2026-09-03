@@ -13,7 +13,7 @@ export default function ExpertNetworkPage() {
       <section className="bg-brand-navy-light py-24 md:py-32 pt-32 border-b border-white/5">
         <Container>
           <div className="max-w-3xl mx-auto text-center">
-            <h1 className="text-5xl md:text-6xl font-bold mb-6 text-white tracking-tight">Expert Network</h1>
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-white tracking-tight">Expert Network</h1>
             <p className="text-xl text-gray-300 leading-relaxed">
               A multidisciplinary collective of specialists driving sport development across Africa.
             </p>

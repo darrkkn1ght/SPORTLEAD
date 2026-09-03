@@ -10,7 +10,7 @@ export default function WhoWeAre() {
         <div className="flex flex-col lg:flex-row gap-16 lg:gap-24 items-start">
           <div className="lg:w-1/3 shrink-0">
             <span className="section-label">WHO WE ARE</span>
-            <h1 className="text-5xl lg:text-7xl font-bold text-white tracking-tight mb-8">
+            <h1 className="text-4xl md:text-5xl lg:text-7xl font-bold text-white tracking-tight mb-8">
               Driving <br />
               <span className="text-gradient">Excellence</span>
             </h1>

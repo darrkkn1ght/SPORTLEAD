@@ -29,7 +29,7 @@ export default function ServicePillars() {
             transition={{ duration: 0.6 }}
             className="mb-12"
           >
-            <div className="bg-brand-navy-light rounded-2xl p-10 md:p-16 flex flex-col md:flex-row gap-10 items-start border border-white/5 shadow-lg hover:border-brand-gold/30 hover:shadow-xl transition-all duration-300">
+            <div className="bg-brand-navy-light rounded-2xl p-6 sm:p-10 md:p-16 flex flex-col md:flex-row gap-10 items-start border border-white/5 shadow-lg hover:border-brand-gold/30 hover:shadow-xl transition-all duration-300">
               <div className="w-16 h-16 shrink-0 rounded-2xl bg-white/5 flex items-center justify-center shadow-sm text-brand-gold border border-white/10">
                 <Icon name={firstService.icon} className="w-8 h-8" />
               </div>
