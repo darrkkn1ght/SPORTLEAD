@@ -11,8 +11,8 @@ interface CardProps {
 }
 
 export function Card({ children, className = '', href, hoverable = false }: CardProps) {
-  const baseClasses = 'bg-brand-navy-light rounded-2xl border border-white/5 p-6 md:p-8 text-white shadow-lg'
-  const hoverClasses = hoverable ? 'transition-all duration-300 hover:border-brand-gold/30 hover:shadow-xl hover:-translate-y-1' : ''
+  const baseClasses = 'bg-white rounded-2xl border border-warm-border p-6 md:p-8 text-charcoal shadow-card'
+  const hoverClasses = hoverable ? 'transition-all duration-300 hover:shadow-card-hover hover:-translate-y-1 hover:border-brand-green/20' : ''
   const classes = `${baseClasses} ${hoverClasses} ${className}`.trim()
   
   if (href) {

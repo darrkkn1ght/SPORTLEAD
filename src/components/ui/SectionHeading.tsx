@@ -22,13 +22,13 @@ export function SectionHeading({
   const isCenter = center || align === 'center'
   const alignClass = isCenter ? 'text-center' : 'text-left'
   const flexAlignClass = isCenter ? 'items-center mx-auto' : 'items-start'
-  const titleColor = light ? 'text-white' : 'text-navy'
-  const subtitleColor = light ? 'text-gray-300' : 'text-gray-600'
+  const titleColor = light ? 'text-white' : 'text-charcoal'
+  const subtitleColor = light ? 'text-gray-300' : 'text-gray-500'
   
   return (
     <div className={`flex flex-col gap-4 ${alignClass} ${className}`}>
       {accent && (
-        <div className={`w-12 h-1 bg-brand-gold ${flexAlignClass}`} />
+        <div className={`w-12 h-1 bg-brand-green ${flexAlignClass}`} />
       )}
       <h2 className={`text-3xl md:text-4xl font-bold tracking-tight ${titleColor}`}>
         {title}

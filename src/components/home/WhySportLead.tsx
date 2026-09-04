@@ -5,41 +5,47 @@ import { motion } from "framer-motion";
 
 export default function WhySportLead() {
   return (
-    <section className="py-24 bg-brand-navy-light">
+    <section className="py-28 bg-warm-white">
       <Container>
-        <div className="mb-20 max-w-2xl">
-          <span className="text-sm uppercase tracking-[0.2em] text-brand-gold font-bold block mb-4">
+        <div className="text-center mb-20">
+          <span className="section-label">
             Our Edge
           </span>
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white tracking-tight">
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-charcoal tracking-tight mb-4">
             Why Partner With Us.
           </h2>
-          <div className="w-24 h-[2px] bg-brand-gold mt-8"></div>
+          <p className="text-gray-500 text-lg max-w-2xl mx-auto">
+            What sets our advisory practice apart in the African sport sector.
+          </p>
         </div>
 
-        <div className="flex flex-col space-y-12 lg:space-y-16 max-w-5xl">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
           {DIFFERENTIATORS.map((diff, index) => (
             <motion.div 
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
+              transition={{ duration: 0.4, delay: index * 0.08 }}
               key={index} 
-              className="relative flex flex-col md:flex-row gap-6 md:gap-12 items-start group pb-12 lg:pb-16 border-b border-white/10 last:border-b-0 last:pb-0"
+              className={`bg-white rounded-2xl border border-warm-border p-8 shadow-card hover:shadow-card-hover hover:-translate-y-1 transition-all duration-300 group ${
+                index === DIFFERENTIATORS.length - 1 && DIFFERENTIATORS.length % 3 === 2 ? 'md:col-span-2 lg:col-span-1' : ''
+              }`}
             >
-              <div className="flex items-center gap-4 md:w-48 shrink-0">
-                <span className="text-sm font-semibold text-brand-gold uppercase tracking-widest">0{index + 1}</span>
-                <div className="h-px bg-brand-gold/30 flex-1"></div>
+              <div className="flex items-center gap-4 mb-6">
+                <div className="w-10 h-10 rounded-full bg-brand-green-muted flex items-center justify-center shrink-0">
+                  <span className="text-sm font-bold text-brand-green">
+                    {String(index + 1).padStart(2, '0')}
+                  </span>
+                </div>
+                <div className="h-px bg-warm-border flex-1"></div>
               </div>
               
-              <div className="flex-1 pt-0">
-                <h3 className="text-2xl md:text-3xl font-bold text-white mb-4 tracking-tight group-hover:text-brand-gold transition-colors">
-                  {diff.title}
-                </h3>
-                <p className="text-gray-300 text-lg leading-relaxed max-w-3xl">
-                  {diff.description}
-                </p>
-              </div>
+              <h3 className="text-xl font-bold text-charcoal mb-3 tracking-tight group-hover:text-brand-green transition-colors">
+                {diff.title}
+              </h3>
+              <p className="text-gray-500 leading-relaxed">
+                {diff.description}
+              </p>
             </motion.div>
           ))}
         </div>

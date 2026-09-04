@@ -16,7 +16,7 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-[#060D18] text-white pt-16 pb-8">
+    <footer className="bg-charcoal text-white pt-16 pb-8">
       <Container>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
           {/* Col 1: Brand */}
@@ -32,12 +32,12 @@ export default function Footer() {
             <div className="space-y-3">
               <a
                 href={`mailto:${SITE_EMAIL}`}
-                className="flex items-center gap-3 text-sm text-gray-300 hover:text-brand-green transition-colors"
+                className="flex items-center gap-3 text-sm text-gray-400 hover:text-brand-green-light transition-colors"
               >
                 <Mail size={16} />
                 {SITE_EMAIL}
               </a>
-              <div className="flex items-start gap-3 text-sm text-gray-300">
+              <div className="flex items-start gap-3 text-sm text-gray-400">
                 <MapPin size={16} className="mt-1 flex-shrink-0" />
                 <span>{HEADQUARTERS}</span>
               </div>
@@ -58,7 +58,7 @@ export default function Footer() {
                 <li key={link.label}>
                   <Link
                     href={link.href}
-                    className="text-sm text-gray-400 hover:text-brand-green transition-colors"
+                    className="text-sm text-gray-400 hover:text-brand-green-light transition-colors"
                   >
                     {link.label}
                   </Link>
@@ -75,7 +75,7 @@ export default function Footer() {
                 <li key={service.id}>
                   <Link
                     href={service.href}
-                    className="text-sm text-gray-400 hover:text-brand-green transition-colors"
+                    className="text-sm text-gray-400 hover:text-brand-green-light transition-colors"
                   >
                     {service.title}
                   </Link>
@@ -97,7 +97,7 @@ export default function Footer() {
                 <li key={idx}>
                   <Link
                     href={link.href}
-                    className="text-sm text-gray-400 hover:text-brand-green transition-colors"
+                    className="text-sm text-gray-400 hover:text-brand-green-light transition-colors"
                   >
                     {link.label}
                   </Link>
@@ -117,7 +117,7 @@ export default function Footer() {
                 href={link.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-gray-400 hover:text-brand-green transition-colors p-2"
+                className="text-gray-500 hover:text-brand-green-light transition-colors p-2"
                 aria-label={link.name}
               >
                 <IconComponent size={20} />

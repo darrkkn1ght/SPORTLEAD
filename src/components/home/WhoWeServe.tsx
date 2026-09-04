@@ -5,18 +5,18 @@ import { motion } from "framer-motion";
 
 export default function WhoWeServe() {
   return (
-    <section className="py-24 md:py-32 bg-brand-navy relative">
+    <section className="py-24 md:py-32 bg-warm-gray relative">
       <Container>
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-24 items-start">
           <div className="lg:col-span-5 sticky top-24">
-            <span className="text-sm uppercase tracking-[0.2em] text-brand-gold font-bold block mb-4">
+            <span className="section-label">
               Who We Serve
             </span>
-            <h2 className="text-4xl md:text-5xl font-bold text-white mb-6 tracking-tight">
+            <h2 className="text-4xl md:text-5xl font-bold text-charcoal mb-6 tracking-tight">
               Empowering the Sports Ecosystem
             </h2>
-            <div className="w-16 h-[2px] bg-brand-gold mb-8"></div>
-            <p className="text-gray-300 text-lg leading-relaxed">
+            <div className="w-16 h-[2px] bg-brand-green mb-8"></div>
+            <p className="text-gray-500 text-lg leading-relaxed">
               We partner with forward-thinking organizations across the continent, driving institutional growth and sustainable impact in the sports sector.
             </p>
           </div>
@@ -29,12 +29,12 @@ export default function WhoWeServe() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.4, delay: index * 0.1 }}
                 key={index} 
-                className="py-6 border-b border-white/10 flex items-center group hover:bg-white/5 transition-colors px-4 -mx-4 rounded-xl cursor-default"
+                className="py-6 border-b border-warm-border flex items-center group hover:bg-white/60 transition-colors px-4 -mx-4 rounded-xl cursor-default"
               >
-                <span className="text-brand-gold font-semibold text-sm mr-6 w-6">
+                <span className="text-brand-green font-semibold text-sm mr-6 w-6">
                   {(index + 1).toString().padStart(2, '0')}
                 </span>
-                <span className="text-xl md:text-2xl text-white font-medium group-hover:translate-x-2 transition-transform">
+                <span className="text-xl md:text-2xl text-charcoal font-medium group-hover:translate-x-2 transition-transform">
                   {audience.label}
                 </span>
               </motion.div>

@@ -38,14 +38,14 @@ export default function MobileNav({ isOpen, onClose }: MobileNavProps) {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-[60] bg-brand-navy/95 backdrop-blur-md flex flex-col transition-opacity duration-300">
-      <div className="flex items-center justify-between p-6 border-b border-white/10">
-        <span className="text-white font-bold text-xl tracking-wider uppercase">
+    <div className="fixed inset-0 z-[60] bg-white/98 backdrop-blur-md flex flex-col transition-opacity duration-300">
+      <div className="flex items-center justify-between p-6 border-b border-warm-border">
+        <span className="text-charcoal font-bold text-xl tracking-wider uppercase">
           SportLead Africa
         </span>
         <button
           onClick={onClose}
-          className="text-white p-2 focus:outline-none hover:text-brand-gold transition-colors"
+          className="text-charcoal p-2 focus:outline-none hover:text-brand-green transition-colors"
           aria-label="Close menu"
         >
           <X size={24} />
@@ -61,7 +61,7 @@ export default function MobileNav({ isOpen, onClose }: MobileNavProps) {
                   href={item.href}
                   onClick={onClose}
                   className={`block py-3 text-lg font-semibold transition-colors ${
-                    pathname === item.href ? 'text-brand-gold' : 'text-white hover:text-brand-gold'
+                    pathname === item.href ? 'text-brand-green' : 'text-charcoal hover:text-brand-green'
                   }`}
                 >
                   {item.label}
@@ -69,7 +69,7 @@ export default function MobileNav({ isOpen, onClose }: MobileNavProps) {
                 {item.children && (
                   <button
                     onClick={() => toggleExpand(item.label)}
-                    className="p-3 text-white focus:outline-none hover:text-brand-gold"
+                    className="p-3 text-charcoal focus:outline-none hover:text-brand-green"
                     aria-label={`Toggle ${item.label}`}
                   >
                     <ChevronDown
@@ -83,7 +83,7 @@ export default function MobileNav({ isOpen, onClose }: MobileNavProps) {
               </div>
 
               {item.children && expandedItems.includes(item.label) && (
-                <div className="pl-4 flex flex-col gap-2 border-l border-white/10 ml-2 mt-2 mb-4">
+                <div className="pl-4 flex flex-col gap-2 border-l-2 border-brand-green/20 ml-2 mt-2 mb-4">
                   {item.children.map((child) => (
                     <Link
                       key={child.label}
@@ -91,8 +91,8 @@ export default function MobileNav({ isOpen, onClose }: MobileNavProps) {
                       onClick={onClose}
                       className={`block py-2 text-base transition-colors ${
                         pathname === child.href
-                          ? 'text-brand-gold'
-                          : 'text-gray-300 hover:text-white'
+                          ? 'text-brand-green'
+                          : 'text-gray-500 hover:text-charcoal'
                       }`}
                     >
                       {child.label}
@@ -105,9 +105,9 @@ export default function MobileNav({ isOpen, onClose }: MobileNavProps) {
         </nav>
       </div>
 
-      <div className="p-6 border-t border-white/10 bg-brand-navy-light mt-auto">
+      <div className="p-6 border-t border-warm-border bg-warm-gray mt-auto">
         <div onClick={onClose}>
-          <Button variant="primary" href="/discuss-a-project" className="w-full justify-center bg-brand-gold text-brand-navy hover:bg-brand-gold-light rounded-full font-bold">
+          <Button variant="primary" href="/discuss-a-project" className="w-full justify-center bg-brand-green text-white hover:bg-brand-green-light rounded-full font-bold">
             Discuss a Project
           </Button>
         </div>

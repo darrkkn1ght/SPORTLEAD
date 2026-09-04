@@ -6,74 +6,80 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 
 export default function ServicePillars() {
-  const [firstService, ...remainingServices] = SERVICE_PILLARS;
-
   return (
-    <section className="py-24 bg-brand-navy relative">
+    <section className="py-28 bg-warm-white relative">
       <Container>
-        <div className="mb-16">
-          <span className="text-sm uppercase tracking-[0.2em] text-brand-gold font-bold block mb-4">
-            Our Solutions
-          </span>
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white tracking-tight">
-            Comprehensive Capabilities.
-          </h2>
-          <div className="w-24 h-[2px] bg-brand-gold mt-8"></div>
+        {/* Section header: split layout */}
+        <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 mb-20">
+          <div>
+            <span className="section-label">
+              Our Solutions
+            </span>
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-charcoal tracking-tight">
+              Comprehensive<br />Capabilities.
+            </h2>
+          </div>
+          <p className="text-gray-500 text-lg leading-relaxed max-w-md lg:text-right">
+            Six practice areas built around the real needs of African sport organisations, facilities and systems.
+          </p>
         </div>
 
-        {firstService && (
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="mb-12"
-          >
-            <div className="bg-brand-navy-light rounded-2xl p-6 sm:p-10 md:p-16 flex flex-col md:flex-row gap-10 items-start border border-white/5 shadow-lg hover:border-brand-gold/30 hover:shadow-xl transition-all duration-300">
-              <div className="w-16 h-16 shrink-0 rounded-2xl bg-white/5 flex items-center justify-center shadow-sm text-brand-gold border border-white/10">
-                <Icon name={firstService.icon} className="w-8 h-8" />
-              </div>
-              <div className="flex-1">
-                <h3 className="text-3xl md:text-4xl font-bold text-white mb-4 tracking-tight">
-                  {firstService.title}
-                </h3>
-                <p className="text-gray-300 text-lg leading-relaxed max-w-3xl mb-8">
-                  {firstService.description}
-                </p>
-                <Link href={firstService.href} className="inline-flex items-center font-semibold text-brand-gold hover:text-white transition-colors group">
-                  <span className="uppercase tracking-wider text-sm">Explore Practice</span>
-                  <span className="ml-2 transform group-hover:translate-x-1 transition-transform">→</span>
-                </Link>
-              </div>
-            </div>
-          </motion.div>
-        )}
+        {/* Bento grid: first row 2 larger cards, second row 2, third row 2 */}
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-5">
+          {SERVICE_PILLARS.map((service, index) => {
+            // First two cards span 7 and 5 cols, next two 5 and 7, last two 6 and 6
+            const colSpans = [
+              'md:col-span-7',
+              'md:col-span-5',
+              'md:col-span-5',
+              'md:col-span-7',
+              'md:col-span-6',
+              'md:col-span-6',
+            ];
+            const span = colSpans[index] || 'md:col-span-6';
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-8 pt-4">
-          {remainingServices.map((service, index) => (
-            <motion.div 
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              key={service.id} 
-              className="bg-brand-navy-light rounded-2xl p-8 md:p-10 border border-white/5 shadow-lg hover:border-brand-gold/30 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group flex flex-col h-full"
-            >
-              <div className="w-12 h-12 rounded-xl bg-white/5 flex items-center justify-center shadow-sm text-brand-gold border border-white/10 mb-6">
-                <Icon name={service.icon} className="w-6 h-6" />
-              </div>
-              <h3 className="text-2xl font-bold text-white tracking-tight mb-4">
-                {service.title}
-              </h3>
-              <p className="text-gray-300 text-lg leading-relaxed mb-8 flex-1">
-                {service.description}
-              </p>
-              <Link href={service.href} className="inline-flex items-center text-white font-semibold text-sm hover:text-brand-gold transition-colors">
-                <span className="uppercase tracking-wider">Explore</span>
-                <span className="ml-2 transform group-hover:translate-x-1 transition-transform">→</span>
-              </Link>
-            </motion.div>
-          ))}
+            return (
+              <motion.div
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: index * 0.08 }}
+                key={service.id}
+                className={`${span} group`}
+              >
+                <Link href={service.href} className="block h-full">
+                  <div className="relative bg-white rounded-2xl border border-warm-border p-8 md:p-10 h-full shadow-card hover:shadow-card-hover hover:-translate-y-1 transition-all duration-300 overflow-hidden">
+                    {/* Top accent line */}
+                    <div className="absolute top-0 left-0 right-0 h-[3px] bg-brand-green/0 group-hover:bg-brand-green transition-colors duration-300" />
+
+                    {/* Number + Icon row */}
+                    <div className="flex items-center justify-between mb-8">
+                      <div className="w-12 h-12 rounded-xl bg-brand-green-muted flex items-center justify-center text-brand-green">
+                        <Icon name={service.icon} className="w-6 h-6" />
+                      </div>
+                      <span className="text-5xl font-bold text-charcoal/[0.06] leading-none tracking-tighter select-none">
+                        {String(index + 1).padStart(2, '0')}
+                      </span>
+                    </div>
+
+                    {/* Content */}
+                    <h3 className="text-xl md:text-2xl font-bold text-charcoal tracking-tight mb-3 group-hover:text-brand-green transition-colors duration-300">
+                      {service.title}
+                    </h3>
+                    <p className="text-gray-500 leading-relaxed mb-6">
+                      {service.description}
+                    </p>
+
+                    {/* Explore link */}
+                    <span className="inline-flex items-center text-brand-green font-semibold text-sm opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 transition-all duration-300">
+                      <span className="uppercase tracking-wider">Explore</span>
+                      <span className="ml-2">→</span>
+                    </span>
+                  </div>
+                </Link>
+              </motion.div>
+            );
+          })}
         </div>
       </Container>
     </section>

@@ -10,11 +10,11 @@ export const metadata: Metadata = {
 
 export default function ContactPage() {
   return (
-    <main className="bg-brand-navy min-h-screen pt-32 pb-24">
+    <main className="bg-warm-white min-h-screen pt-32 pb-24">
       <Container>
         <div className="mb-16 text-center md:text-left">
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 tracking-tight">Get In Touch</h1>
-          <p className="text-xl text-gray-300 max-w-2xl leading-relaxed">
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-charcoal mb-6 tracking-tight">Get In Touch</h1>
+          <p className="text-xl text-gray-500 max-w-2xl leading-relaxed">
             Whether you have a general inquiry or are looking to explore partnership opportunities, our team is ready to connect.
           </p>
         </div>

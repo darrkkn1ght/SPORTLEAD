@@ -4,37 +4,37 @@ import { VALUES } from '@/lib/constants';
 
 export default function ValuesStandards() {
   return (
-    <section className="bg-brand-navy bg-noise py-24 text-white relative">
+    <section className="bg-warm-gray py-28 text-charcoal relative">
       <Container>
-        <div className="mb-20">
-          <span className="section-label">OUR PRINCIPLES</span>
-          <SectionHeading 
-            title="Values & Standards" 
-            align="left"
-            light={true}
-          />
+        <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 mb-20">
+          <div>
+            <span className="section-label">OUR PRINCIPLES</span>
+            <SectionHeading 
+              title="Values & Standards" 
+              align="left"
+            />
+          </div>
+          <p className="text-gray-500 text-lg leading-relaxed max-w-md lg:text-right">
+            The standards that guide every engagement, recommendation and deliverable.
+          </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-24 gap-y-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {VALUES.map((value, index) => (
             <div 
               key={index} 
-              className={`relative border-t border-brand-gold/20 pt-8 animate-fadeInUp ${
-                index % 2 !== 0 ? 'md:mt-24' : ''
-              }`}
-              style={{ animationDelay: `${index * 100}ms` }}
+              className="bg-white rounded-2xl border border-warm-border p-8 shadow-card hover:shadow-card-hover hover:-translate-y-1 transition-all duration-300 group"
             >
-              <div className="flex gap-6 items-start">
-                <span className="text-5xl font-bold text-brand-gold/20 leading-none font-serif tracking-tighter shrink-0 mt-1">
+              <div className="flex items-center gap-4 mb-6">
+                <span className="text-3xl font-bold text-brand-green/20 leading-none tracking-tighter select-none">
                   {String(index + 1).padStart(2, '0')}
                 </span>
-                <div>
-                  <h3 className="text-2xl font-semibold mb-4 text-white">{value.title}</h3>
-                  <p className="text-gray-400 leading-relaxed text-lg">
-                    {value.description}
-                  </p>
-                </div>
+                <div className="h-px bg-warm-border flex-1"></div>
               </div>
+              <h3 className="text-xl font-bold mb-3 text-charcoal group-hover:text-brand-green transition-colors">{value.title}</h3>
+              <p className="text-gray-500 leading-relaxed">
+                {value.description}
+              </p>
             </div>
           ))}
         </div>

@@ -39,7 +39,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${outfit.variable} font-sans antialiased text-navy bg-off-white flex flex-col min-h-screen`}>
+      <body className={`${outfit.variable} font-sans antialiased text-charcoal bg-warm-white flex flex-col min-h-screen`}>
         <Header />
         <main className="flex-grow">
           {children}

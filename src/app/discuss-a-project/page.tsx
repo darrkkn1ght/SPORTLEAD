@@ -9,12 +9,12 @@ export const metadata: Metadata = {
 
 export default function DiscussProjectPage() {
   return (
-    <main className="bg-brand-navy min-h-screen">
-      <section className="bg-brand-navy-light py-24 pt-32 border-b border-white/5">
+    <main className="bg-warm-white min-h-screen">
+      <section className="bg-warm-gray py-24 pt-32 border-b border-warm-border">
         <Container>
           <div className="max-w-3xl mx-auto text-center">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-white tracking-tight">Discuss a Project</h1>
-            <p className="text-xl text-gray-300 leading-relaxed">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-charcoal tracking-tight">Discuss a Project</h1>
+            <p className="text-xl text-gray-500 leading-relaxed">
               Tell us about your sport-sector challenge, facility need or institutional project. We'll review your inquiry and determine the right next step.
             </p>
           </div>

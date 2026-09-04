@@ -4,7 +4,7 @@ import React from 'react'
 import Link from 'next/link'
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: 'primary' | 'secondary' | 'outline' | 'ghost'
+  variant?: 'primary' | 'secondary' | 'outline' | 'outline-light' | 'ghost'
   size?: 'sm' | 'md' | 'lg'
   href?: string
   className?: string
@@ -24,13 +24,14 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     },
     ref
   ) => {
-    const baseStyles = 'inline-flex items-center justify-center font-semibold rounded-md transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-navy'
+    const baseStyles = 'inline-flex items-center justify-center font-semibold rounded-md transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-warm-white'
     
-    const variants = {
-      primary: 'bg-brand-red text-white hover:bg-brand-red-dark focus:ring-brand-red',
-      secondary: 'bg-brand-gold text-navy hover:bg-brand-gold-light focus:ring-brand-gold',
-      outline: 'border-2 border-white text-white hover:bg-white/10 focus:ring-white',
-      ghost: 'text-white hover:text-brand-gold focus:ring-brand-gold',
+    const variants: Record<string, string> = {
+      primary: 'bg-brand-green text-white hover:bg-brand-green-light focus:ring-brand-green',
+      secondary: 'bg-warm-gray text-charcoal hover:bg-grey-light focus:ring-charcoal',
+      outline: 'border-2 border-charcoal/20 text-charcoal hover:border-charcoal hover:bg-charcoal/5 focus:ring-charcoal',
+      'outline-light': 'border-2 border-white/30 text-white hover:border-white hover:bg-white/10 focus:ring-white',
+      ghost: 'text-charcoal hover:text-brand-green focus:ring-brand-green',
     }
     
     const sizes = {

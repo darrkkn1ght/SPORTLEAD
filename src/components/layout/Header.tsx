@@ -23,18 +23,24 @@ export default function Header() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // On dark hero backgrounds (not scrolled), use white text; on scrolled white bg, use charcoal
+  const textColor = isScrolled ? 'text-charcoal/70' : 'text-white/80';
+  const textHover = isScrolled ? 'hover:text-brand-green' : 'hover:text-white';
+  const activeColor = isScrolled ? 'text-brand-green' : 'text-white';
+  const logoColor = isScrolled ? 'text-charcoal' : 'text-white';
+
   return (
     <>
       <header
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-          isScrolled ? 'bg-brand-navy/95 backdrop-blur-md shadow-sm border-b border-white/5' : 'bg-transparent'
+          isScrolled ? 'bg-white/95 backdrop-blur-md shadow-nav border-b border-warm-border' : 'bg-transparent'
         }`}
       >
         <Container>
           <div className="flex items-center justify-between h-20">
             {/* Logo */}
             <Link href="/" className="flex-shrink-0">
-              <span className="text-white font-bold text-xl tracking-wider uppercase">
+              <span className={`font-bold text-xl tracking-wider uppercase transition-colors duration-300 ${logoColor}`}>
                 SportLead Africa
               </span>
             </Link>
@@ -50,10 +56,10 @@ export default function Header() {
                 >
                   <Link
                     href={item.href}
-                    className={`flex items-center text-sm font-semibold transition-colors ${
+                    className={`flex items-center text-sm font-semibold transition-colors duration-300 ${
                       pathname === item.href || (pathname.startsWith(item.href) && item.href !== '/')
-                        ? 'text-brand-gold'
-                        : 'text-white hover:text-brand-gold'
+                        ? activeColor
+                        : `${textColor} ${textHover}`
                     }`}
                   >
                     {item.label}
@@ -70,15 +76,15 @@ export default function Header() {
                   {/* Dropdown */}
                   {item.children && hoveredItem === item.label && (
                     <div className="absolute top-full left-0 mt-[-10px] pt-[10px]">
-                      <div className="bg-brand-navy-light rounded-xl shadow-xl py-3 min-w-[240px] border border-white/10">
+                      <div className="bg-white rounded-xl shadow-card-hover py-3 min-w-[240px] border border-warm-border">
                         {item.children.map((child) => (
                           <Link
                             key={child.label}
                             href={child.href}
                             className={`block px-5 py-2.5 text-sm font-medium transition-colors ${
                               pathname === child.href
-                                ? 'text-brand-gold bg-white/5'
-                                : 'text-gray-200 hover:text-brand-gold hover:bg-white/5'
+                                ? 'text-brand-green bg-brand-green-muted'
+                                : 'text-gray-600 hover:text-brand-green hover:bg-warm-gray'
                             }`}
                           >
                             {child.label}
@@ -94,12 +100,12 @@ export default function Header() {
             {/* CTA & Mobile Toggle */}
             <div className="flex items-center gap-4">
               <div className="hidden lg:block">
-                <Button variant="primary" href="/discuss-a-project" className="bg-brand-gold text-brand-navy hover:bg-brand-gold-light rounded-full border-none font-bold">
+                <Button variant="primary" href="/discuss-a-project" className="bg-brand-green text-white hover:bg-brand-green-light rounded-full border-none font-bold">
                   Discuss a Project
                 </Button>
               </div>
               <button
-                className="lg:hidden text-white p-2 focus:outline-none hover:text-brand-gold transition-colors"
+                className={`lg:hidden p-2 focus:outline-none transition-colors duration-300 ${isScrolled ? 'text-charcoal hover:text-brand-green' : 'text-white hover:text-white/70'}`}
                 onClick={() => setIsMobileNavOpen(true)}
                 aria-label="Open menu"
               >

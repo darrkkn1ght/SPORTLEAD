@@ -79,23 +79,23 @@ export default function ContactForm() {
 
   if (success) {
     return (
-      <div className="bg-brand-navy-light p-12 rounded-3xl border border-white/5 text-center">
-        <div className="w-20 h-20 bg-white/5 text-brand-gold border border-white/10 rounded-full flex items-center justify-center mx-auto mb-8">
+      <div className="bg-white p-12 rounded-3xl border border-warm-border shadow-card text-center">
+        <div className="w-20 h-20 bg-brand-green-muted text-brand-green rounded-full flex items-center justify-center mx-auto mb-8">
           <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path></svg>
         </div>
-        <h3 className="text-3xl font-bold text-white mb-4 tracking-tight">Message Sent</h3>
-        <p className="text-gray-300 mb-10 text-lg">Thank you for contacting SportLead Africa. We have received your message and will respond shortly.</p>
-        <Button variant="outline" onClick={() => setSuccess(false)} className="border-brand-gold text-brand-gold hover:bg-white/5 rounded-full px-8 py-2.5">Send Another Message</Button>
+        <h3 className="text-3xl font-bold text-charcoal mb-4 tracking-tight">Message Sent</h3>
+        <p className="text-gray-500 mb-10 text-lg">Thank you for contacting SportLead Africa. We have received your message and will respond shortly.</p>
+        <Button variant="outline" onClick={() => setSuccess(false)} className="border-brand-green text-brand-green hover:bg-brand-green-muted rounded-full px-8 py-2.5">Send Another Message</Button>
       </div>
     );
   }
 
   return (
-    <div className="bg-brand-navy-light p-8 md:p-12 rounded-3xl border border-white/5">
-      <h3 className="text-3xl font-bold text-white mb-8 tracking-tight">Send us a message</h3>
+    <div className="bg-white p-8 md:p-12 rounded-3xl border border-warm-border shadow-card">
+      <h3 className="text-3xl font-bold text-charcoal mb-8 tracking-tight">Send us a message</h3>
       
       {error && (
-        <div className="mb-8 p-4 bg-red-900/50 border border-red-500/50 text-red-200 rounded-lg text-sm font-medium">
+        <div className="mb-8 p-4 bg-red-50 border border-red-200 text-red-700 rounded-lg text-sm font-medium">
           {error}
         </div>
       )}
@@ -159,18 +159,18 @@ export default function ContactForm() {
               checked={formData.privacyConsent}
               onChange={handleChange}
               required
-              className="w-5 h-5 rounded border-white/20 text-brand-gold focus:ring-brand-gold bg-brand-navy-light cursor-pointer" 
+              className="w-5 h-5 rounded border-gray-300 text-brand-green focus:ring-brand-green bg-white cursor-pointer" 
             />
           </div>
           <div className="ml-3 text-sm pt-0.5">
-            <label htmlFor="privacyConsent" className="text-gray-300 font-medium cursor-pointer">
+            <label htmlFor="privacyConsent" className="text-gray-500 font-medium cursor-pointer">
               I consent to having SportLead Africa store my submitted information so they can respond to my inquiry.
             </label>
           </div>
         </div>
 
         <div className="pt-6">
-          <Button variant="primary" type="submit" disabled={loading} className="w-full md:w-auto bg-brand-gold text-brand-navy hover:bg-brand-gold-light font-bold rounded-full px-10 py-3 text-lg">
+          <Button variant="primary" type="submit" disabled={loading} className="w-full md:w-auto bg-brand-green text-white hover:bg-brand-green-light font-bold rounded-full px-10 py-3 text-lg">
             {loading ? 'Sending...' : 'Send Message'}
           </Button>
         </div>

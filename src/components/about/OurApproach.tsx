@@ -1,49 +1,41 @@
 import React from 'react';
-import { Container, SectionHeading } from '@/components/ui';
+import { Container } from '@/components/ui';
 import { APPROACH_STEPS } from '@/lib/constants';
 
 export default function OurApproach() {
   return (
-    <section className="bg-brand-off-white text-brand-navy py-24 relative overflow-hidden">
-      <div className="absolute inset-0 diagonal-stripe opacity-30 pointer-events-none" />
-      
+    <section className="bg-warm-white text-charcoal py-28 relative overflow-hidden">
       <Container className="relative z-10">
-        <div className="mb-16">
+        <div className="text-center mb-20">
           <span className="section-label">OUR METHOD</span>
-          <SectionHeading 
-            title="Our Approach" 
-            subtitle="A structured method applied to every assignment."
-            align="left"
-            className="text-brand-navy"
-          />
+          <h2 className="text-4xl md:text-5xl font-bold tracking-tight text-charcoal mb-4">Our Approach</h2>
+          <p className="text-gray-500 text-lg max-w-xl mx-auto">A structured method applied to every assignment.</p>
         </div>
 
-        <div className="relative">
-          {/* Desktop connecting line */}
-          <div className="hidden md:block absolute top-[4.5rem] left-0 right-0 h-px bg-brand-gold/30 border-t border-dashed border-brand-gold/50" />
-          
-          {/* Mobile connecting line */}
-          <div className="md:hidden absolute top-0 bottom-0 left-8 w-px bg-brand-gold/30 border-l border-dashed border-brand-gold/50" />
-
-          <div className="grid grid-cols-1 md:grid-cols-6 gap-8 md:gap-4">
-            {APPROACH_STEPS.map((step, index) => (
-              <div key={index} className="relative flex md:block items-start gap-6 md:gap-0 animate-fadeInUp" style={{ animationDelay: `${index * 100}ms` }}>
-                
-                <div className="md:mb-8 bg-brand-off-white relative z-10 w-16 h-16 md:w-auto md:h-auto shrink-0 flex items-center justify-center">
-                  <span className="numbered-label text-4xl md:text-6xl lg:text-7xl !text-brand-navy/10 font-bold block md:inline">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {APPROACH_STEPS.map((step, index) => (
+            <div 
+              key={index} 
+              className="relative bg-white rounded-2xl border border-warm-border p-8 shadow-card hover:shadow-card-hover hover:-translate-y-1 transition-all duration-300 group"
+            >
+              {/* Step number */}
+              <div className="flex items-center gap-4 mb-6">
+                <div className="w-10 h-10 rounded-full bg-brand-green-muted flex items-center justify-center">
+                  <span className="text-sm font-bold text-brand-green">
                     {String(index + 1).padStart(2, '0')}
                   </span>
                 </div>
-
-                <div className="pt-2 md:pt-0">
-                  <h3 className="text-xl font-bold mb-3 text-brand-navy">{step.title}</h3>
-                  <p className="text-brand-grey text-sm leading-relaxed">
-                    {step.description}
-                  </p>
-                </div>
+                {index < APPROACH_STEPS.length - 1 && (
+                  <div className="h-px bg-warm-border flex-1"></div>
+                )}
               </div>
-            ))}
-          </div>
+
+              <h3 className="text-xl font-bold mb-3 text-charcoal group-hover:text-brand-green transition-colors">{step.title}</h3>
+              <p className="text-gray-500 text-sm leading-relaxed">
+                {step.description}
+              </p>
+            </div>
+          ))}
         </div>
       </Container>
     </section>

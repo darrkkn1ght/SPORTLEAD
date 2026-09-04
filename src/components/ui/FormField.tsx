@@ -36,7 +36,7 @@ export function FormField({
   helpText,
   className = '',
 }: FormFieldProps) {
-  const baseInputStyles = 'w-full bg-white/5 border border-white/10 rounded-xl text-white placeholder:text-gray-400 focus:outline-none focus:border-brand-gold focus:ring-1 focus:ring-brand-gold/20 transition-colors shadow-sm'
+  const baseInputStyles = 'w-full bg-white border border-gray-200 rounded-xl text-charcoal placeholder:text-gray-400 focus:outline-none focus:border-brand-green focus:ring-2 focus:ring-brand-green/10 transition-colors shadow-sm'
   const textInputStyles = `${baseInputStyles} px-4 py-3`
   
   const id = `field-${name}`
@@ -44,8 +44,8 @@ export function FormField({
   return (
     <div className={`flex flex-col gap-2 ${className}`}>
       {type !== 'checkbox' && (
-        <label htmlFor={id} className="text-sm font-semibold text-white">
-          {label} {required && <span className="text-brand-gold">*</span>}
+        <label htmlFor={id} className="text-sm font-semibold text-charcoal">
+          {label} {required && <span className="text-brand-green">*</span>}
         </label>
       )}
 
@@ -72,12 +72,12 @@ export function FormField({
           >
             <option value="" disabled>{placeholder || 'Select an option'}</option>
             {options?.map((opt) => (
-               <option key={opt.value} value={opt.value} className="bg-brand-navy text-white">
+               <option key={opt.value} value={opt.value} className="bg-white text-charcoal">
                 {opt.label}
               </option>
             ))}
           </select>
-          <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-white">
+          <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-gray-500">
             <ChevronDown size={16} />
           </div>
         </div>
@@ -91,11 +91,11 @@ export function FormField({
               required={required}
               checked={value as boolean}
               onChange={onChange}
-              className="w-5 h-5 rounded border-white/20 bg-brand-navy-light text-brand-gold focus:ring-brand-gold focus:ring-offset-brand-navy transition-colors cursor-pointer"
+              className="w-5 h-5 rounded border-gray-300 bg-white text-brand-green focus:ring-brand-green focus:ring-offset-white transition-colors cursor-pointer"
             />
           </div>
-          <label htmlFor={id} className="text-sm font-medium text-white cursor-pointer select-none pt-0.5">
-            {label} {required && <span className="text-brand-gold">*</span>}
+          <label htmlFor={id} className="text-sm font-medium text-gray-600 cursor-pointer select-none pt-0.5">
+            {label} {required && <span className="text-brand-green">*</span>}
           </label>
         </div>
       ) : type === 'file' ? (
@@ -106,7 +106,7 @@ export function FormField({
           required={required}
           accept={accept}
           onChange={onChange}
-          className={`${baseInputStyles} px-3 py-2.5 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-white/10 file:text-white hover:file:bg-white/20 cursor-pointer`}
+          className={`${baseInputStyles} px-3 py-2.5 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-brand-green-muted file:text-brand-green hover:file:bg-brand-green/10 cursor-pointer`}
         />
       ) : (
         <input
@@ -121,8 +121,8 @@ export function FormField({
         />
       )}
 
-      {error && <p className="text-sm font-medium text-red-400">{error}</p>}
-      {!error && helpText && <p className="text-sm text-gray-400">{helpText}</p>}
+      {error && <p className="text-sm font-medium text-red-500">{error}</p>}
+      {!error && helpText && <p className="text-sm text-gray-500">{helpText}</p>}
     </div>
   )
 }

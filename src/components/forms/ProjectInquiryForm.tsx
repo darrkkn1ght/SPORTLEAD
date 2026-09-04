@@ -69,9 +69,9 @@ export default function ProjectInquiryForm() {
 
   if (success) {
     return (
-      <div className="bg-brand-navy-light p-12 rounded-3xl border border-white/5 text-center">
-        <h3 className="text-3xl font-bold text-white mb-6 tracking-tight">Inquiry Received</h3>
-        <p className="text-gray-300 mb-8 max-w-lg mx-auto text-lg leading-relaxed">
+      <div className="bg-white p-12 rounded-3xl border border-warm-border shadow-card text-center">
+        <h3 className="text-3xl font-bold text-charcoal mb-6 tracking-tight">Inquiry Received</h3>
+        <p className="text-gray-500 mb-8 max-w-lg mx-auto text-lg leading-relaxed">
           Thank you for sharing your project details with SportLead Africa. Our technical team will review your requirements and contact you shortly to discuss the next steps.
         </p>
       </div>
@@ -79,9 +79,9 @@ export default function ProjectInquiryForm() {
   }
 
   return (
-    <div className="bg-brand-navy-light p-8 md:p-12 rounded-3xl border border-white/5">
+    <div className="bg-white p-8 md:p-12 rounded-3xl border border-warm-border shadow-card">
       {error && (
-        <div className="mb-8 p-4 bg-red-900/50 border border-red-500/50 text-red-200 rounded-lg text-sm font-medium">
+        <div className="mb-8 p-4 bg-red-50 border border-red-200 text-red-700 rounded-lg text-sm font-medium">
           {error}
         </div>
       )}
@@ -93,7 +93,7 @@ export default function ProjectInquiryForm() {
 
         {/* Section 1 */}
         <div>
-          <h4 className="text-xl font-bold text-white border-b border-white/10 pb-4 mb-8">1. Your Details</h4>
+          <h4 className="text-xl font-bold text-charcoal border-b border-warm-border pb-4 mb-8">1. Your Details</h4>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <FormField label="Full Name" name="name" value={formData.name} onChange={handleChange} required />
             <FormField label="Role / Title" name="role" value={formData.role} onChange={handleChange} required />
@@ -105,7 +105,7 @@ export default function ProjectInquiryForm() {
 
         {/* Section 2 */}
         <div>
-          <h4 className="text-xl font-bold text-white border-b border-white/10 pb-4 mb-8">2. Project Location</h4>
+          <h4 className="text-xl font-bold text-charcoal border-b border-warm-border pb-4 mb-8">2. Project Location</h4>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <FormField label="Country" name="country" value={formData.country} onChange={handleChange} required />
             <FormField label="City / Region" name="projectLocation" value={formData.projectLocation} onChange={handleChange} required />
@@ -124,7 +124,7 @@ export default function ProjectInquiryForm() {
 
         {/* Section 3 */}
         <div>
-          <h4 className="text-xl font-bold text-white border-b border-white/10 pb-4 mb-8">3. Project Details</h4>
+          <h4 className="text-xl font-bold text-charcoal border-b border-warm-border pb-4 mb-8">3. Project Details</h4>
           <div className="space-y-6">
             <FormField 
               label="Primary Service Required" 
@@ -167,7 +167,7 @@ export default function ProjectInquiryForm() {
 
         {/* Section 4 */}
         <div>
-          <h4 className="text-xl font-bold text-white border-b border-white/10 pb-4 mb-8">4. Timeline & Budget</h4>
+          <h4 className="text-xl font-bold text-charcoal border-b border-warm-border pb-4 mb-8">4. Timeline & Budget</h4>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <FormField 
               label="Indicative Timeline" 
@@ -201,12 +201,12 @@ export default function ProjectInquiryForm() {
 
         {/* Section 5 */}
         <div>
-          <h4 className="text-xl font-bold text-white border-b border-white/10 pb-4 mb-8">5. Additional Information</h4>
+          <h4 className="text-xl font-bold text-charcoal border-b border-warm-border pb-4 mb-8">5. Additional Information</h4>
           <div className="space-y-6">
             <div className="mb-4">
-              <label className="block text-sm font-semibold text-white mb-2">Supporting Document (Upload placeholder for now)</label>
-              <input type="file" className="block w-full text-sm text-gray-400 file:mr-4 file:py-2.5 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-white/10 file:text-white hover:file:bg-white/20 cursor-pointer" disabled />
-              <p className="text-xs text-gray-500 mt-2">File upload will be implemented in the next phase.</p>
+              <label className="block text-sm font-semibold text-charcoal mb-2">Supporting Document (Upload placeholder for now)</label>
+              <input type="file" className="block w-full text-sm text-gray-500 file:mr-4 file:py-2.5 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-brand-green-muted file:text-brand-green hover:file:bg-brand-green/10 cursor-pointer" disabled />
+              <p className="text-xs text-gray-400 mt-2">File upload will be implemented in the next phase.</p>
             </div>
             
             <FormField 
@@ -225,11 +225,11 @@ export default function ProjectInquiryForm() {
                   checked={formData.privacyConsent}
                   onChange={handleChange}
                   required
-                  className="w-5 h-5 rounded border-white/20 text-brand-gold focus:ring-brand-gold bg-brand-navy-light cursor-pointer" 
+                  className="w-5 h-5 rounded border-gray-300 text-brand-green focus:ring-brand-green bg-white cursor-pointer" 
                 />
               </div>
               <div className="ml-3 text-sm pt-0.5">
-                <label htmlFor="privacyConsent" className="text-gray-300 font-medium cursor-pointer">
+                <label htmlFor="privacyConsent" className="text-gray-500 font-medium cursor-pointer">
                   I consent to having SportLead Africa store and process my submitted information to evaluate this project inquiry.
                 </label>
               </div>
@@ -237,8 +237,8 @@ export default function ProjectInquiryForm() {
           </div>
         </div>
 
-        <div className="pt-8 border-t border-white/10">
-          <Button variant="primary" type="submit" disabled={loading} className="w-full md:w-auto px-10 py-3 text-lg font-bold bg-brand-gold text-brand-navy hover:bg-brand-gold-light rounded-full">
+        <div className="pt-8 border-t border-warm-border">
+          <Button variant="primary" type="submit" disabled={loading} className="w-full md:w-auto px-10 py-3 text-lg font-bold bg-brand-green text-white hover:bg-brand-green-light rounded-full">
             {loading ? 'Submitting Inquiry...' : 'Submit Project Inquiry'}
           </Button>
         </div>
