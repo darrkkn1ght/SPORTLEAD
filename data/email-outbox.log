@@ -1,0 +1,164 @@
+[2026-09-04T14:28:44.367Z] TYPE: contact_admin_alert | TO: inquiries@sportleadafrica.com | SUBJECT: [Contact Inquiry: Facility Auditing] Accra Stadium CAF Category 3 Compliance Audit — Dr. Kwame Mensah
+
+
+    <!DOCTYPE html>
+    <html>
+    <head>
+      <meta charset="utf-8">
+      <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6; color: #121514; background: #FAFAF8; padding: 24px; }
+        .card { background: #fff; border: 1px solid #E5E5DE; border-radius: 14px; max-width: 600px; margin: 0 auto; padding: 32px; }
+        h2 { font-size: 20px; color: #0D4A2B; margin-top: 0; }
+        table { width: 100%; border-collapse: collapse; margin-bottom: 20px; }
+        th { text-align: left; font-size: 12px; color: #666; padding: 6px 0; width: 30%; }
+        td { font-size: 14px; padding: 6px 0; font-weight: 500; }
+        .message-box { background: #F4F4F0; padding: 16px; border-radius: 8px; font-size: 14px; }
+      </style>
+    </head>
+    <body>
+      <div class="card">
+        <h2>New General Inquiry</h2>
+        <table>
+          <tr><th>From:</th><td>Dr. Kwame Mensah</td></tr>
+          <tr><th>Email:</th><td><a href="mailto:kwame@ghanafa.org">kwame@ghanafa.org</a></td></tr>
+          <tr><th>Organisation:</th><td>Ghana Football Association</td></tr>
+          <tr><th>Inquiry Type:</th><td><strong>Facility Auditing</strong></td></tr>
+          <tr><th>Subject:</th><td>Accra Stadium CAF Category 3 Compliance Audit</td></tr>
+          <tr><th>Preferred Contact:</th><td>Email</td></tr>
+        </table>
+        <div style="font-weight: 700; font-size: 12px; text-transform: uppercase; color: #666; margin-bottom: 6px;">Message</div>
+        <div class="message-box">We require a comprehensive technical assessment of Accra Sports Stadium pitch and floodlighting systems ahead of upcoming continental fixtures.</div>
+      </div>
+    </body>
+    </html>
+  
+
+============================================================
+
+[2026-09-04T14:28:44.369Z] TYPE: contact_client_receipt | TO: kwame@ghanafa.org | SUBJECT: SportLead Africa: Message Received [Ref #9921cc85]
+
+
+        <div style="font-family: sans-serif; padding: 24px; color: #121514;">
+          <h2 style="color: #0D4A2B;">SportLead Africa</h2>
+          <p>Dear Dr. Kwame Mensah,</p>
+          <p>Thank you for contacting SportLead Africa regarding <strong>Accra Stadium CAF Category 3 Compliance Audit</strong>.</p>
+          <p>We have received your message and our communications team will respond via your preferred contact method (Email) shortly.</p>
+          <p style="margin-top: 24px; font-size: 13px; color: #666;">Inquiry Reference ID: 9921cc85-7028-4781-93a4-9b55ba784dca</p>
+        </div>
+      
+
+============================================================
+
+[2026-09-04T14:28:44.614Z] TYPE: mandate_admin_brief | TO: inquiries@sportleadafrica.com | SUBJECT: [New Mandate Brief] Lagos State Sports Commission — Sport Infrastructure Planning & Development
+
+
+    <!DOCTYPE html>
+    <html>
+    <head>
+      <meta charset="utf-8">
+      <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; line-height: 1.6; color: #121514; background: #FAFAF8; margin: 0; padding: 24px; }
+        .card { background: #ffffff; border: 1px solid #E5E5DE; border-radius: 16px; max-width: 640px; margin: 0 auto; padding: 32px; box-shadow: 0 4px 12px rgba(0,0,0,0.03); }
+        .header { border-bottom: 2px solid #0D4A2B; padding-bottom: 16px; margin-bottom: 24px; }
+        .title { font-size: 22px; font-weight: 800; color: #0D4A2B; margin: 0 0 6px 0; }
+        .badge { display: inline-block; background: #EBF5EF; color: #0D4A2B; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; padding: 4px 10px; rounded-radius: 4px; }
+        .section-title { font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: #666; margin: 24px 0 12px 0; border-bottom: 1px solid #EEE; padding-bottom: 6px; }
+        table { width: 100%; border-collapse: collapse; margin-bottom: 16px; }
+        th { text-align: left; font-size: 12px; color: #777; padding: 8px 0; width: 35%; }
+        td { font-size: 14px; color: #121514; font-weight: 500; padding: 8px 0; }
+        .desc-box { background: #F4F4F0; padding: 16px; border-radius: 8px; font-size: 14px; line-height: 1.7; color: #222; }
+        .footer { font-size: 12px; color: #888; text-align: center; margin-top: 32px; border-top: 1px solid #E5E5DE; padding-top: 16px; }
+      </style>
+    </head>
+    <body>
+      <div class="card">
+        <div class="header">
+          <span class="badge">Inbound Advisory Inquiry</span>
+          <h1 class="title">New Project Brief Submission</h1>
+          <p style="margin: 0; font-size: 13px; color: #555;">Ref ID: ddfc4607-fb0e-4bdd-8f06-3b3058143b90</p>
+        </div>
+
+        <div class="section-title">Client Coordinates</div>
+        <table>
+          <tr><th>Full Name:</th><td>Engr. Babatunde Raji</td></tr>
+          <tr><th>Role / Title:</th><td>Special Advisor on Sports Infrastructure</td></tr>
+          <tr><th>Organisation:</th><td>Lagos State Sports Commission</td></tr>
+          <tr><th>Email Address:</th><td><a href="mailto:babatunde.raji@lagosstate.gov.ng">babatunde.raji@lagosstate.gov.ng</a></td></tr>
+          <tr><th>Telephone:</th><td>+234 803 123 4567</td></tr>
+          <tr><th>Country / Base:</th><td>Nigeria</td></tr>
+        </table>
+
+        <div class="section-title">Project Parameters</div>
+        <table>
+          <tr><th>Service Required:</th><td><strong style="color: #0D4A2B;">Sport Infrastructure Planning & Development</strong></td></tr>
+          <tr><th>Organisation Type:</th><td>Government ministries, agencies and public institutions</td></tr>
+          <tr><th>Project Location:</th><td>Lagos, Nigeria</td></tr>
+          <tr><th>Estimated Timeline:</th><td>3 - 6 months</td></tr>
+          <tr><th>Budget Envelope:</th><td>$500,000 - $2,000,000</td></tr>
+          <tr><th>Current Stage:</th><td>Pre-feasibility / Concept development</td></tr>
+        </table>
+
+        <div class="section-title">Project Brief & Description</div>
+        <div class="desc-box">
+          Masterplanning and feasibility modeling for the modernization of Teslim Balogun Stadium and conversion into a multi-sport entertainment arena with private commercial tenancies.
+        </div>
+
+        
+          <div class="section-title">Desired Outcomes</div>
+          <p style="font-size: 14px; margin: 0;">Bankable PPP prospectus and architectural specifications within 6 months.</p>
+        
+
+        <div class="footer">
+          SportLead Africa Advisory Management System • Lagos, Nigeria
+        </div>
+      </div>
+    </body>
+    </html>
+  
+
+============================================================
+
+[2026-09-04T14:28:44.616Z] TYPE: mandate_client_receipt | TO: babatunde.raji@lagosstate.gov.ng | SUBJECT: Inquiry Acknowledgment: SportLead Africa [Ref #ddfc4607]
+
+
+    <!DOCTYPE html>
+    <html>
+    <head>
+      <meta charset="utf-8">
+      <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; line-height: 1.6; color: #121514; background: #FAFAF8; margin: 0; padding: 24px; }
+        .card { background: #ffffff; border: 1px solid #E5E5DE; border-radius: 16px; max-width: 600px; margin: 0 auto; padding: 36px; }
+        .brand { font-size: 20px; font-weight: 800; color: #0D4A2B; letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 24px; }
+        h2 { font-size: 22px; color: #121514; margin: 0 0 16px 0; }
+        p { font-size: 15px; color: #444; line-height: 1.7; margin-bottom: 16px; }
+        .highlight-box { background: #EBF5EF; border-left: 4px solid #0D4A2B; padding: 16px 20px; border-radius: 6px; margin: 24px 0; }
+        .footer { font-size: 12px; color: #888; border-top: 1px solid #EEE; padding-top: 20px; margin-top: 32px; }
+      </style>
+    </head>
+    <body>
+      <div class="card">
+        <div class="brand">SportLead Africa</div>
+        <h2>Thank You for Reaching Out</h2>
+        <p>Dear Engr. Babatunde Raji,</p>
+        <p>We have successfully received your project inquiry regarding <strong>Sport Infrastructure Planning & Development</strong> for <strong>Lagos State Sports Commission</strong>.</p>
+        
+        <div class="highlight-box">
+          <strong style="color: #0D4A2B; display: block; margin-bottom: 4px;">What Happens Next:</strong>
+          <span style="font-size: 14px; color: #2D3748;">Our senior practice leadership conducts technical reviews within <strong>48 hours</strong>. A practice specialist will follow up directly to discuss scoping requirements or schedule an introductory advisory session.</span>
+        </div>
+
+        <p>If you have urgent documents or technical briefs to append, you may reply directly to this message or write to <a href="mailto:inquiries@sportleadafrica.com" style="color: #0D4A2B; font-weight: 600;">inquiries@sportleadafrica.com</a>.</p>
+
+        <p>Warm regards,<br/><strong>The Senior Advisory Practice</strong><br/>SportLead Africa</p>
+
+        <div class="footer">
+          SportLead Africa • Building Better Sport Systems Across Africa<br/>
+          Headquarters: Lagos, Nigeria • <a href="https://sportleadafrica.com" style="color: #666;">sportleadafrica.com</a>
+        </div>
+      </div>
+    </body>
+    </html>
+  
+
+============================================================
+
