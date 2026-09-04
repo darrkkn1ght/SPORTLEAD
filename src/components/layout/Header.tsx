@@ -32,9 +32,8 @@ export default function Header() {
   return (
     <>
       <header
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-          isScrolled ? 'bg-white/95 backdrop-blur-md shadow-nav border-b border-warm-border' : 'bg-transparent'
-        }`}
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? 'bg-white/95 backdrop-blur-md shadow-nav border-b border-warm-border' : 'bg-transparent'
+          }`}
       >
         <Container>
           <div className="flex items-center justify-between h-20">
@@ -56,19 +55,17 @@ export default function Header() {
                 >
                   <Link
                     href={item.href}
-                    className={`flex items-center text-sm font-semibold transition-colors duration-300 ${
-                      pathname === item.href || (pathname.startsWith(item.href) && item.href !== '/')
+                    className={`flex items-center text-sm font-semibold transition-colors duration-300 ${pathname === item.href || (pathname.startsWith(item.href) && item.href !== '/')
                         ? activeColor
                         : `${textColor} ${textHover}`
-                    }`}
+                      }`}
                   >
                     {item.label}
                     {item.children && (
                       <ChevronDown
                         size={16}
-                        className={`ml-1 transition-transform ${
-                          hoveredItem === item.label ? 'rotate-180' : ''
-                        }`}
+                        className={`ml-1 transition-transform ${hoveredItem === item.label ? 'rotate-180' : ''
+                          }`}
                       />
                     )}
                   </Link>
@@ -81,11 +78,10 @@ export default function Header() {
                           <Link
                             key={child.label}
                             href={child.href}
-                            className={`block px-5 py-2.5 text-sm font-medium transition-colors ${
-                              pathname === child.href
+                            className={`block px-5 py-2.5 text-sm font-medium transition-colors ${pathname === child.href
                                 ? 'text-brand-green bg-brand-green-muted'
                                 : 'text-gray-600 hover:text-brand-green hover:bg-warm-gray'
-                            }`}
+                              }`}
                           >
                             {child.label}
                           </Link>

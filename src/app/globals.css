@@ -31,26 +31,77 @@
 }
 
 @layer utilities {
-  .bg-charcoal { background-color: var(--charcoal); }
-  .bg-charcoal-light { background-color: var(--charcoal-light); }
-  .bg-charcoal-dark { background-color: var(--charcoal-dark); }
-  .bg-warm-white { background-color: var(--warm-white); }
-  .bg-warm-gray { background-color: var(--warm-gray); }
-  .bg-brand-green { background-color: var(--brand-green); }
-  .bg-brand-green-light { background-color: var(--brand-green-light); }
-  .bg-brand-green-muted { background-color: var(--brand-green-muted); }
-  .bg-brand-gold { background-color: var(--brand-gold); }
+  .bg-charcoal {
+    background-color: var(--charcoal);
+  }
 
-  .text-charcoal { color: var(--charcoal); }
-  .text-charcoal-light { color: var(--charcoal-light); }
-  .text-brand-green { color: var(--brand-green); }
-  .text-brand-green-light { color: var(--brand-green-light); }
-  .text-brand-gold { color: var(--brand-gold); }
-  .text-warm-white { color: var(--warm-white); }
+  .bg-charcoal-light {
+    background-color: var(--charcoal-light);
+  }
 
-  .border-brand-green { border-color: var(--brand-green); }
-  .border-brand-gold { border-color: var(--brand-gold); }
-  .border-warm { border-color: var(--warm-border); }
+  .bg-charcoal-dark {
+    background-color: var(--charcoal-dark);
+  }
+
+  .bg-warm-white {
+    background-color: var(--warm-white);
+  }
+
+  .bg-warm-gray {
+    background-color: var(--warm-gray);
+  }
+
+  .bg-brand-green {
+    background-color: var(--brand-green);
+  }
+
+  .bg-brand-green-light {
+    background-color: var(--brand-green-light);
+  }
+
+  .bg-brand-green-muted {
+    background-color: var(--brand-green-muted);
+  }
+
+  .bg-brand-gold {
+    background-color: var(--brand-gold);
+  }
+
+  .text-charcoal {
+    color: var(--charcoal);
+  }
+
+  .text-charcoal-light {
+    color: var(--charcoal-light);
+  }
+
+  .text-brand-green {
+    color: var(--brand-green);
+  }
+
+  .text-brand-green-light {
+    color: var(--brand-green-light);
+  }
+
+  .text-brand-gold {
+    color: var(--brand-gold);
+  }
+
+  .text-warm-white {
+    color: var(--warm-white);
+  }
+
+  .border-brand-green {
+    border-color: var(--brand-green);
+  }
+
+  .border-brand-gold {
+    border-color: var(--brand-gold);
+  }
+
+  .border-warm {
+    border-color: var(--warm-border);
+  }
 
   .text-gradient {
     background-image: linear-gradient(135deg, #0D4A2B 0%, #147A3E 100%);
@@ -77,13 +128,16 @@
 ::-webkit-scrollbar {
   width: 8px;
 }
+
 ::-webkit-scrollbar-track {
   background: var(--warm-gray);
 }
+
 ::-webkit-scrollbar-thumb {
   background: #C4C4BE;
   border-radius: 4px;
 }
+
 ::-webkit-scrollbar-thumb:hover {
   background: #9A9A94;
 }

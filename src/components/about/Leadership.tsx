@@ -18,7 +18,7 @@ export default function Leadership() {
               <div className="w-24 h-24 rounded-full bg-warm-gray border border-warm-border flex items-center justify-center shrink-0">
                 <User className="text-gray-400 w-10 h-10" />
               </div>
-              
+
               <div className="text-center md:text-left">
                 <h3 className="text-2xl font-bold mb-2 text-charcoal">Founder & Principal Consultant</h3>
                 <p className="text-brand-green font-semibold uppercase tracking-wider text-sm mb-6">Profile Forthcoming</p>

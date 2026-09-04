@@ -60,9 +60,8 @@ export default function MobileNav({ isOpen, onClose }: MobileNavProps) {
                 <Link
                   href={item.href}
                   onClick={onClose}
-                  className={`block py-3 text-lg font-semibold transition-colors ${
-                    pathname === item.href ? 'text-brand-green' : 'text-charcoal hover:text-brand-green'
-                  }`}
+                  className={`block py-3 text-lg font-semibold transition-colors ${pathname === item.href ? 'text-brand-green' : 'text-charcoal hover:text-brand-green'
+                    }`}
                 >
                   {item.label}
                 </Link>
@@ -74,9 +73,8 @@ export default function MobileNav({ isOpen, onClose }: MobileNavProps) {
                   >
                     <ChevronDown
                       size={20}
-                      className={`transition-transform ${
-                        expandedItems.includes(item.label) ? 'rotate-180' : ''
-                      }`}
+                      className={`transition-transform ${expandedItems.includes(item.label) ? 'rotate-180' : ''
+                        }`}
                     />
                   </button>
                 )}
@@ -89,11 +87,10 @@ export default function MobileNav({ isOpen, onClose }: MobileNavProps) {
                       key={child.label}
                       href={child.href}
                       onClick={onClose}
-                      className={`block py-2 text-base transition-colors ${
-                        pathname === child.href
+                      className={`block py-2 text-base transition-colors ${pathname === child.href
                           ? 'text-brand-green'
                           : 'text-gray-500 hover:text-charcoal'
-                      }`}
+                        }`}
                     >
                       {child.label}
                     </Link>

@@ -9,15 +9,15 @@ export default function Hero() {
       {/* Background Image */}
       <div className="absolute inset-0 z-0">
         <div className="absolute inset-0 bg-charcoal/80 z-10" />
-        <img 
-          src="https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?q=80&w=2936&auto=format&fit=crop" 
-          alt="Professional Sport Planning" 
+        <img
+          src="https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?q=80&w=2936&auto=format&fit=crop"
+          alt="Professional Sport Planning"
           className="w-full h-full object-cover opacity-30 grayscale"
         />
       </div>
 
       <Container className="relative z-10 w-full mt-12 md:mt-0">
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}

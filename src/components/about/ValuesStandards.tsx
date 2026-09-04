@@ -9,8 +9,8 @@ export default function ValuesStandards() {
         <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 mb-20">
           <div>
             <span className="section-label">OUR PRINCIPLES</span>
-            <SectionHeading 
-              title="Values & Standards" 
+            <SectionHeading
+              title="Values & Standards"
               align="left"
             />
           </div>
@@ -21,8 +21,8 @@ export default function ValuesStandards() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {VALUES.map((value, index) => (
-            <div 
-              key={index} 
+            <div
+              key={index}
               className="bg-white rounded-2xl border border-warm-border p-8 shadow-card hover:shadow-card-hover hover:-translate-y-1 transition-all duration-300 group"
             >
               <div className="flex items-center gap-4 mb-6">

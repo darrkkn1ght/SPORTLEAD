@@ -6,7 +6,7 @@ export default function OurMandate() {
     <section className="bg-warm-white text-charcoal py-24 relative z-10">
       <Container>
         <span className="section-label">OUR MANDATE</span>
-        
+
         <div className="grid lg:grid-cols-12 gap-12 mt-12">
           <div className="lg:col-span-8 lg:col-start-3 space-y-8">
             <blockquote className="border-l-4 border-brand-green pl-8 py-2 my-12">
@@ -14,7 +14,7 @@ export default function OurMandate() {
                 "SportLead Africa exists to help close these institutional, operational and physical gaps."
               </p>
             </blockquote>
-            
+
             <div className="prose prose-lg text-gray-500 max-w-none space-y-6">
               <p>
                 The African sport sector holds immense potential, yet it continues to face significant structural challenges.

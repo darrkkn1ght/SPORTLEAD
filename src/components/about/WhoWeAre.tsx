@@ -14,7 +14,7 @@ export default function WhoWeAre() {
             </h1>
             <div className="w-16 h-1 bg-brand-green mb-8"></div>
           </div>
-          
+
           <div className="lg:w-2/3 prose prose-lg max-w-none space-y-6 text-gray-300">
             <p className="text-2xl text-white font-medium leading-relaxed">
               SportLead Africa is an advisory firm dedicated to advancing the sport industry in Africa.

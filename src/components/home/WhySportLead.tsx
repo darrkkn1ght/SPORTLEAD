@@ -21,15 +21,14 @@ export default function WhySportLead() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
           {DIFFERENTIATORS.map((diff, index) => (
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: index * 0.08 }}
-              key={index} 
-              className={`bg-white rounded-2xl border border-warm-border p-8 shadow-card hover:shadow-card-hover hover:-translate-y-1 transition-all duration-300 group ${
-                index === DIFFERENTIATORS.length - 1 && DIFFERENTIATORS.length % 3 === 2 ? 'md:col-span-2 lg:col-span-1' : ''
-              }`}
+              key={index}
+              className={`bg-white rounded-2xl border border-warm-border p-8 shadow-card hover:shadow-card-hover hover:-translate-y-1 transition-all duration-300 group ${index === DIFFERENTIATORS.length - 1 && DIFFERENTIATORS.length % 3 === 2 ? 'md:col-span-2 lg:col-span-1' : ''
+                }`}
             >
               <div className="flex items-center gap-4 mb-6">
                 <div className="w-10 h-10 rounded-full bg-brand-green-muted flex items-center justify-center shrink-0">
@@ -39,7 +38,7 @@ export default function WhySportLead() {
                 </div>
                 <div className="h-px bg-warm-border flex-1"></div>
               </div>
-              
+
               <h3 className="text-xl font-bold text-charcoal mb-3 tracking-tight group-hover:text-brand-green transition-colors">
                 {diff.title}
               </h3>

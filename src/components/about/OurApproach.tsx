@@ -14,8 +14,8 @@ export default function OurApproach() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {APPROACH_STEPS.map((step, index) => (
-            <div 
-              key={index} 
+            <div
+              key={index}
               className="relative bg-white rounded-2xl border border-warm-border p-8 shadow-card hover:shadow-card-hover hover:-translate-y-1 transition-all duration-300 group"
             >
               {/* Step number */}
