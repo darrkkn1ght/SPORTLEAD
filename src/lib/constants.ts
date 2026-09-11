@@ -93,23 +93,23 @@ export const AUDIENCES: AudienceItem[] = [
 
 export const DIFFERENTIATORS: Differentiator[] = [
   {
-    title: 'Sport-sector understanding',
+    title: 'Sport Sector Understanding',
     description: 'We approach assignments through the realities of sport organisations, facilities, competitions and development systems.',
   },
   {
-    title: 'Multidisciplinary expert network',
+    title: 'Multidisciplinary Expert Network',
     description: 'We assemble relevant specialists around the requirements of each assignment rather than forcing every project through one discipline.',
   },
   {
-    title: 'Evidence-led diagnosis',
+    title: 'Evidence Led Diagnosis',
     description: 'We begin by understanding the actual problem, constraints, risks and operating context before recommending solutions.',
   },
   {
-    title: 'Context-sensitive solutions',
-    description: 'Our African focus does not assume African markets are identical. Solutions should respond to the specific institutional, economic, regulatory and operational context of each assignment.',
+    title: 'Context Sensitive Solutions',
+    description: 'Our African focus does not assume African markets are identical. Each solution should respond to the specific institutional, economic, regulatory and operational context of the assignment.',
   },
   {
-    title: 'Coordinated project delivery',
+    title: 'Coordinated Project Delivery',
     description: 'Where required, we move beyond advice to coordinate expertise, stakeholders, implementation, reporting and evaluation.',
   },
 ];
@@ -178,6 +178,8 @@ export const VALUES: ValueItem[] = [
   },
 ];
 
+// Social media profile links — pending official handle provisioning from client.
+// Kept inactive ('#') so the footer does not render visibly broken external links.
 export const SOCIAL_LINKS = [
   { name: 'LinkedIn', url: '#', icon: 'LinkedIn' },
   { name: 'Instagram', url: '#', icon: 'Instagram' },

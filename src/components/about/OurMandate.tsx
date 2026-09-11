@@ -3,29 +3,25 @@ import { Container } from '@/components/ui';
 
 export default function OurMandate() {
   return (
-    <section className="bg-warm-white text-charcoal py-24 relative z-10">
+    <section className="bg-warm-white text-charcoal py-24 md:py-28 relative z-10 border-b border-warm-border">
       <Container>
-        <span className="section-label">OUR MANDATE</span>
+        <div className="max-w-4xl mx-auto">
+          <span className="section-label">WHY WE EXIST</span>
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-charcoal tracking-tight mb-6">
+            Addressing Institutional, Operational &amp; Physical Gaps
+          </h2>
+          <div className="w-16 h-1 bg-brand-green mb-10"></div>
 
-        <div className="grid lg:grid-cols-12 gap-12 mt-12">
-          <div className="lg:col-span-8 lg:col-start-3 space-y-8">
-            <blockquote className="border-l-4 border-brand-green pl-8 py-2 my-12">
-              <p className="text-3xl lg:text-4xl font-medium text-charcoal leading-snug">
-                "SportLead Africa exists to help close these institutional, operational and physical gaps."
-              </p>
-            </blockquote>
-
-            <div className="prose prose-lg text-gray-500 max-w-none space-y-6">
-              <p>
-                The African sport sector holds immense potential, yet it continues to face significant structural challenges.
-              </p>
-              <p>
-                Our mandate is clear: we partner with visionary leaders, institutions, and stakeholders to build robust frameworks, implement sustainable practices, and drive measurable progress across the continent's sporting landscape.
-              </p>
-              <p>
-                By addressing these fundamental gaps, we aim to unlock the true economic and social value of sport in Africa.
-              </p>
-            </div>
+          <div className="space-y-6 text-lg md:text-xl text-gray-600 leading-relaxed">
+            <p className="font-medium text-charcoal">
+              Sport development depends on more than talent. It also depends on functioning institutions, appropriate infrastructure, capable administration, sound governance, effective competition systems and projects that are properly designed and delivered.
+            </p>
+            <p>
+              SportLead Africa exists to help address these institutional, operational and physical gaps. We work with clients and partners to understand what is not working, determine what is required and support the development of stronger systems for the delivery of sport.
+            </p>
+            <p>
+              Our African focus does not assume that African sport operates in one uniform context. Each assignment should respond to the specific institutional, economic, regulatory and operational realities in which it sits.
+            </p>
           </div>
         </div>
       </Container>

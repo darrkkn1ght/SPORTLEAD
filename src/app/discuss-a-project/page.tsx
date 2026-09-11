@@ -1,3 +1,4 @@
+import { Suspense } from 'react';
 import { Metadata } from 'next';
 import { Container } from '@/components/ui';
 import ProjectInquiryForm from '@/components/forms/ProjectInquiryForm';
@@ -23,7 +24,9 @@ export default function DiscussProjectPage() {
 
       <section className="py-24">
         <Container className="max-w-4xl">
-          <ProjectInquiryForm />
+          <Suspense fallback={<div className="text-center py-12 text-gray-400">Loading form...</div>}>
+            <ProjectInquiryForm />
+          </Suspense>
         </Container>
       </section>
     </main>

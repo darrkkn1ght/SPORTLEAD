@@ -15,15 +15,12 @@ export default function WhoWeAre() {
             <div className="w-16 h-1 bg-brand-green mb-8"></div>
           </div>
 
-          <div className="lg:w-2/3 prose prose-lg max-w-none space-y-6 text-gray-300">
-            <p className="text-2xl text-white font-medium leading-relaxed">
-              SportLead Africa is an advisory firm dedicated to advancing the sport industry in Africa.
+          <div className="lg:w-2/3 space-y-6 text-gray-300">
+            <p className="text-xl md:text-2xl text-white font-medium leading-relaxed">
+              SportLead Africa is a sport management, infrastructure and institutional advisory organisation focused on strengthening the systems through which sport is planned, governed, organised and delivered across Africa.
             </p>
-            <p>
-              We provide strategic advisory, capacity building, and project management services to sport organisations, governments, and private sector entities.
-            </p>
-            <p>
-              Our mission is to help our clients navigate the complex landscape of the African sport industry and achieve their objectives through tailored, data-driven solutions.
+            <p className="text-base md:text-lg text-gray-300 leading-relaxed">
+              We work with sport organisations, governments, educational institutions and private sector partners to plan and improve facilities, strengthen governance and administration, develop institutional strategy, organise effective competitions and deliver complex sport sector projects.
             </p>
           </div>
         </div>

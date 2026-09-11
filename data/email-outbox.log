@@ -162,3 +162,263 @@
 
 ============================================================
 
+[2026-09-11T10:45:08.686Z] TYPE: mandate_admin_brief | TO: inquiries@sportleadafrica.com | SUBJECT: [New Mandate Brief] National Association — Sport Governance & Administration
+
+
+    <!DOCTYPE html>
+    <html>
+    <head>
+      <meta charset="utf-8">
+      <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; line-height: 1.6; color: #121514; background: #FAFAF8; margin: 0; padding: 24px; }
+        .card { background: #ffffff; border: 1px solid #E5E5DE; border-radius: 16px; max-width: 640px; margin: 0 auto; padding: 32px; box-shadow: 0 4px 12px rgba(0,0,0,0.03); }
+        .header { border-bottom: 2px solid #0D4A2B; padding-bottom: 16px; margin-bottom: 24px; }
+        .title { font-size: 22px; font-weight: 800; color: #0D4A2B; margin: 0 0 6px 0; }
+        .badge { display: inline-block; background: #EBF5EF; color: #0D4A2B; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; padding: 4px 10px; rounded-radius: 4px; }
+        .section-title { font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: #666; margin: 24px 0 12px 0; border-bottom: 1px solid #EEE; padding-bottom: 6px; }
+        table { width: 100%; border-collapse: collapse; margin-bottom: 16px; }
+        th { text-align: left; font-size: 12px; color: #777; padding: 8px 0; width: 35%; }
+        td { font-size: 14px; color: #121514; font-weight: 500; padding: 8px 0; }
+        .desc-box { background: #F4F4F0; padding: 16px; border-radius: 8px; font-size: 14px; line-height: 1.7; color: #222; }
+        .footer { font-size: 12px; color: #888; text-align: center; margin-top: 32px; border-top: 1px solid #E5E5DE; padding-top: 16px; }
+      </style>
+    </head>
+    <body>
+      <div class="card">
+        <div class="header">
+          <span class="badge">Inbound Advisory Inquiry</span>
+          <h1 class="title">New Project Brief Submission</h1>
+          <p style="margin: 0; font-size: 13px; color: #555;">Ref ID: 17cc7451-33d6-4291-9fb9-b47ca01cba79</p>
+        </div>
+
+        <div class="section-title">Client Coordinates</div>
+        <table>
+          <tr><th>Full Name:</th><td>Jane Doe</td></tr>
+          <tr><th>Role / Title:</th><td>Director</td></tr>
+          <tr><th>Organisation:</th><td>National Association</td></tr>
+          <tr><th>Email Address:</th><td><a href="mailto:jane@example.org">jane@example.org</a></td></tr>
+          <tr><th>Telephone:</th><td>Not provided</td></tr>
+          <tr><th>Country / Base:</th><td>NigeriaNigeria</td></tr>
+        </table>
+
+        <div class="section-title">Project Parameters</div>
+        <table>
+          <tr><th>Service Required:</th><td><strong style="color: #0D4A2B;">Sport Governance & Administration</strong></td></tr>
+          <tr><th>Organisation Type:</th><td>Club or league</td></tr>
+          <tr><th>Project Location:</th><td>Abuja</td></tr>
+          <tr><th>Estimated Timeline:</th><td>Flexible / Scoping phase</td></tr>
+          <tr><th>Budget Envelope:</th><td>Undisclosed</td></tr>
+          <tr><th>Current Stage:</th><td>Inception / Discovery</td></tr>
+        </table>
+
+        <div class="section-title">Project Brief & Description</div>
+        <div class="desc-box">
+          Institutional reform and governance enhancement for regional sports administration.
+        </div>
+
+        
+
+        <div class="footer">
+          SportLead Africa Advisory Management System • Lagos, Nigeria
+        </div>
+      </div>
+    </body>
+    </html>
+  
+
+============================================================
+
+[2026-09-11T10:45:08.693Z] TYPE: mandate_client_receipt | TO: jane@example.org | SUBJECT: Inquiry Acknowledgment: SportLead Africa [Ref #17cc7451]
+
+
+    <!DOCTYPE html>
+    <html>
+    <head>
+      <meta charset="utf-8">
+      <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; line-height: 1.6; color: #121514; background: #FAFAF8; margin: 0; padding: 24px; }
+        .card { background: #ffffff; border: 1px solid #E5E5DE; border-radius: 16px; max-width: 600px; margin: 0 auto; padding: 36px; }
+        .brand { font-size: 20px; font-weight: 800; color: #0D4A2B; letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 24px; }
+        h2 { font-size: 22px; color: #121514; margin: 0 0 16px 0; }
+        p { font-size: 15px; color: #444; line-height: 1.7; margin-bottom: 16px; }
+        .highlight-box { background: #EBF5EF; border-left: 4px solid #0D4A2B; padding: 16px 20px; border-radius: 6px; margin: 24px 0; }
+        .footer { font-size: 12px; color: #888; border-top: 1px solid #EEE; padding-top: 20px; margin-top: 32px; }
+      </style>
+    </head>
+    <body>
+      <div class="card">
+        <div class="brand">SportLead Africa</div>
+        <h2>Thank You for Reaching Out</h2>
+        <p>Dear Jane Doe,</p>
+        <p>We have successfully received your project inquiry regarding <strong>Sport Governance & Administration</strong> for <strong>National Association</strong>.</p>
+        
+        <div class="highlight-box">
+          <strong style="color: #0D4A2B; display: block; margin-bottom: 4px;">What Happens Next:</strong>
+          <span style="font-size: 14px; color: #2D3748;">Our senior practice leadership conducts technical reviews within <strong>48 hours</strong>. A practice specialist will follow up directly to discuss scoping requirements or schedule an introductory advisory session.</span>
+        </div>
+
+        <p>If you have urgent documents or technical briefs to append, you may reply directly to this message or write to <a href="mailto:inquiries@sportleadafrica.com" style="color: #0D4A2B; font-weight: 600;">inquiries@sportleadafrica.com</a>.</p>
+
+        <p>Warm regards,<br/><strong>The Senior Advisory Practice</strong><br/>SportLead Africa</p>
+
+        <div class="footer">
+          SportLead Africa • Building Better Sport Systems Across Africa<br/>
+          Headquarters: Lagos, Nigeria • <a href="https://sportleadafrica.com" style="color: #666;">sportleadafrica.com</a>
+        </div>
+      </div>
+    </body>
+    </html>
+  
+
+============================================================
+
+[2026-09-11T11:04:36.991Z] TYPE: contact_admin_alert | TO: waterbrooksile@gmail.com | SUBJECT: [Contact Inquiry: General Inquiry] CAF CAT — Water Brooks
+
+
+    <!DOCTYPE html>
+    <html>
+    <head>
+      <meta charset="utf-8">
+      <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6; color: #121514; background: #FAFAF8; padding: 24px; }
+        .card { background: #fff; border: 1px solid #E5E5DE; border-radius: 14px; max-width: 600px; margin: 0 auto; padding: 32px; }
+        h2 { font-size: 20px; color: #0D4A2B; margin-top: 0; }
+        table { width: 100%; border-collapse: collapse; margin-bottom: 20px; }
+        th { text-align: left; font-size: 12px; color: #666; padding: 6px 0; width: 30%; }
+        td { font-size: 14px; padding: 6px 0; font-weight: 500; }
+        .message-box { background: #F4F4F0; padding: 16px; border-radius: 8px; font-size: 14px; }
+      </style>
+    </head>
+    <body>
+      <div class="card">
+        <h2>New General Inquiry</h2>
+        <table>
+          <tr><th>From:</th><td>Water Brooks</td></tr>
+          <tr><th>Email:</th><td><a href="mailto:waterbrooksile@gmail.com">waterbrooksile@gmail.com</a></td></tr>
+          <tr><th>Organisation:</th><td>SPORTD</td></tr>
+          <tr><th>Inquiry Type:</th><td><strong>General Inquiry</strong></td></tr>
+          <tr><th>Subject:</th><td>CAF CAT</td></tr>
+          <tr><th>Preferred Contact:</th><td>Email</td></tr>
+        </table>
+        <div style="font-weight: 700; font-size: 12px; text-transform: uppercase; color: #666; margin-bottom: 6px;">Message</div>
+        <div class="message-box">SO MUCH MORE</div>
+      </div>
+    </body>
+    </html>
+  
+
+============================================================
+
+[2026-09-11T11:04:43.949Z] TYPE: contact_client_receipt | TO: waterbrooksile@gmail.com | SUBJECT: SportLead Africa: Message Received [Ref #0f0dd92b]
+
+
+        <div style="font-family: sans-serif; padding: 24px; color: #121514;">
+          <h2 style="color: #0D4A2B;">SportLead Africa</h2>
+          <p>Dear Water Brooks,</p>
+          <p>Thank you for contacting SportLead Africa regarding <strong>CAF CAT</strong>.</p>
+          <p>We have received your message and our communications team will respond via your preferred contact method (Email) shortly.</p>
+          <p style="margin-top: 24px; font-size: 13px; color: #666;">Inquiry Reference ID: 0f0dd92b-5796-49c3-8e15-2df54c292d36</p>
+        </div>
+      
+
+============================================================
+
+[2026-09-11T11:14:21.670Z] TYPE: expert_network_application | TO: waterbrooksile@gmail.com | SUBJECT: [Expert Network Application] Dr. Emmanuel K. Mensah — Sport Infrastructure Planning & Development
+
+
+        <div style="font-family: sans-serif; padding: 24px; color: #121514; background: #FAFAF8;">
+          <div style="background: #ffffff; border: 1px solid #E5E5DE; border-radius: 12px; padding: 28px; max-width: 680px; margin: 0 auto;">
+            <h2 style="color: #0D4A2B; margin-top: 0; border-bottom: 2px solid #0D4A2B; padding-bottom: 12px;">New Expert Network Application</h2>
+            
+            <h3 style="color: #333; margin-top: 20px;">1. Personal & Contact</h3>
+            <p><strong>Full Name:</strong> Dr. Emmanuel K. Mensah (Emmanuel Mensah)</p>
+            <p><strong>Email:</strong> <a href="mailto:emmanuel.mensah@example.com">emmanuel.mensah@example.com</a></p>
+            <p><strong>Telephone/WhatsApp:</strong> +233 24 123 4567</p>
+            <p><strong>Location:</strong> Accra, Ghana</p>
+
+            <h3 style="color: #333; margin-top: 20px;">2. Professional Background</h3>
+            <p><strong>Current Title:</strong> Principal Sport Facility Architect</p>
+            <p><strong>Organisation / Practice:</strong> Mensah & Partners Advisory</p>
+            <p><strong>Primary Discipline:</strong> Sport Infrastructure Planning & Development</p>
+            <p><strong>Secondary Disciplines:</strong> Facility Auditing</p>
+            <p><strong>Years of Experience:</strong> 13-20 years</p>
+            <p><strong>Academic Qualifications:</strong> B.Arch (KNUST), MSc Urban Infrastructure (UCL)</p>
+            <p><strong>Professional Registrations:</strong> Ghana Institute of Architects (GIA), ARCON</p>
+
+            <h3 style="color: #333; margin-top: 20px;">3. Experience & Scope</h3>
+            <p><strong>Services Provided:</strong> Master planning, technical feasibility, facility condition audits.</p>
+            <p><strong>Sector / Facility Experience:</strong> National stadia, multi-sport complexes, university athletics tracks.</p>
+            <p><strong>Work Regions:</strong> West Africa, Pan-African</p>
+            <p><strong>Travel Availability:</strong> Continental travel</p>
+            <p><strong>Languages:</strong> English (Fluent), Twi</p>
+            <p><strong>Preferred Engagement:</strong> Project-based</p>
+
+            <div style="background: #F4F4F0; padding: 14px; border-radius: 8px; margin: 12px 0;">
+              <strong>Key Sport Sector Project Experience:</strong><br/>
+              Led the master planning and technical compliance audit for a 15,000-seat multi-sport stadium in Kumasi.
+            </div>
+
+            <h3 style="color: #333; margin-top: 20px;">4. Links & Uploads</h3>
+            <p><strong>LinkedIn:</strong> <a href="https://linkedin.com/in/emmanuel-mensah-arch">https://linkedin.com/in/emmanuel-mensah-arch</a></p>
+            
+            <p><strong>CV File:</strong> Emmanuel_Mensah_CV.pdf (505290d8-9a6d-4a2a-bf7b-79bce582359c-Emmanuel_Mensah_CV.pdf)</p>
+            <p><strong>Photo File:</strong> emmanuel_photo.jpg (891cd70b-bc1c-4017-adbd-3adf5c95fba0-emmanuel_photo.jpg)</p>
+            <p><strong>Certificates:</strong> GIA_Licence_2026.pdf</p>
+            
+            <div style="background: #F4F4F0; padding: 14px; border-radius: 8px; margin: 12px 0;">
+              <strong>References:</strong><br/>
+              Prof. Kwame Boateng, KNUST (kwame@example.com, +233201234567)
+            </div>
+
+            <h3 style="color: #333; margin-top: 20px;">5. Narrative</h3>
+            <div style="background: #F4F4F0; padding: 14px; border-radius: 8px; margin: 12px 0;">
+              <strong>Biography:</strong><br/>
+              Dr. Emmanuel Mensah is a chartered sport facility architect with over 15 years of continental practice across West Africa.
+            </div>
+            <div style="background: #F4F4F0; padding: 14px; border-radius: 8px; margin: 12px 0;">
+              <strong>Statement of Interest:</strong><br/>
+              I wish to contribute rigorous infrastructural planning and facility audit expertise to SportLead Africa advisory mandates.
+            </div>
+
+            <p style="font-size: 12px; color: #777; margin-top: 24px; border-top: 1px solid #EEE; padding-top: 12px;">
+              Application Ref ID: 569f4346-bdc1-4cd0-8f7c-3aa8ec385bac | Submitted: 2026-09-11T11:14:21.665Z
+            </p>
+          </div>
+        </div>
+      
+
+============================================================
+
+[2026-09-11T11:14:27.015Z] TYPE: expert_network_receipt | TO: emmanuel.mensah@example.com | SUBJECT: SportLead Africa Expert Network: Application Acknowledged [Ref #569f4346]
+
+
+        <div style="font-family: sans-serif; padding: 24px; color: #121514; background: #FAFAF8;">
+          <div style="background: #ffffff; border: 1px solid #E5E5DE; border-radius: 12px; padding: 32px; max-width: 600px; margin: 0 auto;">
+            <div style="font-size: 18px; font-weight: 800; color: #0D4A2B; margin-bottom: 20px;">SPORTLEAD AFRICA</div>
+            <h2 style="color: #121514; margin-top: 0;">Application Received</h2>
+            <p>Dear Emmanuel Mensah,</p>
+            <p>Thank you for applying to join the <strong>SportLead Africa Expert Network</strong> in <strong>Sport Infrastructure Planning & Development</strong>.</p>
+            
+            <div style="background: #EBF5EF; border-left: 4px solid #0D4A2B; padding: 16px; border-radius: 6px; margin: 20px 0;">
+              <strong style="color: #0D4A2B;">Next Steps in Onboarding:</strong>
+              <p style="margin: 6px 0 0 0; font-size: 14px; color: #2D3748;">
+                Our expert network governance committee reviews applications on a rolling cadence. Should your profile and disciplinary credentials align with ongoing or upcoming institutional and infrastructure assignments across Africa, a coordinator will reach out to schedule an introductory interview and conduct reference verification.
+              </p>
+            </div>
+
+            <p style="font-size: 14px; color: #555;">
+              <strong>Application Reference:</strong> 569f4346-bdc1-4cd0-8f7c-3aa8ec385bac<br/>
+              <strong>Registered Email:</strong> emmanuel.mensah@example.com
+            </p>
+
+            <p style="margin-top: 24px;">
+              Warm regards,<br/>
+              <strong>The Expert Network Committee</strong><br/>
+              SportLead Africa
+            </p>
+          </div>
+        </div>
+      
+
+============================================================
+

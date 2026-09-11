@@ -1,9 +1,19 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useSearchParams } from 'next/navigation';
 import { Button, FormField } from '@/components/ui';
 import { ORGANISATION_TYPES, SERVICE_OPTIONS, PROJECT_STAGES, BUDGET_RANGES, TIMELINE_OPTIONS } from '@/lib/constants';
 import { CheckCircle2, ArrowRight, ArrowLeft, ShieldCheck, Clock, FileText, Send, Building2, Layers, AlertCircle } from 'lucide-react';
+
+const SLUG_TO_SERVICE: Record<string, string> = {
+  infrastructure: 'Sport Infrastructure Planning & Development',
+  auditing: 'Sport Facility Auditing & Improvement',
+  governance: 'Sport Governance & Administration',
+  strategy: 'Strategy & Institutional Development',
+  competitions: 'Competition & Event Management',
+  'project-management': 'Sport Project Development & Management',
+};
 
 interface FormState {
   name: string;
@@ -48,12 +58,30 @@ const INITIAL_FORM: FormState = {
 };
 
 export default function ProjectInquiryForm() {
+  const searchParams = useSearchParams();
   const [currentStep, setCurrentStep] = useState(1);
   const [loading, setLoading] = useState(false);
   const [successData, setSuccessData] = useState<{ referenceId: string; message: string } | null>(null);
   const [fieldErrors, setFieldErrors] = useState<Record<string, string[]>>({});
   const [generalError, setGeneralError] = useState('');
   const [formData, setFormData] = useState<FormState>(INITIAL_FORM);
+
+  useEffect(() => {
+    const serviceParam = searchParams?.get('service');
+    if (serviceParam) {
+      const matched =
+        SLUG_TO_SERVICE[serviceParam] ||
+        SERVICE_OPTIONS.find(
+          (opt) => opt.toLowerCase() === serviceParam.toLowerCase()
+        );
+      if (matched) {
+        setFormData((prev) => ({
+          ...prev,
+          serviceRequired: matched,
+        }));
+      }
+    }
+  }, [searchParams]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value, type } = e.target;

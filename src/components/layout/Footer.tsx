@@ -90,9 +90,9 @@ export default function Footer() {
             <ul className="space-y-4">
               {[
                 { label: 'Commission a Project', href: '/discuss-a-project' },
-                { label: 'Fund a Facility Project', href: '/partner-with-us' },
-                { label: 'Join Our Expert Network', href: '/partner-with-us' },
-                { label: 'Institutional Partnerships', href: '/partner-with-us' },
+                { label: 'Fund a Facility Project', href: '/partner-with-us#fund' },
+                { label: 'Join Our Expert Network', href: '/expert-network/apply' },
+                { label: 'Institutional Partnerships', href: '/partner-with-us#institutional' },
               ].map((link, idx) => (
                 <li key={idx}>
                   <Link
@@ -107,24 +107,26 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Social Links */}
-        <div className="flex items-center gap-4 mb-8">
-          {SOCIAL_LINKS.map((link) => {
-            const IconComponent = SOCIAL_ICON_MAP[link.icon] || Globe;
-            return (
-              <a
-                key={link.name}
-                href={link.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-gray-500 hover:text-brand-green-light transition-colors p-2"
-                aria-label={link.name}
-              >
-                <IconComponent size={20} />
-              </a>
-            );
-          })}
-        </div>
+        {/* Social Links (displayed only when real URLs are configured) */}
+        {SOCIAL_LINKS.filter((l) => l.url && l.url !== '#').length > 0 && (
+          <div className="flex items-center gap-4 mb-8">
+            {SOCIAL_LINKS.filter((l) => l.url && l.url !== '#').map((link) => {
+              const IconComponent = SOCIAL_ICON_MAP[link.icon] || Globe;
+              return (
+                <a
+                  key={link.name}
+                  href={link.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-gray-500 hover:text-brand-green-light transition-colors p-2"
+                  aria-label={link.name}
+                >
+                  <IconComponent size={20} />
+                </a>
+              );
+            })}
+          </div>
+        )}
 
         {/* Bottom Bar */}
         <div className="pt-8 border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-4">
@@ -132,10 +134,10 @@ export default function Footer() {
             © {currentYear} SportLead Africa. All rights reserved.
           </p>
           <div className="flex items-center gap-6">
-            <Link href="#" className="text-sm text-gray-500 hover:text-white transition-colors">
+            <Link href="/privacy" className="text-sm text-gray-400 hover:text-white transition-colors">
               Privacy Policy
             </Link>
-            <Link href="#" className="text-sm text-gray-500 hover:text-white transition-colors">
+            <Link href="/terms" className="text-sm text-gray-400 hover:text-white transition-colors">
               Terms of Use
             </Link>
           </div>

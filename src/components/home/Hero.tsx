@@ -1,4 +1,5 @@
 'use client';
+import Image from "next/image";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { motion } from "framer-motion";
@@ -9,10 +10,13 @@ export default function Hero() {
       {/* Background Image */}
       <div className="absolute inset-0 z-0">
         <div className="absolute inset-0 bg-charcoal/80 z-10" />
-        <img
+        <Image
           src="https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?q=80&w=2936&auto=format&fit=crop"
           alt="Professional Sport Planning"
-          className="w-full h-full object-cover opacity-30 grayscale"
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover opacity-30 grayscale"
         />
       </div>
 

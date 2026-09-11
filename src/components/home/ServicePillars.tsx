@@ -9,19 +9,16 @@ export default function ServicePillars() {
   return (
     <section className="py-28 bg-warm-white relative">
       <Container>
-        {/* Section header: split layout */}
-        <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 mb-20">
+        {/* Section header */}
+        <div className="mb-16">
           <div>
             <span className="section-label">
-              Our Solutions
+              What We Do
             </span>
             <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-charcoal tracking-tight">
-              Comprehensive<br />Capabilities.
+              Our Services
             </h2>
           </div>
-          <p className="text-gray-500 text-lg leading-relaxed max-w-md lg:text-right">
-            Six practice areas built around the real needs of African sport organisations, facilities and systems.
-          </p>
         </div>
 
         {/* Bento grid: first row 2 larger cards, second row 2, third row 2 */}
@@ -72,7 +69,7 @@ export default function ServicePillars() {
 
                     {/* Explore link */}
                     <span className="inline-flex items-center text-brand-green font-semibold text-sm opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 transition-all duration-300">
-                      <span className="uppercase tracking-wider">Explore</span>
+                      <span className="uppercase tracking-wider">Explore Service</span>
                       <span className="ml-2">→</span>
                     </span>
                   </div>

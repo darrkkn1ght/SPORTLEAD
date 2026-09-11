@@ -73,17 +73,117 @@ export interface StoredProjectInquiry {
   status: 'new' | 'in_review' | 'contacted' | 'mandate_active';
 }
 
+/**
+ * ARCHITECTURE NOTICE — CLOUD STORAGE REQUIREMENT:
+ * Local file storage to `data/uploads/` is implemented for local development
+ * and single-server deployments. For production deployment on serverless platforms
+ * such as Vercel or AWS Lambda, container disk storage is strictly ephemeral and
+ * will not persist across invocations or deployments. Before deploying to production,
+ * file uploads must be adapted to stream directly to an S3-compatible cloud bucket,
+ * Cloudflare R2, or Cloudinary.
+ */
+
+export interface StoredUploadedFile {
+  filename: string;
+  originalName: string;
+  mimeType: string;
+  size: number;
+  urlPath: string;
+  savedAt: string;
+}
+
+const UPLOADS_DIR = path.join(DATA_DIR, 'uploads');
+
+export async function ensureUploadsDir(subfolder = ''): Promise<string> {
+  const dir = subfolder ? path.join(UPLOADS_DIR, subfolder) : UPLOADS_DIR;
+  try {
+    await fs.mkdir(dir, { recursive: true });
+  } catch (err) {
+    // Already exists
+  }
+  return dir;
+}
+
+export async function saveUploadedFile(
+  file: File,
+  subfolder: 'cv' | 'photo' | 'certificates',
+  allowedMimes: string[]
+): Promise<StoredUploadedFile> {
+  const MAX_SIZE = 5 * 1024 * 1024; // 5MB limit
+  if (file.size > MAX_SIZE) {
+    throw new Error(`File "${file.name}" exceeds the maximum allowed size of 5MB.`);
+  }
+
+  const mimeType = file.type.toLowerCase();
+  const ext = path.extname(file.name).toLowerCase();
+
+  const allowedExtensions: Record<string, string[]> = {
+    cv: ['.pdf', '.doc', '.docx'],
+    photo: ['.jpg', '.jpeg', '.png', '.webp'],
+    certificates: ['.pdf', '.jpg', '.jpeg', '.png', '.webp'],
+  };
+
+  const validExts = allowedExtensions[subfolder] || [];
+  const matchesMime = allowedMimes.includes(mimeType);
+  const matchesExt = validExts.includes(ext);
+
+  if (!matchesMime && !matchesExt) {
+    throw new Error(`Invalid file type for "${file.name}". Allowed extensions: ${validExts.join(', ')}`);
+  }
+
+  const targetDir = await ensureUploadsDir(subfolder);
+  const cleanOriginalName = path.basename(file.name).replace(/[^a-zA-Z0-9._-]/g, '_');
+  const storedFilename = `${crypto.randomUUID()}-${cleanOriginalName}`;
+  const destinationPath = path.join(targetDir, storedFilename);
+
+  const arrayBuffer = await file.arrayBuffer();
+  await fs.writeFile(destinationPath, Buffer.from(arrayBuffer));
+
+  return {
+    filename: storedFilename,
+    originalName: file.name,
+    mimeType: file.type || 'application/octet-stream',
+    size: file.size,
+    urlPath: `/data/uploads/${subfolder}/${storedFilename}`,
+    savedAt: new Date().toISOString(),
+  };
+}
+
 export interface StoredExpertApplication {
   id: string;
   fullName: string;
+  preferredName?: string;
   email: string;
-  telephone?: string;
+  telephone: string;
   country: string;
+  city: string;
+  jobTitle: string;
+  organisation: string;
   primaryDiscipline: string;
-  secondaryDisciplines?: string[];
+  secondaryDisciplines?: string;
   yearsOfExperience: string;
-  credentialsSummary: string;
-  linkedInUrl?: string;
+  academicQualifications: string;
+  professionalRegistrations?: string;
+  projectExperience: string;
+  servicesProvided: string;
+  sectorExperience: string;
+  workRegions: string;
+  travelAvailability: string;
+  languages: string;
+  engagementType: string;
+  linkedInUrl: string;
+  websiteUrl?: string;
+  references: string;
+  bio: string;
+  statementOfInterest: string;
+  consentVerification: boolean;
+  consentPublication: boolean;
+  acknowledgementNoGuarantee: boolean;
+  privacyConsent: boolean;
+  cvFile?: StoredUploadedFile;
+  photoFile?: StoredUploadedFile;
+  certificateFiles?: StoredUploadedFile[];
+  credentialsSummary?: string;
   regionalDeskPreference?: string;
   createdAt: string;
   status: 'pending_review' | 'vetted' | 'accepted' | 'declined';

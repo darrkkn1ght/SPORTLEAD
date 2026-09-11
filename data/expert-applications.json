@@ -1,0 +1,61 @@
+[
+  {
+    "fullName": "Dr. Emmanuel K. Mensah",
+    "preferredName": "Emmanuel Mensah",
+    "email": "emmanuel.mensah@example.com",
+    "telephone": "+233 24 123 4567",
+    "country": "Ghana",
+    "city": "Accra",
+    "jobTitle": "Principal Sport Facility Architect",
+    "organisation": "Mensah & Partners Advisory",
+    "primaryDiscipline": "Sport Infrastructure Planning & Development",
+    "secondaryDisciplines": "Facility Auditing",
+    "yearsOfExperience": "13-20 years",
+    "academicQualifications": "B.Arch (KNUST), MSc Urban Infrastructure (UCL)",
+    "professionalRegistrations": "Ghana Institute of Architects (GIA), ARCON",
+    "projectExperience": "Led the master planning and technical compliance audit for a 15,000-seat multi-sport stadium in Kumasi.",
+    "servicesProvided": "Master planning, technical feasibility, facility condition audits.",
+    "sectorExperience": "National stadia, multi-sport complexes, university athletics tracks.",
+    "workRegions": "West Africa, Pan-African",
+    "travelAvailability": "Continental travel",
+    "languages": "English (Fluent), Twi",
+    "engagementType": "Project-based",
+    "linkedInUrl": "https://linkedin.com/in/emmanuel-mensah-arch",
+    "references": "Prof. Kwame Boateng, KNUST (kwame@example.com, +233201234567)",
+    "bio": "Dr. Emmanuel Mensah is a chartered sport facility architect with over 15 years of continental practice across West Africa.",
+    "statementOfInterest": "I wish to contribute rigorous infrastructural planning and facility audit expertise to SportLead Africa advisory mandates.",
+    "consentVerification": true,
+    "consentPublication": true,
+    "acknowledgementNoGuarantee": true,
+    "privacyConsent": true,
+    "cvFile": {
+      "filename": "505290d8-9a6d-4a2a-bf7b-79bce582359c-Emmanuel_Mensah_CV.pdf",
+      "originalName": "Emmanuel_Mensah_CV.pdf",
+      "mimeType": "application/pdf",
+      "size": 48,
+      "urlPath": "/data/uploads/cv/505290d8-9a6d-4a2a-bf7b-79bce582359c-Emmanuel_Mensah_CV.pdf",
+      "savedAt": "2026-09-11T11:14:21.643Z"
+    },
+    "photoFile": {
+      "filename": "891cd70b-bc1c-4017-adbd-3adf5c95fba0-emmanuel_photo.jpg",
+      "originalName": "emmanuel_photo.jpg",
+      "mimeType": "image/jpeg",
+      "size": 22,
+      "urlPath": "/data/uploads/photo/891cd70b-bc1c-4017-adbd-3adf5c95fba0-emmanuel_photo.jpg",
+      "savedAt": "2026-09-11T11:14:21.649Z"
+    },
+    "certificateFiles": [
+      {
+        "filename": "4aa5e688-792b-444a-8d35-a40a53711cb8-GIA_Licence_2026.pdf",
+        "originalName": "GIA_Licence_2026.pdf",
+        "mimeType": "application/pdf",
+        "size": 29,
+        "urlPath": "/data/uploads/certificates/4aa5e688-792b-444a-8d35-a40a53711cb8-GIA_Licence_2026.pdf",
+        "savedAt": "2026-09-11T11:14:21.655Z"
+      }
+    ],
+    "id": "569f4346-bdc1-4cd0-8f7c-3aa8ec385bac",
+    "createdAt": "2026-09-11T11:14:21.665Z",
+    "status": "pending_review"
+  }
+]

@@ -7,16 +7,13 @@ export default function WhySportLead() {
   return (
     <section className="py-28 bg-warm-white">
       <Container>
-        <div className="text-center mb-20">
+        <div className="text-center mb-16">
           <span className="section-label">
             Our Edge
           </span>
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-charcoal tracking-tight mb-4">
-            Why Partner With Us.
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-charcoal tracking-tight">
+            Why SportLead Africa
           </h2>
-          <p className="text-gray-500 text-lg max-w-2xl mx-auto">
-            What sets our advisory practice apart in the African sport sector.
-          </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">

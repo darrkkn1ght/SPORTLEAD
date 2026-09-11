@@ -10,14 +10,14 @@ export default function WhoWeServe() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-24 items-start">
           <div className="lg:col-span-5 sticky top-24">
             <span className="section-label">
-              Who We Serve
+              Who We Work With
             </span>
             <h2 className="text-4xl md:text-5xl font-bold text-charcoal mb-6 tracking-tight">
-              Empowering the Sports Ecosystem
+              Who We Work With
             </h2>
             <div className="w-16 h-[2px] bg-brand-green mb-8"></div>
             <p className="text-gray-500 text-lg leading-relaxed">
-              We partner with forward-thinking organizations across the continent, driving institutional growth and sustainable impact in the sports sector.
+              SportLead Africa works with the institutions, organisations and partners responsible for planning, governing, financing and delivering sport. We support clients and partners who need stronger facilities, better systems, clearer strategy and more effective project delivery.
             </p>
           </div>
 

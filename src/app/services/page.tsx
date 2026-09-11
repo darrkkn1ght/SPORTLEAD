@@ -36,7 +36,7 @@ export default function ServicesPage() {
                   <p className="text-gray-500 mb-6 leading-relaxed">{service.description}</p>
                 </div>
                 <div className="pt-6 mt-auto border-t border-warm-border">
-                  <Link href="#" className="text-brand-green font-semibold hover:text-brand-green-light inline-flex items-center transition-colors group">
+                  <Link href={`/services/${service.id}`} className="text-brand-green font-semibold hover:text-brand-green-light inline-flex items-center transition-colors group">
                     Learn more <Icon name="ArrowRight" className="w-4 h-4 ml-2 transform group-hover:translate-x-1 transition-transform" />
                   </Link>
                 </div>

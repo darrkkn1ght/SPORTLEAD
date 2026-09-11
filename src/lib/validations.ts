@@ -41,17 +41,62 @@ export const projectInquirySchema = z.object({
 });
 
 export const expertApplicationSchema = z.object({
-  fullName: z.string().min(2, 'Full name is required').max(100),
+  // Personal & contact
+  fullName: z.string().min(2, 'Full legal name is required').max(100),
+  preferredName: z.string().max(100).optional().or(z.literal('')),
   email: z.string().email('Valid email address is required'),
-  telephone: z.string().max(30).optional().or(z.literal('')),
+  telephone: z.string().min(5, 'Telephone/WhatsApp number is required').max(30),
   country: z.string().min(2, 'Country of residence is required').max(100),
+  city: z.string().min(2, 'City / base location is required').max(100),
+
+  // Professional
+  jobTitle: z.string().min(2, 'Current job title is required').max(100),
+  organisation: z.string().min(2, 'Current organisation or practice status is required').max(150),
   primaryDiscipline: z.string().min(1, 'Please select your primary discipline'),
-  yearsOfExperience: z.string().min(1, 'Please select your experience level'),
-  credentialsSummary: z.string().min(30, 'Please provide a brief summary of your track record (at least 30 characters)').max(3000),
-  linkedInUrl: z.string().url('Please provide a valid URL').optional().or(z.literal('')),
-  regionalDeskPreference: z.string().optional().or(z.literal('')),
-  privacyConsent: z.boolean().refine(val => val === true, {
-    message: 'You must accept the privacy terms to apply',
+  secondaryDisciplines: z.string().max(300).optional().or(z.literal('')),
+  yearsOfExperience: z.string().min(1, 'Please select your years of relevant experience'),
+  academicQualifications: z.string().min(2, 'Academic qualifications are required').max(500),
+  professionalRegistrations: z.string().max(500).optional().or(z.literal('')),
+
+  // Experience
+  projectExperience: z.string().min(10, 'Please describe key sport sector project experience').max(3000),
+  servicesProvided: z.string().min(5, 'Please list types of services you can provide').max(1000),
+  sectorExperience: z.string().min(5, 'Please specify sports, sectors or facility types').max(1000),
+  workRegions: z.string().min(2, 'Please state countries or regions you can work in').max(500),
+  travelAvailability: z.string().min(1, 'Please select travel availability'),
+  languages: z.string().min(2, 'Languages spoken are required').max(300),
+  engagementType: z.string().min(1, 'Please select your preferred engagement type'),
+
+  // Links & uploads / references
+  linkedInUrl: z.string().url('Please enter a valid LinkedIn URL').refine(url => url.includes('linkedin.com'), {
+    message: 'Must be a valid LinkedIn profile URL',
   }),
+  websiteUrl: z.string().url('Please enter a valid website URL').optional().or(z.literal('')),
+  references: z.string().min(10, 'Please provide professional reference details (name, title, organisation, contact)').max(2000),
+
+  // Narrative
+  bio: z.string().min(30, 'Please provide a short professional biography (minimum 30 characters)').max(3000),
+  statementOfInterest: z.string().min(20, 'Please explain why you want to join SportLead Africa (minimum 20 characters)').max(2000),
+
+  // Consents (all 4 required)
+  consentVerification: z.boolean().refine(val => val === true, {
+    message: 'You must consent to verification of submitted information',
+  }),
+  consentPublication: z.boolean().refine(val => val === true, {
+    message: 'You must consent to publication of approved professional profile information',
+  }),
+  acknowledgementNoGuarantee: z.boolean().refine(val => val === true, {
+    message: 'You must acknowledge that admission does not guarantee project assignments',
+  }),
+  privacyConsent: z.boolean().refine(val => val === true, {
+    message: 'You must consent to privacy and data processing',
+  }),
+
+  // Legacy / optional fields for backwards compatibility
+  credentialsSummary: z.string().max(3000).optional().or(z.literal('')),
+  regionalDeskPreference: z.string().max(100).optional().or(z.literal('')),
   honeypot: z.string().max(0).optional().or(z.literal('')),
 });
+
+export type ExpertApplicationFormData = z.infer<typeof expertApplicationSchema>;
+

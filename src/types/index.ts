@@ -36,13 +36,34 @@ export interface ValueItem {
 export interface LeaderProfile {
   name: string;
   role: string;
-  bio: string;
-  qualifications: string[];
-  registrations: string[];
+  titleLine?: string;
+  bio: string | string[];
+  qualifications: string | string[];
+  registrations?: string[];
   photo: string;
+  photoAlt?: string;
   linkedin?: string;
   website?: string;
-  areas: string[];
+  areas?: string[];
+}
+
+export interface ExpertProfile {
+  id: string;
+  fullName: string;
+  photograph?: string;
+  primaryDiscipline: string;
+  currentRole: string;
+  currentOrganisation: string;
+  country: string;
+  shortBio: string | string[];
+  academicQualifications: string[];
+  professionalQualifications?: string[];
+  areasOfExpertise: string[];
+  relevantProjectExperience?: string[];
+  regionsOfPractice?: string[];
+  languages?: string[];
+  linkedin?: string;
+  website?: string;
 }
 
 export interface ContactFormData {
@@ -55,7 +76,7 @@ export interface ContactFormData {
   inquiryType: string;
   subject: string;
   message: string;
-  preferredContact: 'email' | 'phone';
+  preferredContact: 'Email' | 'Phone' | 'WhatsApp';
   privacyConsent: boolean;
 }
 
@@ -68,7 +89,7 @@ export interface ProjectInquiryData {
   country: string;
   projectLocation: string;
   organisationType: string;
-  serviceRequired: string[];
+  serviceRequired: string;
   description: string;
   currentStage: string;
   desiredOutcome: string;

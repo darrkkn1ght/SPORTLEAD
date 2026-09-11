@@ -23,17 +23,27 @@ export default function Header() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // On dark hero backgrounds (not scrolled), use white text; on scrolled white bg, use charcoal
-  const textColor = isScrolled ? 'text-charcoal/70' : 'text-white/80';
-  const textHover = isScrolled ? 'hover:text-brand-green' : 'hover:text-white';
-  const activeColor = isScrolled ? 'text-brand-green' : 'text-white';
-  const logoColor = isScrolled ? 'text-charcoal' : 'text-white';
+  // The homepage is the only page with a full-height dark hero where a transparent
+  // header with white text is used before scroll. All other pages feature light hero
+  // sections and must display the high-contrast dark-on-light header immediately on load.
+  const isDarkHero = pathname === '/';
+  const isTransparent = isDarkHero && !isScrolled;
+
+  const headerBg = isTransparent
+    ? 'bg-transparent'
+    : 'bg-white/95 backdrop-blur-md shadow-nav border-b border-warm-border';
+  const textColor = isTransparent ? 'text-white/80' : 'text-charcoal/70';
+  const textHover = isTransparent ? 'hover:text-white' : 'hover:text-brand-green';
+  const activeColor = isTransparent ? 'text-white' : 'text-brand-green';
+  const logoColor = isTransparent ? 'text-white' : 'text-charcoal';
+  const mobileToggleColor = isTransparent
+    ? 'text-white hover:text-white/70'
+    : 'text-charcoal hover:text-brand-green';
 
   return (
     <>
       <header
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? 'bg-white/95 backdrop-blur-md shadow-nav border-b border-warm-border' : 'bg-transparent'
-          }`}
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${headerBg}`}
       >
         <Container>
           <div className="flex items-center justify-between h-20">
@@ -56,8 +66,8 @@ export default function Header() {
                   <Link
                     href={item.href}
                     className={`flex items-center text-sm font-semibold transition-colors duration-300 ${pathname === item.href || (pathname.startsWith(item.href) && item.href !== '/')
-                        ? activeColor
-                        : `${textColor} ${textHover}`
+                      ? activeColor
+                      : `${textColor} ${textHover}`
                       }`}
                   >
                     {item.label}
@@ -79,8 +89,8 @@ export default function Header() {
                             key={child.label}
                             href={child.href}
                             className={`block px-5 py-2.5 text-sm font-medium transition-colors ${pathname === child.href
-                                ? 'text-brand-green bg-brand-green-muted'
-                                : 'text-gray-600 hover:text-brand-green hover:bg-warm-gray'
+                              ? 'text-brand-green bg-brand-green-muted'
+                              : 'text-gray-600 hover:text-brand-green hover:bg-warm-gray'
                               }`}
                           >
                             {child.label}
@@ -101,7 +111,7 @@ export default function Header() {
                 </Button>
               </div>
               <button
-                className={`lg:hidden p-2 focus:outline-none transition-colors duration-300 ${isScrolled ? 'text-charcoal hover:text-brand-green' : 'text-white hover:text-white/70'}`}
+                className={`lg:hidden p-2 focus:outline-none transition-colors duration-300 ${mobileToggleColor}`}
                 onClick={() => setIsMobileNavOpen(true)}
                 aria-label="Open menu"
               >

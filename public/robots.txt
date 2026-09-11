@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://sportlead.africa/sitemap.xml
+Sitemap: https://sportleadafrica.com/sitemap.xml
