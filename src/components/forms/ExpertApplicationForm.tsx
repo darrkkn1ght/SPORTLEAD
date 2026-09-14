@@ -431,7 +431,7 @@ export default function ExpertApplicationForm() {
                 name="email"
                 type="email"
                 required
-                placeholder="jane.adebayo@example.com"
+                placeholder="e.g. jane.adebayo@organisation.org"
                 value={fields.email}
                 onChange={handleInputChange}
                 error={fieldErrors.email?.[0]}

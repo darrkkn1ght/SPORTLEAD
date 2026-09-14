@@ -17,7 +17,7 @@ export default function ServicesPage() {
           <div className="max-w-3xl mx-auto text-center">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-charcoal tracking-tight">Our Services</h1>
             <p className="text-xl text-gray-500 leading-relaxed">
-              We provide strategic guidance and technical expertise to build stronger sports institutions and infrastructure across Africa.
+              We provide advisory, technical and project support across the institutional, operational and physical systems through which sport is delivered.
             </p>
           </div>
         </Container>

@@ -2,7 +2,7 @@ import type { NavItem, ServicePillar, AudienceItem, Differentiator, ApproachStep
 
 export const SITE_NAME = 'SportLead Africa';
 export const SITE_URL = 'https://sportleadafrica.com';
-export const SITE_EMAIL = 'inquiries@sportleadafrica.com';
+export const SITE_EMAIL = 'info@sportleadafrica.com';
 export const SITE_TAGLINE = 'Building Better Sport Systems Through Infrastructure, Governance, Strategy & Institutional Development Across Africa.';
 export const HEADQUARTERS = 'Lagos, Nigeria';
 
@@ -178,15 +178,9 @@ export const VALUES: ValueItem[] = [
   },
 ];
 
-// Social media profile links — pending official handle provisioning from client.
-// Kept inactive ('#') so the footer does not render visibly broken external links.
-export const SOCIAL_LINKS = [
-  { name: 'LinkedIn', url: '#', icon: 'LinkedIn' },
-  { name: 'Instagram', url: '#', icon: 'Instagram' },
-  { name: 'X / Twitter', url: '#', icon: 'Twitter' },
-  { name: 'Facebook', url: '#', icon: 'Facebook' },
-  { name: 'TikTok', url: '#', icon: 'Globe' },
-];
+// Social media profile links — no profiles active at this time.
+// Array is kept empty so social sections do not render anywhere on the site.
+export const SOCIAL_LINKS: { name: string; url: string; icon: string }[] = [];
 
 export const INQUIRY_TYPES = [
   'General Inquiry',

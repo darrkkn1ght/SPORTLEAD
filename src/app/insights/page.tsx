@@ -55,8 +55,11 @@ export default function InsightsPage() {
                 Editorial &amp; Research Hub
               </h2>
 
-              <p className="text-base sm:text-lg text-gray-600 leading-relaxed max-w-2xl mx-auto mb-8">
+              <p className="text-base sm:text-lg text-gray-600 leading-relaxed max-w-2xl mx-auto mb-4">
                 SportLead Africa Insights is in development. This section will publish original sector assessments, practical analysis, research, reports and evidence on the institutions, infrastructure and systems shaping African sport.
+              </p>
+              <p className="text-base sm:text-lg text-gray-600 leading-relaxed max-w-2xl mx-auto mb-8">
+                Our first publications will be added as SportLead Africa&apos;s research and sector assessment work develops.
               </p>
 
               <div className="flex flex-col sm:flex-row justify-center gap-4">

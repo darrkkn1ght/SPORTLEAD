@@ -1,8 +1,8 @@
 import React from 'react';
 import Link from 'next/link';
 import { Container } from '@/components/ui/Container';
-import { SITE_EMAIL, HEADQUARTERS, SERVICE_PILLARS, SOCIAL_LINKS } from '@/lib/constants';
-import { LinkedIn, Instagram, Twitter, Facebook, Globe, Mail, MapPin } from '@/components/ui/Icon';
+import { HEADQUARTERS, SERVICE_PILLARS, SOCIAL_LINKS } from '@/lib/constants';
+import { LinkedIn, Instagram, Twitter, Facebook, Globe, MapPin } from '@/components/ui/Icon';
 
 const SOCIAL_ICON_MAP: Record<string, React.ComponentType<{ size?: number; className?: string }>> = {
   LinkedIn,
@@ -30,13 +30,6 @@ export default function Footer() {
               Building Better Sport Systems Across Africa.
             </p>
             <div className="space-y-3">
-              <a
-                href={`mailto:${SITE_EMAIL}`}
-                className="flex items-center gap-3 text-sm text-gray-400 hover:text-brand-green-light transition-colors"
-              >
-                <Mail size={16} />
-                {SITE_EMAIL}
-              </a>
               <div className="flex items-start gap-3 text-sm text-gray-400">
                 <MapPin size={16} className="mt-1 flex-shrink-0" />
                 <span>{HEADQUARTERS}</span>

@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { Container } from '@/components/ui';
 import { Globe, LinkedIn, ExternalLink } from '@/components/ui/Icon';
 import type { LeaderProfile } from '@/types';
@@ -9,7 +10,7 @@ const FOUNDER_DATA: LeaderProfile = {
   name: 'Dr. Joshua A. Oparachukwu',
   role: 'Founder & Principal Consultant',
   titleLine: 'Founder, SportLead Africa | Performance Strategist | Applied Performance Scientist | Sport Administration Expert',
-  photo: '', // Placeholder slot for official professional headshot
+  photo: '/images/leadership/joshua-oparachukwu.jfif',
   photoAlt: 'Dr. Joshua A. Oparachukwu — Founder, SportLead Africa',
   bio: [
     'Dr. Joshua A. Oparachukwu is a Performance Strategist, Applied Performance Scientist and Sport Administration expert working at the intersection of human performance and the systems that shape sport. He is the Founder of SportLead Africa, where his focus is on sport management, governance, institutional development, infrastructure strategy and the development of stronger systems for the delivery of sport across Africa.',
@@ -20,8 +21,8 @@ const FOUNDER_DATA: LeaderProfile = {
     "Dr. Oparachukwu holds a Bachelor's degree in Human Kinetics, a Master's degree in the Sociology and Psychology of Sport, and a PhD in Performance Psychology from the University of Ibadan, Nigeria. He is also undertaking postgraduate study in Sport Administration.",
   ],
   website: 'https://joshuaoparachukwu.com',
-  // TODO: Replace with Dr. Joshua A. Oparachukwu's public LinkedIn profile URL when confirmed
-  linkedin: '#',
+  // LinkedIn profile URL — will be added when the official profile is confirmed
+  linkedin: '',
   areas: [
     'Sport Management & Strategy',
     'Applied Performance Systems',
@@ -50,21 +51,29 @@ export function LeadershipCard({ profile }: { profile: LeaderProfile }) {
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
         {/* Left Column: Portrait & Direct Coordinates */}
         <div className="lg:col-span-4 flex flex-col items-center lg:items-start text-center lg:text-left">
-          {/* Professional Portrait Slot */}
-          {/* TODO: Replace placeholder below with official professional photo file (e.g. /images/leadership/joshua-oparachukwu.jpg) */}
-          <div className="relative w-48 sm:w-56 lg:w-full aspect-[4/5] rounded-2xl overflow-hidden bg-gradient-to-br from-charcoal-light to-charcoal border border-warm-border flex flex-col items-center justify-center p-6 shadow-sm mb-6">
-            <div className="w-20 h-20 rounded-full bg-brand-green/20 border-2 border-brand-green/40 flex items-center justify-center mb-4">
-              <span className="text-2xl font-bold text-brand-gold tracking-widest">
-                JO
-              </span>
-            </div>
-            <span className="text-xs font-semibold uppercase tracking-widest text-white/70 text-center">
-              Professional Portrait
-            </span>
-            <span className="text-[11px] text-gray-400 mt-1 text-center">
-              Dr. Joshua A. Oparachukwu
-            </span>
-            <div className="absolute top-3 right-3 w-2.5 h-2.5 rounded-full bg-brand-green" title="Confirmed Leadership" />
+          {/* Professional Portrait */}
+          <div className="relative w-48 sm:w-56 lg:w-full aspect-[4/5] rounded-2xl overflow-hidden border border-warm-border shadow-sm mb-6">
+            {profile.photo ? (
+              <Image
+                src={profile.photo}
+                alt={profile.photoAlt || profile.name}
+                fill
+                sizes="(max-width: 640px) 192px, (max-width: 1024px) 224px, 100%"
+                className="object-cover object-top"
+                priority
+              />
+            ) : (
+              <div className="w-full h-full bg-gradient-to-br from-charcoal-light to-charcoal flex flex-col items-center justify-center p-6">
+                <div className="w-20 h-20 rounded-full bg-brand-green/20 border-2 border-brand-green/40 flex items-center justify-center mb-4">
+                  <span className="text-2xl font-bold text-brand-gold tracking-widest">
+                    {profile.name.split(' ').map(n => n[0]).join('').slice(0, 2)}
+                  </span>
+                </div>
+                <span className="text-xs font-semibold uppercase tracking-widest text-white/70 text-center">
+                  Professional Portrait
+                </span>
+              </div>
+            )}
           </div>
 
           {/* Connect Links */}

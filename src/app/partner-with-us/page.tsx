@@ -32,11 +32,11 @@ export default function PartnerWithUsPage() {
           <div className="max-w-4xl">
             <span className="section-label">COLLABORATION MODELS</span>
             <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-charcoal mb-6">
-              Partner With Us
+              Partner With SportLead Africa
             </h1>
             <div className="w-20 h-1 bg-brand-green rounded-full mb-8" />
             <p className="text-lg sm:text-xl text-gray-600 leading-relaxed max-w-3xl">
-              Clear routes for different types of collaboration — whether you need advisory services, want to fund infrastructure, contribute expertise, or build an institutional partnership.
+              SportLead Africa works with organisations, funders, technical professionals and institutions that want to develop stronger sport facilities, systems and projects. Choose the route that best describes the conversation you want to start.
             </p>
           </div>
         </Container>

@@ -9,8 +9,8 @@ export default function WhoWeAre() {
           <div className="lg:w-1/3 shrink-0">
             <span className="text-xs uppercase tracking-[0.25em] text-brand-green-light font-bold block mb-4">WHO WE ARE</span>
             <h1 className="text-4xl md:text-5xl lg:text-7xl font-bold text-white tracking-tight mb-8">
-              Driving <br />
-              <span className="text-gradient">Excellence</span>
+              About <br />
+              <span className="text-gradient">SportLead Africa</span>
             </h1>
             <div className="w-16 h-1 bg-brand-green mb-8"></div>
           </div>

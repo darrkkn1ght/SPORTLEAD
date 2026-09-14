@@ -16,7 +16,7 @@ export default function DiscussProjectPage() {
           <div className="max-w-3xl mx-auto text-center">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-charcoal tracking-tight">Discuss a Project</h1>
             <p className="text-xl text-gray-500 leading-relaxed">
-              Tell us about your sport-sector challenge, facility need or institutional project. We'll review your inquiry and determine the right next step.
+              Tell us what you are trying to develop, improve or solve. We will review the information and determine the most appropriate next conversation.
             </p>
           </div>
         </Container>
