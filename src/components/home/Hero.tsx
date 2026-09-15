@@ -27,13 +27,13 @@ export default function Hero() {
           transition={{ duration: 0.8, ease: "easeOut" }}
           className="w-full max-w-5xl"
         >
-          <h1 className="text-white font-bold leading-[1.1] tracking-tight text-4xl md:text-5xl lg:text-6xl xl:text-7xl mb-8">
+          <h1 className="text-white font-bold leading-[1.15] tracking-tight text-3xl sm:text-4xl md:text-5xl lg:text-6xl mb-6">
             Building Better Sport Systems Through Infrastructure, Governance, Strategy & Institutional Development Across <span className="text-brand-green-light">Africa.</span>
           </h1>
 
-          <div className="w-24 h-1 bg-brand-green rounded-full mb-8"></div>
+          <div className="w-20 h-1 bg-brand-green rounded-full mb-6"></div>
 
-          <p className="text-xl md:text-2xl text-gray-300 font-light leading-relaxed mb-12 max-w-4xl">
+          <p className="text-lg md:text-xl text-gray-300 font-light leading-relaxed mb-10 max-w-3xl">
             SportLead Africa helps sport organisations plan better facilities, strengthen institutions, improve governance and administration, develop effective strategies and deliver complex sport-sector projects.
           </p>
 
