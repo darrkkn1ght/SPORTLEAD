@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
+import crypto from 'crypto';
 import { contactSchema } from '@/lib/validations';
-import { saveContactSubmission } from '@/lib/storage';
 import { sendEmail, generateContactAdminEmail } from '@/lib/email';
 import { SITE_EMAIL } from '@/lib/constants';
 
@@ -25,19 +25,24 @@ export async function POST(request: Request) {
 
     const validatedData = validationResult.data;
 
-    // 1. Save to persistent storage
-    const record = await saveContactSubmission(validatedData);
+    // Build record with generated metadata (no file-system storage)
+    const record = {
+      ...validatedData,
+      id: crypto.randomUUID(),
+      createdAt: new Date().toISOString(),
+    };
 
-    // 2. Dispatch Admin Notification Email
+    // 1. Dispatch Admin Notification Email
+    const adminRecipient = process.env.ADMIN_NOTIFICATION_EMAIL || 'peteradewaletomiwa@gmail.com';
     const adminEmail = generateContactAdminEmail(record);
     await sendEmail({
-      to: process.env.ADMIN_NOTIFICATION_EMAIL || SITE_EMAIL,
+      to: adminRecipient,
       subject: adminEmail.subject,
       html: adminEmail.html,
       type: 'contact_admin_alert',
     });
 
-    // 3. Dispatch Client Acknowledgment Email
+    // 2. Dispatch Client Acknowledgment Email
     await sendEmail({
       to: record.email,
       subject: `SportLead Africa: Message Received [Ref #${record.id.slice(0, 8)}]`,

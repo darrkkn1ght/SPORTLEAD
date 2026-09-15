@@ -5,13 +5,19 @@ import { ChevronDown } from './Icon'
 
 type InputType = 'text' | 'email' | 'tel' | 'textarea' | 'select' | 'file' | 'checkbox'
 
+interface SelectOption {
+  label: string
+  value: string
+  group?: string
+}
+
 interface FormFieldProps {
   label: string
   name: string
   type?: InputType
   placeholder?: string
   required?: boolean
-  options?: { label: string; value: string }[]
+  options?: SelectOption[]
   error?: string
   value?: string | boolean | string[]
   onChange?: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => void
@@ -41,6 +47,20 @@ export function FormField({
   
   const id = `field-${name}`
 
+  const hasGroups = options?.some((opt) => opt.group)
+  const groupedOptions: { group: string; items: SelectOption[] }[] = []
+  if (hasGroups && options) {
+    options.forEach((opt) => {
+      const gName = opt.group || 'Other'
+      let g = groupedOptions.find((item) => item.group === gName)
+      if (!g) {
+        g = { group: gName, items: [] }
+        groupedOptions.push(g)
+      }
+      g.items.push(opt)
+    })
+  }
+
   return (
     <div className={`flex flex-col gap-2 ${className}`}>
       {type !== 'checkbox' && (
@@ -66,16 +86,26 @@ export function FormField({
             id={id}
             name={name}
             required={required}
-            value={value as string}
+            value={(value as string) || ''}
             onChange={onChange}
             className={`${textInputStyles} appearance-none pr-10`}
           >
             <option value="" disabled>{placeholder || 'Select an option'}</option>
-            {options?.map((opt) => (
-               <option key={opt.value} value={opt.value} className="bg-white text-charcoal">
-                {opt.label}
-              </option>
-            ))}
+            {hasGroups
+              ? groupedOptions.map((g) => (
+                  <optgroup key={g.group} label={g.group} className="font-semibold text-charcoal bg-white">
+                    {g.items.map((opt) => (
+                      <option key={opt.value} value={opt.value} className="font-normal text-charcoal bg-white">
+                        {opt.label}
+                      </option>
+                    ))}
+                  </optgroup>
+                ))
+              : options?.map((opt) => (
+                  <option key={opt.value} value={opt.value} className="bg-white text-charcoal">
+                    {opt.label}
+                  </option>
+                ))}
           </select>
           <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-gray-500">
             <ChevronDown size={16} />

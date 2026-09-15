@@ -1,8 +1,10 @@
 'use client';
 
 import { useState } from 'react';
-import { Button, FormField } from '@/components/ui';
+import { Button, FormField, PhoneField } from '@/components/ui';
 import { INQUIRY_TYPES } from '@/lib/constants';
+import { COUNTRY_OPTIONS, updatePhoneWithCountry } from '@/lib/countries';
+import { useFormDraft } from '@/lib/useFormDraft';
 import { CheckCircle2, Send, AlertCircle, Clock, Shield } from 'lucide-react';
 
 export default function ContactForm() {
@@ -11,7 +13,7 @@ export default function ContactForm() {
   const [fieldErrors, setFieldErrors] = useState<Record<string, string[]>>({});
   const [generalError, setGeneralError] = useState('');
 
-  const [formData, setFormData] = useState({
+  const INITIAL_CONTACT_FORM = {
     name: '',
     organisation: '',
     role: '',
@@ -24,16 +26,33 @@ export default function ContactForm() {
     preferredContact: 'Email' as 'Email' | 'Phone' | 'WhatsApp',
     privacyConsent: false,
     honeypot: '',
-  });
+  };
+
+  const {
+    formData,
+    setFormData,
+    isRestored,
+    clearDraft,
+  } = useFormDraft('sportlead_draft_contact', INITIAL_CONTACT_FORM);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value, type } = e.target;
     const checked = type === 'checkbox' ? (e.target as HTMLInputElement).checked : undefined;
 
-    setFormData(prev => ({
-      ...prev,
-      [name]: type === 'checkbox' ? checked : value,
-    }));
+    setFormData(prev => {
+      if (name === 'country') {
+        const updatedPhone = updatePhoneWithCountry(prev.telephone, value, prev.country);
+        return {
+          ...prev,
+          country: value,
+          telephone: updatedPhone,
+        };
+      }
+      return {
+        ...prev,
+        [name]: type === 'checkbox' ? checked : value,
+      };
+    });
 
     if (fieldErrors[name]) {
       setFieldErrors(prev => {
@@ -73,20 +92,8 @@ export default function ContactForm() {
         referenceId: data.referenceId,
         message: data.message,
       });
-      setFormData({
-        name: '',
-        organisation: '',
-        role: '',
-        email: '',
-        telephone: '',
-        country: '',
-        inquiryType: INQUIRY_TYPES[0] || 'General Inquiry',
-        subject: '',
-        message: '',
-        preferredContact: 'Email',
-        privacyConsent: false,
-        honeypot: '',
-      });
+      clearDraft();
+      setFormData(INITIAL_CONTACT_FORM);
     } catch (err: any) {
       setGeneralError(err.message || 'Something went wrong. Please try again.');
     } finally {
@@ -133,6 +140,25 @@ export default function ContactForm() {
           Our communications team responds to all institutional and public inquiries promptly.
         </p>
       </div>
+
+      {isRestored && (
+        <div className="mb-6 px-5 py-3.5 bg-brand-green-muted border border-brand-green/20 rounded-2xl text-brand-green text-xs sm:text-sm flex items-center justify-between shadow-sm animate-in fade-in">
+          <div className="flex items-center gap-2">
+            <span className="w-2 h-2 rounded-full bg-brand-green animate-pulse" />
+            <span>Draft restored from your last visit.</span>
+          </div>
+          <button
+            type="button"
+            onClick={() => {
+              clearDraft();
+              setFormData(INITIAL_CONTACT_FORM);
+            }}
+            className="text-xs font-bold uppercase tracking-wider hover:underline text-brand-green-dark"
+          >
+            Clear Draft
+          </button>
+        </div>
+      )}
 
       {generalError && (
         <div className="mb-6 p-4 bg-red-50 border border-red-200 text-red-700 rounded-2xl text-sm font-medium flex items-center gap-3">
@@ -189,21 +215,24 @@ export default function ContactForm() {
             error={fieldErrors.role?.[0]}
           />
           <FormField
-            label="Telephone / WhatsApp"
-            type="tel"
-            name="telephone"
-            value={formData.telephone}
-            onChange={handleChange}
-            placeholder="+234 ..."
-            error={fieldErrors.telephone?.[0]}
-          />
-          <FormField
-            label="Country"
+            label="Country of Operation"
             name="country"
+            type="select"
+            options={COUNTRY_OPTIONS}
             value={formData.country}
             onChange={handleChange}
-            placeholder="e.g. Nigeria, South Africa"
+            placeholder="Select African Country of Operation"
             error={fieldErrors.country?.[0]}
+          />
+          <PhoneField
+            label="Telephone / WhatsApp"
+            name="telephone"
+            value={formData.telephone}
+            selectedCountry={formData.country}
+            onChange={handleChange}
+            placeholder="803 000 0000"
+            error={fieldErrors.telephone?.[0]}
+            helpText="Country code auto-selects with African country or choose manually"
           />
         </div>
 

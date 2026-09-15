@@ -6,6 +6,7 @@ import { usePathname } from 'next/navigation';
 import { NAV_ITEMS } from '@/lib/constants';
 import { X, ChevronDown } from '@/components/ui/Icon';
 import { Button } from '@/components/ui/Button';
+import { AfricaEmblem } from './AfricaEmblem';
 
 interface MobileNavProps {
   isOpen: boolean;
@@ -40,9 +41,12 @@ export default function MobileNav({ isOpen, onClose }: MobileNavProps) {
   return (
     <div className="fixed inset-0 z-[60] bg-white/98 backdrop-blur-md flex flex-col transition-opacity duration-300">
       <div className="flex items-center justify-between p-6 border-b border-warm-border">
-        <span className="text-charcoal font-bold text-xl tracking-wider uppercase">
-          SportLead Africa
-        </span>
+        <div className="flex items-center gap-2.5">
+          <span className="text-charcoal font-bold text-xl tracking-wider uppercase">
+            SportLead Africa
+          </span>
+          <AfricaEmblem size={26} />
+        </div>
         <button
           onClick={onClose}
           className="text-charcoal p-2 focus:outline-none hover:text-brand-green transition-colors"

@@ -7,6 +7,7 @@ import { NAV_ITEMS } from '@/lib/constants';
 import { Menu, ChevronDown } from '@/components/ui/Icon';
 import { Button } from '@/components/ui/Button';
 import { Container } from '@/components/ui/Container';
+import { AfricaEmblem } from './AfricaEmblem';
 import MobileNav from './MobileNav';
 
 export default function Header() {
@@ -48,10 +49,11 @@ export default function Header() {
         <Container>
           <div className="flex items-center justify-between h-20">
             {/* Logo */}
-            <Link href="/" className="flex-shrink-0">
+            <Link href="/" className="flex-shrink-0 flex items-center gap-2.5 group">
               <span className={`font-bold text-xl tracking-wider uppercase transition-colors duration-300 ${logoColor}`}>
                 SportLead Africa
               </span>
+              <AfricaEmblem size={28} />
             </Link>
 
             {/* Desktop Nav */}

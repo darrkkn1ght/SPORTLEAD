@@ -1,8 +1,10 @@
 'use client';
 
-import React, { useState } from 'react';
-import { Button, FormField } from '@/components/ui';
+import React, { useState, useEffect } from 'react';
+import { Button, FormField, PhoneField } from '@/components/ui';
 import { EXPERT_DISCIPLINE_CATEGORIES } from '@/lib/expert-network';
+import { COUNTRY_OPTIONS } from '@/lib/countries';
+import { useFormDraft } from '@/lib/useFormDraft';
 import { CheckCircle2, ArrowRight, ArrowLeft, Send, AlertCircle, FileText, Upload, ShieldCheck, UserCheck } from 'lucide-react';
 
 interface FormFields {
@@ -103,7 +105,12 @@ const STEPS = [
 
 export default function ExpertApplicationForm() {
   const [currentStep, setCurrentStep] = useState(1);
-  const [fields, setFields] = useState<FormFields>(INITIAL_FIELDS);
+  const {
+    formData: fields,
+    setFormData: setFields,
+    isRestored,
+    clearDraft,
+  } = useFormDraft<FormFields>('sportlead_draft_expert_application', INITIAL_FIELDS);
   const [cvFile, setCvFile] = useState<File | null>(null);
   const [photoFile, setPhotoFile] = useState<File | null>(null);
   const [certificateFiles, setCertificateFiles] = useState<File[]>([]);
@@ -277,6 +284,7 @@ export default function ExpertApplicationForm() {
         referenceId: data.referenceId,
         message: data.message,
       });
+      clearDraft();
       setFields(INITIAL_FIELDS);
       setCvFile(null);
       setPhotoFile(null);
@@ -375,6 +383,26 @@ export default function ExpertApplicationForm() {
         </div>
       </div>
 
+      {/* Draft Restored Notice */}
+      {isRestored && (
+        <div className="mb-8 px-5 py-3.5 bg-brand-green-muted border border-brand-green/20 rounded-2xl text-brand-green text-xs sm:text-sm flex items-center justify-between shadow-sm animate-in fade-in">
+          <div className="flex items-center gap-2">
+            <span className="w-2 h-2 rounded-full bg-brand-green animate-pulse" />
+            <span>Draft restored from your last visit.</span>
+          </div>
+          <button
+            type="button"
+            onClick={() => {
+              clearDraft();
+              setFields(INITIAL_FIELDS);
+            }}
+            className="text-xs font-bold uppercase tracking-wider hover:underline text-brand-green-dark"
+          >
+            Clear Draft
+          </button>
+        </div>
+      )}
+
       {/* General Error Banner */}
       {generalError && (
         <div className="mb-8 p-4 bg-red-50 border border-red-200 rounded-xl text-red-700 text-sm flex items-start gap-3">
@@ -436,16 +464,16 @@ export default function ExpertApplicationForm() {
                 onChange={handleInputChange}
                 error={fieldErrors.email?.[0]}
               />
-              <FormField
+              <PhoneField
                 label="Telephone / WhatsApp"
                 name="telephone"
-                type="tel"
                 required
-                placeholder="+234 800 000 0000"
+                placeholder="800 000 0000"
                 value={fields.telephone}
+                selectedCountry={fields.country}
                 onChange={handleInputChange}
                 error={fieldErrors.telephone?.[0]}
-                helpText="Include country code for WhatsApp correspondence"
+                helpText="Country code auto-selects with African country or choose manually"
               />
             </div>
 
@@ -453,8 +481,10 @@ export default function ExpertApplicationForm() {
               <FormField
                 label="Country of Residence"
                 name="country"
+                type="select"
+                options={COUNTRY_OPTIONS}
                 required
-                placeholder="e.g. Nigeria, Kenya, Ghana, South Africa"
+                placeholder="Select African Country of Residence"
                 value={fields.country}
                 onChange={handleInputChange}
                 error={fieldErrors.country?.[0]}

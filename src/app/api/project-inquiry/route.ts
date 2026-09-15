@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
+import crypto from 'crypto';
 import { projectInquirySchema } from '@/lib/validations';
-import { saveProjectInquiry } from '@/lib/storage';
 import { sendEmail, generateProjectInquiryAdminEmail, generateProjectInquiryClientReceipt } from '@/lib/email';
 import { SITE_EMAIL } from '@/lib/constants';
 
@@ -25,19 +25,24 @@ export async function POST(request: Request) {
 
     const validatedData = validationResult.data;
 
-    // 1. Save mandate to persistent storage
-    const record = await saveProjectInquiry(validatedData);
+    // Build record with generated metadata (no file-system storage)
+    const record = {
+      ...validatedData,
+      id: crypto.randomUUID(),
+      createdAt: new Date().toISOString(),
+    };
 
-    // 2. Dispatch Senior Practice Alert Email
+    // 1. Dispatch Senior Practice Alert Email
+    const adminRecipient = process.env.ADMIN_NOTIFICATION_EMAIL || 'peteradewaletomiwa@gmail.com';
     const adminEmail = generateProjectInquiryAdminEmail(record);
     await sendEmail({
-      to: process.env.ADMIN_NOTIFICATION_EMAIL || SITE_EMAIL,
+      to: adminRecipient,
       subject: adminEmail.subject,
       html: adminEmail.html,
       type: 'mandate_admin_brief',
     });
 
-    // 3. Dispatch Client Confirmation Receipt
+    // 2. Dispatch Client Confirmation Receipt
     const clientEmail = generateProjectInquiryClientReceipt(record);
     await sendEmail({
       to: record.email,

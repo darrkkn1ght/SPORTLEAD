@@ -1,19 +1,25 @@
 import nodemailer from 'nodemailer';
-import { logEmailOutbox } from './storage';
 import { SITE_NAME, SITE_EMAIL, HEADQUARTERS } from './constants';
 
-// Configure transporter if environment variables are provided
-const transporter = process.env.SMTP_HOST
-  ? nodemailer.createTransport({
-      host: process.env.SMTP_HOST,
-      port: Number(process.env.SMTP_PORT) || 587,
-      secure: process.env.SMTP_SECURE === 'true',
-      auth: {
-        user: process.env.SMTP_USER,
-        pass: process.env.SMTP_PASS,
-      },
-    })
-  : null;
+function getTransporter() {
+  const host = process.env.SMTP_HOST || (process.env.SMTP_USER?.includes('@gmail.com') ? 'smtp.gmail.com' : undefined);
+  const user = process.env.SMTP_USER;
+  const pass = process.env.SMTP_PASS ? process.env.SMTP_PASS.replace(/\s+/g, '') : undefined;
+
+  if (!host || !user || !pass) {
+    return null;
+  }
+
+  const port = Number(process.env.SMTP_PORT) || (host === 'smtp.gmail.com' ? 465 : 587);
+  const secure = process.env.SMTP_SECURE !== undefined ? process.env.SMTP_SECURE === 'true' : port === 465;
+
+  return nodemailer.createTransport({
+    host,
+    port,
+    secure,
+    auth: { user, pass },
+  });
+}
 
 interface EmailOptions {
   to: string;
@@ -24,28 +30,31 @@ interface EmailOptions {
 }
 
 export async function sendEmail({ to, subject, html, text, type }: EmailOptions): Promise<{ success: boolean; mode: 'smtp' | 'logged' }> {
-  // Always log to local outbox for audit and offline dev verification
-  await logEmailOutbox({ to, subject, html, text, type });
+  const transporter = getTransporter();
+  const smtpUser = process.env.SMTP_USER;
 
-  if (transporter && process.env.SMTP_USER) {
+  if (transporter && smtpUser) {
     try {
-      await transporter.sendMail({
-        from: `"${SITE_NAME}" <${process.env.SMTP_FROM || process.env.SMTP_USER}>`,
+      const info = await transporter.sendMail({
+        from: `"${SITE_NAME}" <${process.env.SMTP_FROM || smtpUser}>`,
         to,
         subject,
         text: text || html.replace(/<[^>]*>?/gm, ''),
         html,
       });
-      console.log(`[Email Sent via SMTP] To: ${to} | Subject: ${subject}`);
+      console.log(`[Email Sent] type=${type} to=${to} subject="${subject}" messageId=${info.messageId}`);
       return { success: true, mode: 'smtp' };
     } catch (err) {
-      console.error(`[Email SMTP Error] Failed to send to ${to}:`, err);
-      // Fall back to logged mode without failing the user submission
-      return { success: true, mode: 'logged' };
+      console.error(`[Email SMTP Error] type=${type} to=${to} subject="${subject}"`, err);
+      throw err;
     }
   }
 
-  console.log(`[Email Logged to data/email-outbox.log] To: ${to} | Subject: ${subject}`);
+  // No SMTP configured — log the intent for dev visibility but don't fail
+  console.warn(
+    `[Email Not Sent — No SMTP configured] type=${type} to=${to} subject="${subject}". ` +
+    `Set SMTP_USER and SMTP_PASS environment variables to enable email delivery.`
+  );
   return { success: true, mode: 'logged' };
 }
 

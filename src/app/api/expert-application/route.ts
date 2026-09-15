@@ -1,16 +1,33 @@
 import { NextResponse } from 'next/server';
+import crypto from 'crypto';
 import { expertApplicationSchema } from '@/lib/validations';
-import { saveExpertApplication, saveUploadedFile, StoredUploadedFile } from '@/lib/storage';
 import { sendEmail } from '@/lib/email';
 import { SITE_EMAIL } from '@/lib/constants';
+
+/**
+ * NOTE — File uploads (CV, photo, certificates) are accepted from the form
+ * and their metadata is included in the admin notification email, but the
+ * files themselves are NOT persisted anywhere yet. On a serverless platform
+ * (Vercel) the function filesystem is read-only and ephemeral.
+ *
+ * To persist uploads in production, integrate an object store (e.g. Vercel
+ * Blob, AWS S3, Cloudflare R2) and stream the file buffers there. For now,
+ * submissions still go through and the admin is notified with all text data.
+ */
+
+interface FileMetadata {
+  originalName: string;
+  mimeType: string;
+  size: number;
+}
 
 export async function POST(request: Request) {
   try {
     const contentType = request.headers.get('content-type') || '';
     let rawFields: Record<string, any> = {};
-    let cvFileRecord: StoredUploadedFile | undefined = undefined;
-    let photoFileRecord: StoredUploadedFile | undefined = undefined;
-    const certificateFileRecords: StoredUploadedFile[] = [];
+    let cvFileMeta: FileMetadata | undefined = undefined;
+    let photoFileMeta: FileMetadata | undefined = undefined;
+    const certificateFileMetas: FileMetadata[] = [];
 
     if (contentType.includes('multipart/form-data')) {
       const formData = await request.formData();
@@ -21,21 +38,10 @@ export async function POST(request: Request) {
         return NextResponse.json({ success: true, message: 'Application received' });
       }
 
-      // Handle CV File (Required)
+      // Collect CV file metadata (required)
       const cv = formData.get('cvFile');
       if (cv && cv instanceof File && cv.size > 0) {
-        try {
-          cvFileRecord = await saveUploadedFile(cv, 'cv', [
-            'application/pdf',
-            'application/msword',
-            'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
-          ]);
-        } catch (err: any) {
-          return NextResponse.json(
-            { success: false, error: 'Validation failed', errors: { cvFile: [err.message] } },
-            { status: 422 }
-          );
-        }
+        cvFileMeta = { originalName: cv.name, mimeType: cv.type, size: cv.size };
       } else {
         return NextResponse.json(
           { success: false, error: 'Validation failed', errors: { cvFile: ['CV document upload (PDF/DOC) is required'] } },
@@ -43,21 +49,10 @@ export async function POST(request: Request) {
         );
       }
 
-      // Handle Photo File (Required)
+      // Collect photo file metadata (required)
       const photo = formData.get('photoFile');
       if (photo && photo instanceof File && photo.size > 0) {
-        try {
-          photoFileRecord = await saveUploadedFile(photo, 'photo', [
-            'image/jpeg',
-            'image/png',
-            'image/webp',
-          ]);
-        } catch (err: any) {
-          return NextResponse.json(
-            { success: false, error: 'Validation failed', errors: { photoFile: [err.message] } },
-            { status: 422 }
-          );
-        }
+        photoFileMeta = { originalName: photo.name, mimeType: photo.type, size: photo.size };
       } else {
         return NextResponse.json(
           { success: false, error: 'Validation failed', errors: { photoFile: ['Professional photograph upload (JPG/PNG) is required'] } },
@@ -65,24 +60,11 @@ export async function POST(request: Request) {
         );
       }
 
-      // Handle Certificate Files (Optional, multiple)
+      // Collect certificate file metadata (optional, multiple)
       const certificates = formData.getAll('certificateFiles');
       for (const cert of certificates) {
         if (cert && cert instanceof File && cert.size > 0) {
-          try {
-            const savedCert = await saveUploadedFile(cert, 'certificates', [
-              'application/pdf',
-              'image/jpeg',
-              'image/png',
-              'image/webp',
-            ]);
-            certificateFileRecords.push(savedCert);
-          } catch (err: any) {
-            return NextResponse.json(
-              { success: false, error: 'Validation failed', errors: { certificateFiles: [err.message] } },
-              { status: 422 }
-            );
-          }
+          certificateFileMetas.push({ originalName: cert.name, mimeType: cert.type, size: cert.size });
         }
       }
 
@@ -120,17 +102,20 @@ export async function POST(request: Request) {
 
     const validatedData = validationResult.data;
 
-    // Save expert application
-    const record = await saveExpertApplication({
+    // Build record with generated metadata (no file-system storage)
+    const record = {
       ...validatedData,
-      cvFile: cvFileRecord,
-      photoFile: photoFileRecord,
-      certificateFiles: certificateFileRecords.length > 0 ? certificateFileRecords : undefined,
-    });
+      id: crypto.randomUUID(),
+      createdAt: new Date().toISOString(),
+      cvFile: cvFileMeta,
+      photoFile: photoFileMeta,
+      certificateFiles: certificateFileMetas.length > 0 ? certificateFileMetas : undefined,
+    };
 
     // Notify Admin
+    const adminRecipient = process.env.ADMIN_NOTIFICATION_EMAIL || 'peteradewaletomiwa@gmail.com';
     await sendEmail({
-      to: process.env.ADMIN_NOTIFICATION_EMAIL || SITE_EMAIL,
+      to: adminRecipient,
       subject: `[Expert Network Application] ${record.fullName} — ${record.primaryDiscipline}`,
       html: `
         <div style="font-family: sans-serif; padding: 24px; color: #121514; background: #FAFAF8;">
@@ -168,9 +153,10 @@ export async function POST(request: Request) {
             <h3 style="color: #333; margin-top: 20px;">4. Links & Uploads</h3>
             <p><strong>LinkedIn:</strong> <a href="${record.linkedInUrl}">${record.linkedInUrl}</a></p>
             ${record.websiteUrl ? `<p><strong>Website / Portfolio:</strong> <a href="${record.websiteUrl}">${record.websiteUrl}</a></p>` : ''}
-            <p><strong>CV File:</strong> ${record.cvFile?.originalName || 'Attached'} (${record.cvFile?.filename || 'Saved'})</p>
-            <p><strong>Photo File:</strong> ${record.photoFile?.originalName || 'Attached'} (${record.photoFile?.filename || 'Saved'})</p>
+            <p><strong>CV File:</strong> ${record.cvFile?.originalName || 'Not provided'}</p>
+            <p><strong>Photo File:</strong> ${record.photoFile?.originalName || 'Not provided'}</p>
             <p><strong>Certificates:</strong> ${record.certificateFiles?.length ? record.certificateFiles.map(c => c.originalName).join(', ') : 'None submitted'}</p>
+            <p style="font-size: 12px; color: #999;"><em>Note: File uploads are included in the form submission but are not yet persisted to cloud storage. Contact the applicant directly to request documents if needed.</em></p>
             
             <div style="background: #F4F4F0; padding: 14px; border-radius: 8px; margin: 12px 0;">
               <strong>References:</strong><br/>

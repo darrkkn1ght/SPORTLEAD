@@ -2,8 +2,10 @@
 
 import { useState, useEffect } from 'react';
 import { useSearchParams } from 'next/navigation';
-import { Button, FormField } from '@/components/ui';
+import { Button, FormField, PhoneField } from '@/components/ui';
 import { ORGANISATION_TYPES, SERVICE_OPTIONS, PROJECT_STAGES, BUDGET_RANGES, TIMELINE_OPTIONS } from '@/lib/constants';
+import { COUNTRY_OPTIONS, updatePhoneWithCountry } from '@/lib/countries';
+import { useFormDraft } from '@/lib/useFormDraft';
 import { CheckCircle2, ArrowRight, ArrowLeft, ShieldCheck, Clock, FileText, Send, Building2, Layers, AlertCircle } from 'lucide-react';
 
 const SLUG_TO_SERVICE: Record<string, string> = {
@@ -64,7 +66,12 @@ export default function ProjectInquiryForm() {
   const [successData, setSuccessData] = useState<{ referenceId: string; message: string } | null>(null);
   const [fieldErrors, setFieldErrors] = useState<Record<string, string[]>>({});
   const [generalError, setGeneralError] = useState('');
-  const [formData, setFormData] = useState<FormState>(INITIAL_FORM);
+  const {
+    formData,
+    setFormData,
+    isRestored,
+    clearDraft,
+  } = useFormDraft<FormState>('sportlead_draft_project_inquiry', INITIAL_FORM);
 
   useEffect(() => {
     const serviceParam = searchParams?.get('service');
@@ -87,10 +94,20 @@ export default function ProjectInquiryForm() {
     const { name, value, type } = e.target;
     const checked = type === 'checkbox' ? (e.target as HTMLInputElement).checked : undefined;
 
-    setFormData(prev => ({
-      ...prev,
-      [name]: type === 'checkbox' ? checked : value,
-    }));
+    setFormData(prev => {
+      if (name === 'country') {
+        const updatedPhone = updatePhoneWithCountry(prev.telephone, value, prev.country);
+        return {
+          ...prev,
+          country: value,
+          telephone: updatedPhone,
+        };
+      }
+      return {
+        ...prev,
+        [name]: type === 'checkbox' ? checked : value,
+      };
+    });
 
     // Clear specific field error on edit
     if (fieldErrors[name]) {
@@ -169,6 +186,7 @@ export default function ProjectInquiryForm() {
         referenceId: data.referenceId,
         message: data.message,
       });
+      clearDraft();
       setFormData(INITIAL_FORM);
     } catch (err: any) {
       setGeneralError(err.message || 'An unexpected error occurred. Please try again.');
@@ -271,6 +289,25 @@ export default function ProjectInquiryForm() {
         </div>
       </div>
 
+      {isRestored && (
+        <div className="mb-8 px-5 py-3.5 bg-brand-green-muted border border-brand-green/20 rounded-2xl text-brand-green text-xs sm:text-sm flex items-center justify-between shadow-sm animate-in fade-in">
+          <div className="flex items-center gap-2">
+            <span className="w-2 h-2 rounded-full bg-brand-green animate-pulse" />
+            <span>Draft restored from your last visit.</span>
+          </div>
+          <button
+            type="button"
+            onClick={() => {
+              clearDraft();
+              setFormData(INITIAL_FORM);
+            }}
+            className="text-xs font-bold uppercase tracking-wider hover:underline text-brand-green-dark"
+          >
+            Clear Draft
+          </button>
+        </div>
+      )}
+
       {generalError && (
         <div className="mb-8 p-4 bg-red-50 border border-red-200 text-red-700 rounded-2xl text-sm font-medium flex items-center gap-3">
           <AlertCircle size={18} className="shrink-0" />
@@ -340,22 +377,25 @@ export default function ProjectInquiryForm() {
                 error={fieldErrors.email?.[0]}
               />
               <FormField
-                label="Telephone / WhatsApp (with Country Code)"
-                type="tel"
-                name="telephone"
-                value={formData.telephone}
-                onChange={handleChange}
-                placeholder="e.g. +234 803 000 0000"
-                error={fieldErrors.telephone?.[0]}
-              />
-              <FormField
                 label="Country of Operation"
                 name="country"
+                type="select"
+                options={COUNTRY_OPTIONS}
                 value={formData.country}
                 onChange={handleChange}
-                placeholder="e.g. Ghana, Kenya, Nigeria"
+                placeholder="Select African Country of Operation"
                 required
                 error={fieldErrors.country?.[0]}
+              />
+              <PhoneField
+                label="Telephone / WhatsApp"
+                name="telephone"
+                value={formData.telephone}
+                selectedCountry={formData.country}
+                onChange={handleChange}
+                placeholder="803 000 0000"
+                error={fieldErrors.telephone?.[0]}
+                helpText="Country code auto-selects with African country or choose manually"
               />
             </div>
 
