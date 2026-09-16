@@ -1,7 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { Container } from '@/components/ui/Container';
-import { HEADQUARTERS, SERVICE_PILLARS, SOCIAL_LINKS } from '@/lib/constants';
+import { HEADQUARTERS, SERVICE_PILLARS, SOCIAL_LINKS, SITE_EMAIL } from '@/lib/constants';
 import { AfricaEmblem } from './AfricaEmblem';
 import { LinkedIn, Instagram, Twitter, Facebook, Globe, MapPin, Mail } from '@/components/ui/Icon';
 
@@ -12,8 +12,6 @@ const SOCIAL_ICON_MAP: Record<string, React.ComponentType<{ size?: number; class
   Facebook,
   Globe,
 };
-
-const OFFICIAL_EMAIL = 'inquiries@sportleadafrica.com';
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -50,10 +48,10 @@ export default function Footer() {
               <div className="flex items-center gap-2.5 text-sm text-gray-400">
                 <Mail size={16} className="text-brand-green shrink-0" />
                 <a
-                  href={`mailto:${OFFICIAL_EMAIL}`}
-                  className="hover:text-brand-green-light transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-green rounded"
+                  href={`mailto:${SITE_EMAIL}`}
+                  className="text-gray-300 hover:text-white transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-green rounded"
                 >
-                  {OFFICIAL_EMAIL}
+                  {SITE_EMAIL}
                 </a>
               </div>
             </div>

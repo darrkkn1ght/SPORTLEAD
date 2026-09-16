@@ -1,4 +1,4 @@
-import { HEADQUARTERS } from '@/lib/constants';
+import { HEADQUARTERS, SITE_EMAIL } from '@/lib/constants';
 import { Icon } from '@/components/ui/Icon';
 
 export default function ContactInfo() {
@@ -17,6 +17,19 @@ export default function ContactInfo() {
           <div>
             <h4 className="font-semibold text-charcoal">Headquarters</h4>
             <p className="text-gray-500">{HEADQUARTERS}</p>
+          </div>
+        </div>
+
+        <div className="flex items-start space-x-4">
+          <Icon name="Mail" className="w-6 h-6 text-brand-green mt-1 flex-shrink-0" />
+          <div>
+            <h4 className="font-semibold text-charcoal">Email</h4>
+            <a
+              href={`mailto:${SITE_EMAIL}`}
+              className="text-gray-600 hover:text-brand-green transition-colors font-medium"
+            >
+              {SITE_EMAIL}
+            </a>
           </div>
         </div>
       </div>
