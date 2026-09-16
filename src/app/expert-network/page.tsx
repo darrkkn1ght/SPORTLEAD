@@ -4,11 +4,37 @@ import { Container, Button } from '@/components/ui';
 import { Icon } from '@/components/ui/Icon';
 import { ExpertCard } from '@/components/expert-network/ExpertCard';
 import { APPROVED_EXPERTS, EXPERT_DISCIPLINE_CATEGORIES } from '@/lib/expert-network';
+import { PartnerCTAButton } from '@/components/partner/PartnerCTAButton';
 
 export const metadata: Metadata = {
   title: 'SportLead Africa Expert Network | Specialists in African Sport Development',
   description:
     'Our Expert Network brings together qualified specialists across the disciplines required to plan, strengthen and deliver sport sector projects across Africa.',
+  alternates: {
+    canonical: 'https://sportleadafrica.com/expert-network',
+  },
+  openGraph: {
+    title: 'SportLead Africa Expert Network | Specialists in African Sport Development',
+    description:
+      'Our Expert Network brings together qualified specialists across the disciplines required to plan, strengthen and deliver sport sector projects across Africa.',
+    url: 'https://sportleadafrica.com/expert-network',
+    siteName: 'SportLead Africa',
+    images: [
+      {
+        url: '/images/og-image.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'SportLead Africa Expert Network',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'SportLead Africa Expert Network | Specialists in African Sport Development',
+    description:
+      'Our Expert Network brings together qualified specialists across the disciplines required to plan, strengthen and deliver sport sector projects across Africa.',
+    images: ['/images/og-image.jpg'],
+  },
 };
 
 export default function ExpertNetworkPage() {
@@ -71,7 +97,7 @@ export default function ExpertNetworkPage() {
                     {discipline}
                   </h3>
                   <span className="text-xs text-gray-400 font-medium">
-                    Technical Fellows &amp; Specialists
+                    Specialist Experts
                   </span>
                 </div>
               </div>
@@ -123,15 +149,11 @@ export default function ExpertNetworkPage() {
               Are you a qualified professional whose expertise can contribute to stronger sport systems, facilities, institutions or projects across Africa? Apply to join the SportLead Africa Expert Network.
             </p>
             <div>
-              <Link href="/expert-network/apply">
-                <Button
-                  variant="primary"
-                  size="lg"
-                  className="bg-brand-green text-white hover:bg-brand-green-light rounded-full px-10 py-4 font-bold text-sm sm:text-base shadow-lg"
-                >
-                  Apply to Join the Expert Network
-                </Button>
-              </Link>
+              <PartnerCTAButton
+                href="/expert-network/apply"
+                eventName="Apply to Join Expert Network"
+                text="Apply to Join the SportLead Africa Expert Network"
+              />
             </div>
           </div>
         </Container>

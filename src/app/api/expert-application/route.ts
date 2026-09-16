@@ -41,6 +41,19 @@ export async function POST(request: Request) {
       // Collect CV file metadata (required)
       const cv = formData.get('cvFile');
       if (cv && cv instanceof File && cv.size > 0) {
+        const ext = cv.name.substring(cv.name.lastIndexOf('.')).toLowerCase();
+        if (!['.pdf', '.doc', '.docx'].includes(ext)) {
+          return NextResponse.json(
+            { success: false, error: 'Validation failed', errors: { cvFile: ['CV must be a PDF, DOC, or DOCX document'] } },
+            { status: 422 }
+          );
+        }
+        if (cv.size > 5 * 1024 * 1024) {
+          return NextResponse.json(
+            { success: false, error: 'Validation failed', errors: { cvFile: ['CV file exceeds the 5MB size limit'] } },
+            { status: 422 }
+          );
+        }
         cvFileMeta = { originalName: cv.name, mimeType: cv.type, size: cv.size };
       } else {
         return NextResponse.json(
@@ -52,6 +65,19 @@ export async function POST(request: Request) {
       // Collect photo file metadata (required)
       const photo = formData.get('photoFile');
       if (photo && photo instanceof File && photo.size > 0) {
+        const ext = photo.name.substring(photo.name.lastIndexOf('.')).toLowerCase();
+        if (!['.jpg', '.jpeg', '.png', '.webp'].includes(ext)) {
+          return NextResponse.json(
+            { success: false, error: 'Validation failed', errors: { photoFile: ['Photograph must be a JPG, JPEG, PNG, or WEBP image'] } },
+            { status: 422 }
+          );
+        }
+        if (photo.size > 2 * 1024 * 1024) {
+          return NextResponse.json(
+            { success: false, error: 'Validation failed', errors: { photoFile: ['Photograph file exceeds the 2MB size limit'] } },
+            { status: 422 }
+          );
+        }
         photoFileMeta = { originalName: photo.name, mimeType: photo.type, size: photo.size };
       } else {
         return NextResponse.json(
@@ -64,6 +90,19 @@ export async function POST(request: Request) {
       const certificates = formData.getAll('certificateFiles');
       for (const cert of certificates) {
         if (cert && cert instanceof File && cert.size > 0) {
+          const ext = cert.name.substring(cert.name.lastIndexOf('.')).toLowerCase();
+          if (!['.pdf', '.doc', '.docx'].includes(ext)) {
+            return NextResponse.json(
+              { success: false, error: 'Validation failed', errors: { certificateFiles: ['Certificates must be PDF, DOC, or DOCX documents only'] } },
+              { status: 422 }
+            );
+          }
+          if (cert.size > 5 * 1024 * 1024) {
+            return NextResponse.json(
+              { success: false, error: 'Validation failed', errors: { certificateFiles: ['Each certificate file must not exceed 5MB'] } },
+              { status: 422 }
+            );
+          }
           certificateFileMetas.push({ originalName: cert.name, mimeType: cert.type, size: cert.size });
         }
       }
@@ -219,7 +258,7 @@ export async function POST(request: Request) {
 
     return NextResponse.json({
       success: true,
-      message: 'Your application has been received. Our review committee evaluates profiles on a rolling basis.',
+      message: 'Your application has been received. Our review committee evaluates profiles on a rolling basis and will reach out if your credentials match upcoming assignments.',
       referenceId: record.id,
     });
   } catch (error: any) {

@@ -4,8 +4,27 @@ import { Container } from '@/components/ui';
 import { SITE_NAME, SITE_EMAIL } from '@/lib/constants';
 
 export const metadata: Metadata = {
-  title: 'Terms of Use | SportLead Africa',
-  description: 'Terms governing access to the SportLead Africa website and digital advisory platforms.',
+  title: 'Terms of Use | Legal Terms | SportLead Africa',
+  description:
+    'Terms of use governing access to and use of the SportLead Africa advisory website and platforms.',
+  alternates: {
+    canonical: 'https://sportleadafrica.com/terms',
+  },
+  openGraph: {
+    title: 'Terms of Use | Legal Terms | SportLead Africa',
+    description:
+      'Terms of use governing access to and use of the SportLead Africa advisory website and platforms.',
+    url: 'https://sportleadafrica.com/terms',
+    siteName: 'SportLead Africa',
+    images: [{ url: '/images/og-image.jpg', width: 1200, height: 630, alt: 'SportLead Africa Terms of Use' }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Terms of Use | Legal Terms | SportLead Africa',
+    description:
+      'Terms of use governing access to and use of the SportLead Africa advisory website and platforms.',
+    images: ['/images/og-image.jpg'],
+  },
 };
 
 export default function TermsPage() {
@@ -64,7 +83,7 @@ export default function TermsPage() {
             <div>
               <h2 className="text-xl font-bold text-charcoal mb-3">4. Expert Network Status &amp; Representation</h2>
               <p>
-                Admission to or membership in the SportLead Africa Expert Network represents credential recognition for project team consideration. It does not establish an employer-employee relationship, agency authority, or guarantee commercial assignments. Fellows may not represent or bind {SITE_NAME} without explicit written authorization.
+                Admission to or membership in the SportLead Africa Expert Network represents credential recognition for project team consideration. It does not establish an employer-employee relationship, agency authority, or guarantee commercial assignments. Expert Network specialists may not represent or bind {SITE_NAME} without explicit written authorisation.
               </p>
             </div>
 

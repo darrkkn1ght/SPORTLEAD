@@ -1,7 +1,7 @@
 import { z } from 'zod';
 
 export const contactSchema = z.object({
-  name: z.string().min(2, 'Name must be at least 2 characters').max(100),
+  name: z.string().min(2, 'Full name is required (at least 2 characters)').max(100),
   email: z.string().email('Please enter a valid email address'),
   organisation: z.string().max(150).optional().or(z.literal('')),
   role: z.string().max(100).optional().or(z.literal('')),
@@ -9,22 +9,22 @@ export const contactSchema = z.object({
   country: z.string().max(100).optional().or(z.literal('')),
   inquiryType: z.string().min(1, 'Please select an inquiry type'),
   subject: z.string().min(3, 'Subject must be at least 3 characters').max(200),
-  message: z.string().min(10, 'Message must be at least 10 characters').max(4000),
+  message: z.string().min(10, 'Please provide a message of at least 10 characters').max(4000),
   preferredContact: z.enum(['Email', 'Phone', 'WhatsApp']).default('Email'),
   privacyConsent: z.boolean().refine(val => val === true, {
-    message: 'You must consent to continue',
+    message: 'You must consent to the storage and processing of your contact details',
   }),
   honeypot: z.string().max(0).optional().or(z.literal('')),
 });
 
 export const projectInquirySchema = z.object({
   name: z.string().min(2, 'Full name is required').max(100),
-  role: z.string().min(2, 'Role / Title is required').max(100),
+  role: z.string().min(2, 'Role / title is required').max(100),
   organisation: z.string().min(2, 'Organisation name is required').max(150),
   email: z.string().email('Valid email address is required'),
   telephone: z.string().max(30).optional().or(z.literal('')),
-  country: z.string().min(2, 'Country is required').max(100),
-  projectLocation: z.string().min(2, 'City / Region is required').max(150),
+  country: z.string().min(2, 'Country of operation is required').max(100),
+  projectLocation: z.string().min(2, 'City / project location is required').max(150),
   organisationType: z.string().min(1, 'Please select an organisation type'),
   serviceRequired: z.string().min(1, 'Please select the primary service required'),
   description: z.string().min(20, 'Please provide a detailed description (at least 20 characters)').max(5000),
@@ -33,9 +33,11 @@ export const projectInquirySchema = z.object({
   timeline: z.string().optional().or(z.literal('')),
   budget: z.string().optional().or(z.literal('')),
   stakeholders: z.string().max(1000).optional().or(z.literal('')),
+  preferredContact: z.enum(['Email', 'Phone', 'WhatsApp']).default('Email'),
+  documentName: z.string().max(255).optional().or(z.literal('')),
   howHeard: z.string().optional().or(z.literal('')),
   privacyConsent: z.boolean().refine(val => val === true, {
-    message: 'You must accept the privacy terms to submit your brief',
+    message: 'You must accept the privacy and data processing terms to submit your brief',
   }),
   honeypot: z.string().max(0).optional().or(z.literal('')),
 });
@@ -99,4 +101,48 @@ export const expertApplicationSchema = z.object({
 });
 
 export type ExpertApplicationFormData = z.infer<typeof expertApplicationSchema>;
+
+export const facilityFundingSchema = z.object({
+  organisationName: z.string().min(2, 'Organisation or funder name is required').max(150),
+  contactPerson: z.string().min(2, 'Contact person name is required').max(100),
+  email: z.string().email('Valid email address is required'),
+  telephone: z.string().max(30).optional().or(z.literal('')),
+  country: z.string().min(2, 'Country is required').max(100),
+  geographicArea: z.string().min(2, 'Geographic area of interest is required').max(150),
+  facilityType: z.string().min(2, 'Type of facility or project is required').max(150),
+  intendedSupport: z.string().min(2, 'Intended form of support is required').max(200),
+  fundingRange: z.string().max(100).optional().or(z.literal('')),
+  partnershipModel: z.string().min(2, 'Preferred partnership model is required').max(150),
+  timeline: z.string().min(2, 'Timeline is required').max(100),
+  message: z.string().min(10, 'Please provide a message of at least 10 characters').max(4000),
+  documentName: z.string().max(255).optional().or(z.literal('')),
+  privacyConsent: z.boolean().refine(val => val === true, {
+    message: 'You must accept the privacy and data processing terms',
+  }),
+  honeypot: z.string().max(0).optional().or(z.literal('')),
+});
+
+export type FacilityFundingFormData = z.infer<typeof facilityFundingSchema>;
+
+export const institutionalPartnershipSchema = z.object({
+  institutionName: z.string().min(2, 'Institution name is required').max(150),
+  institutionType: z.string().min(2, 'Institution type is required').max(100),
+  contactPerson: z.string().min(2, 'Contact person name is required').max(100),
+  role: z.string().min(2, 'Role or title is required').max(100),
+  email: z.string().email('Valid email address is required'),
+  telephone: z.string().max(30).optional().or(z.literal('')),
+  country: z.string().min(2, 'Country is required').max(100),
+  collaborationArea: z.string().min(2, 'Collaboration area is required').max(200),
+  objectives: z.string().min(10, 'Please describe proposed objectives (at least 10 characters)').max(3000),
+  duration: z.string().min(2, 'Expected duration is required').max(100),
+  existingInitiative: z.string().max(2000).optional().or(z.literal('')),
+  message: z.string().min(10, 'Please provide a message of at least 10 characters').max(4000),
+  documentName: z.string().max(255).optional().or(z.literal('')),
+  privacyConsent: z.boolean().refine(val => val === true, {
+    message: 'You must accept the privacy and data processing terms',
+  }),
+  honeypot: z.string().max(0).optional().or(z.literal('')),
+});
+
+export type InstitutionalPartnershipFormData = z.infer<typeof institutionalPartnershipSchema>;
 

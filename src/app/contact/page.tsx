@@ -4,8 +4,27 @@ import ContactInfo from '@/components/contact/ContactInfo';
 import ContactForm from '@/components/contact/ContactForm';
 
 export const metadata: Metadata = {
-  title: 'Contact | SportLead Africa',
-  description: 'Get in touch with SportLead Africa for inquiries, partnerships, or general information.',
+  title: 'Contact SportLead Africa | Inquiries & Advisory',
+  description:
+    'Contact us for general enquiries, service questions or to be directed to the appropriate project or partnership pathway.',
+  alternates: {
+    canonical: 'https://sportleadafrica.com/contact',
+  },
+  openGraph: {
+    title: 'Contact SportLead Africa | Inquiries & Advisory',
+    description:
+      'Contact us for general enquiries, service questions or to be directed to the appropriate project or partnership pathway.',
+    url: 'https://sportleadafrica.com/contact',
+    siteName: 'SportLead Africa',
+    images: [{ url: '/images/og-image.jpg', width: 1200, height: 630, alt: 'Contact SportLead Africa' }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Contact SportLead Africa | Inquiries & Advisory',
+    description:
+      'Contact us for general enquiries, service questions or to be directed to the appropriate project or partnership pathway.',
+    images: ['/images/og-image.jpg'],
+  },
 };
 
 export default function ContactPage() {

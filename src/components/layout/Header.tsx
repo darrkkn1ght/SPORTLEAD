@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { NAV_ITEMS } from '@/lib/constants';
@@ -10,11 +10,19 @@ import { Container } from '@/components/ui/Container';
 import { AfricaEmblem } from './AfricaEmblem';
 import MobileNav from './MobileNav';
 
+function slugify(text: string): string {
+  return text.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+}
+
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileNavOpen, setIsMobileNavOpen] = useState(false);
-  const [hoveredItem, setHoveredItem] = useState<string | null>(null);
+  const [openDropdown, setOpenDropdown] = useState<string | null>(null);
   const pathname = usePathname();
+
+  const navContainerRef = useRef<HTMLElement>(null);
+  const triggerRefs = useRef<Record<string, HTMLButtonElement | null>>({});
+  const menuItemRefs = useRef<Record<string, (HTMLAnchorElement | null)[]>>({});
 
   useEffect(() => {
     const handleScroll = () => {
@@ -24,9 +32,21 @@ export default function Header() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // The homepage is the only page with a full-height dark hero where a transparent
-  // header with white text is used before scroll. All other pages feature light hero
-  // sections and must display the high-contrast dark-on-light header immediately on load.
+  // Close dropdown on click outside or route change
+  useEffect(() => {
+    setOpenDropdown(null);
+  }, [pathname]);
+
+  useEffect(() => {
+    const handleOutsideClick = (e: MouseEvent) => {
+      if (navContainerRef.current && !navContainerRef.current.contains(e.target as Node)) {
+        setOpenDropdown(null);
+      }
+    };
+    document.addEventListener('mousedown', handleOutsideClick);
+    return () => document.removeEventListener('mousedown', handleOutsideClick);
+  }, []);
+
   const isDarkHero = pathname === '/';
   const isTransparent = isDarkHero && !isScrolled;
 
@@ -41,6 +61,47 @@ export default function Header() {
     ? 'text-white hover:text-white/70'
     : 'text-charcoal hover:text-brand-green';
 
+  const toggleDropdown = (label: string) => {
+    setOpenDropdown((prev) => (prev === label ? null : label));
+  };
+
+  const handleTriggerKeyDown = (e: React.KeyboardEvent<HTMLButtonElement>, label: string) => {
+    if (e.key === 'Enter' || e.key === ' ' || e.key === 'ArrowDown') {
+      e.preventDefault();
+      setOpenDropdown(label);
+      setTimeout(() => {
+        const firstItem = menuItemRefs.current[label]?.[0];
+        firstItem?.focus();
+      }, 50);
+    } else if (e.key === 'Escape') {
+      e.preventDefault();
+      setOpenDropdown(null);
+    }
+  };
+
+  const handleMenuItemKeyDown = (
+    e: React.KeyboardEvent<HTMLAnchorElement>,
+    label: string,
+    currentIndex: number,
+    totalItems: number
+  ) => {
+    if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      const nextIndex = (currentIndex + 1) % totalItems;
+      menuItemRefs.current[label]?.[nextIndex]?.focus();
+    } else if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      const prevIndex = (currentIndex - 1 + totalItems) % totalItems;
+      menuItemRefs.current[label]?.[prevIndex]?.focus();
+    } else if (e.key === 'Escape') {
+      e.preventDefault();
+      setOpenDropdown(null);
+      triggerRefs.current[label]?.focus();
+    } else if (e.key === 'Tab' && !e.shiftKey && currentIndex === totalItems - 1) {
+      setOpenDropdown(null);
+    }
+  };
+
   return (
     <>
       <header
@@ -49,7 +110,10 @@ export default function Header() {
         <Container>
           <div className="flex items-center justify-between h-20">
             {/* Logo */}
-            <Link href="/" className="flex-shrink-0 flex items-center gap-2.5 group">
+            <Link
+              href="/"
+              className="flex-shrink-0 flex items-center gap-2.5 group focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-green rounded-lg"
+            >
               <span className={`font-bold text-xl tracking-wider uppercase transition-colors duration-300 ${logoColor}`}>
                 SportLead Africa
               </span>
@@ -57,63 +121,120 @@ export default function Header() {
             </Link>
 
             {/* Desktop Nav */}
-            <nav className="hidden lg:flex items-center gap-8">
-              {NAV_ITEMS.map((item) => (
-                <div
-                  key={item.label}
-                  className="relative group py-6"
-                  onMouseEnter={() => setHoveredItem(item.label)}
-                  onMouseLeave={() => setHoveredItem(null)}
-                >
-                  <Link
-                    href={item.href}
-                    className={`flex items-center text-sm font-semibold transition-colors duration-300 ${pathname === item.href || (pathname.startsWith(item.href) && item.href !== '/')
-                      ? activeColor
-                      : `${textColor} ${textHover}`
-                      }`}
-                  >
-                    {item.label}
-                    {item.children && (
-                      <ChevronDown
-                        size={16}
-                        className={`ml-1 transition-transform ${hoveredItem === item.label ? 'rotate-180' : ''
-                          }`}
-                      />
-                    )}
-                  </Link>
+            <nav ref={navContainerRef} className="hidden lg:flex items-center gap-7" aria-label="Main Navigation">
+              {NAV_ITEMS.map((item) => {
+                const hasChildren = Boolean(item.children && item.children.length > 0);
+                const isItemActive =
+                  pathname === item.href ||
+                  (pathname.startsWith(item.href) && item.href !== '/');
+                const slug = slugify(item.label);
 
-                  {/* Dropdown */}
-                  {item.children && hoveredItem === item.label && (
-                    <div className="absolute top-full left-0 mt-[-10px] pt-[10px]">
-                      <div className="bg-white rounded-xl shadow-card-hover py-3 min-w-[240px] border border-warm-border">
-                        {item.children.map((child) => (
-                          <Link
-                            key={child.label}
-                            href={child.href}
-                            className={`block px-5 py-2.5 text-sm font-medium transition-colors ${pathname === child.href
-                              ? 'text-brand-green bg-brand-green-muted'
-                              : 'text-gray-600 hover:text-brand-green hover:bg-warm-gray'
-                              }`}
+                return (
+                  <div
+                    key={item.label}
+                    className="relative py-6 flex items-center"
+                    onMouseEnter={() => hasChildren && setOpenDropdown(item.label)}
+                    onMouseLeave={() => hasChildren && setOpenDropdown(null)}
+                  >
+                    {/* Parent item is also clickable link */}
+                    <Link
+                      href={item.href}
+                      className={`text-sm font-semibold transition-colors duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-green rounded ${
+                        isItemActive ? activeColor : `${textColor} ${textHover}`
+                      }`}
+                    >
+                      {item.label}
+                    </Link>
+
+                    {/* Accessible dropdown trigger button */}
+                    {hasChildren && item.children && (
+                      <>
+                        <button
+                          ref={(el) => {
+                            triggerRefs.current[item.label] = el;
+                          }}
+                          type="button"
+                          id={`nav-trigger-${slug}`}
+                          aria-haspopup="true"
+                          aria-expanded={openDropdown === item.label}
+                          aria-controls={`nav-dropdown-${slug}`}
+                          aria-label={`${item.label} submenu`}
+                          onClick={() => toggleDropdown(item.label)}
+                          onKeyDown={(e) => handleTriggerKeyDown(e, item.label)}
+                          className={`ml-1 p-1 rounded-md transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-green ${textColor} ${textHover}`}
+                        >
+                          <ChevronDown
+                            size={16}
+                            className={`transition-transform duration-200 ${
+                              openDropdown === item.label ? 'rotate-180' : ''
+                            }`}
+                          />
+                        </button>
+
+                        {/* Dropdown Menu */}
+                        {openDropdown === item.label && (
+                          <div
+                            id={`nav-dropdown-${slug}`}
+                            role="menu"
+                            aria-labelledby={`nav-trigger-${slug}`}
+                            className="absolute top-full left-0 mt-[-8px] pt-[8px] z-50 animate-in fade-in slide-in-from-top-1 duration-150"
                           >
-                            {child.label}
-                          </Link>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-                </div>
-              ))}
+                            <div className="bg-white rounded-xl shadow-card-hover py-3 min-w-[280px] border border-warm-border">
+                              {item.children.map((child, childIdx) => {
+                                const isChildActive = pathname === child.href;
+                                return (
+                                  <Link
+                                    key={child.label}
+                                    ref={(el) => {
+                                      if (!menuItemRefs.current[item.label]) {
+                                        menuItemRefs.current[item.label] = [];
+                                      }
+                                      menuItemRefs.current[item.label][childIdx] = el;
+                                    }}
+                                    role="menuitem"
+                                    href={child.href}
+                                    onClick={() => setOpenDropdown(null)}
+                                    onKeyDown={(e) =>
+                                      handleMenuItemKeyDown(
+                                        e,
+                                        item.label,
+                                        childIdx,
+                                        item.children!.length
+                                      )
+                                    }
+                                    className={`block px-5 py-2.5 text-sm font-medium transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-green ${
+                                      isChildActive
+                                        ? 'text-brand-green bg-brand-green-muted font-semibold'
+                                        : 'text-gray-600 hover:text-brand-green hover:bg-warm-gray'
+                                    }`}
+                                  >
+                                    {child.label}
+                                  </Link>
+                                );
+                              })}
+                            </div>
+                          </div>
+                        )}
+                      </>
+                    )}
+                  </div>
+                );
+              })}
             </nav>
 
             {/* CTA & Mobile Toggle */}
             <div className="flex items-center gap-4">
               <div className="hidden lg:block">
-                <Button variant="primary" href="/discuss-a-project" className="bg-brand-green text-white hover:bg-brand-green-light rounded-full border-none font-bold">
+                <Button
+                  variant="primary"
+                  href="/discuss-a-project"
+                  className="bg-brand-green text-white hover:bg-brand-green-light rounded-full border-none font-bold shadow-sm"
+                >
                   Discuss a Project
                 </Button>
               </div>
               <button
-                className={`lg:hidden p-2 focus:outline-none transition-colors duration-300 ${mobileToggleColor}`}
+                className={`lg:hidden p-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-green rounded-lg transition-colors duration-300 ${mobileToggleColor}`}
                 onClick={() => setIsMobileNavOpen(true)}
                 aria-label="Open menu"
               >

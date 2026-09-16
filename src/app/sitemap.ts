@@ -16,6 +16,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/expert-network/apply',
     '/insights',
     '/partner-with-us',
+    '/partner-with-us/fund-a-facility',
+    '/partner-with-us/institutional-partnership',
     '/discuss-a-project',
     '/contact',
     '/privacy',

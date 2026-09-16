@@ -112,9 +112,11 @@ export function PhoneField({
     onChange(syntheticEvent);
   };
 
+  const inputId = `field-${name}`;
+
   return (
     <div className={`w-full ${className}`}>
-      <label className="block text-sm font-semibold text-charcoal mb-2">
+      <label htmlFor={inputId} className="block text-sm font-semibold text-charcoal mb-2">
         {label}
         {required && <span className="text-brand-red ml-1">*</span>}
       </label>
@@ -123,6 +125,7 @@ export function PhoneField({
         {/* Country Code Dropdown */}
         <div className="relative bg-warm-gray border-r border-warm-border flex items-center">
           <select
+            id={`${inputId}-dialcode`}
             value={activeDialCode}
             onChange={handleDialCodeSelect}
             aria-label="Country calling code"
@@ -143,6 +146,7 @@ export function PhoneField({
 
         {/* Local Number Input */}
         <input
+          id={inputId}
           type="tel"
           name={name}
           value={localNumber}

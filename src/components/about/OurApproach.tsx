@@ -16,27 +16,23 @@ export default function OurApproach() {
           </p>
         </div>
 
-        {/* Process Flow: 6 connected steps */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+        {/* Clean Linear Process */}
+        <div className="max-w-4xl mx-auto space-y-4">
           {APPROACH_STEPS.map((step, index) => (
             <div
               key={index}
-              className="relative bg-white rounded-2xl border border-warm-border p-7 shadow-sm hover:shadow-card hover:-translate-y-0.5 transition-all duration-300 group flex flex-col"
+              className="relative bg-white rounded-2xl border border-warm-border p-6 sm:p-7 shadow-sm hover:shadow-card transition-all duration-300 flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-6 group"
             >
-              {/* Step indicator header */}
-              <div className="flex items-center justify-between mb-5">
-                <span className="text-xs font-bold uppercase tracking-widest text-brand-green bg-brand-green-muted px-3 py-1 rounded-full">
-                  Step 0{index + 1}
-                </span>
-                <span className="text-2xl font-bold text-charcoal/10 font-mono select-none">
+              <div className="flex items-center gap-4 shrink-0">
+                <div className="w-12 h-12 rounded-xl bg-brand-green-muted text-brand-green font-bold text-sm flex items-center justify-center group-hover:bg-brand-green group-hover:text-white transition-colors shrink-0">
                   {(index + 1).toString().padStart(2, '0')}
-                </span>
+                </div>
+                <h3 className="text-xl font-bold text-charcoal sm:w-36 group-hover:text-brand-green transition-colors shrink-0">
+                  {step.title}
+                </h3>
               </div>
-
-              <h3 className="text-lg sm:text-xl font-bold mb-2 text-charcoal group-hover:text-brand-green transition-colors">
-                {step.title}
-              </h3>
-              <p className="text-gray-500 text-xs sm:text-sm leading-relaxed mt-auto">
+              <div className="hidden sm:block w-px h-10 bg-warm-border shrink-0" />
+              <p className="text-gray-600 text-sm sm:text-base leading-relaxed flex-grow">
                 {step.description}
               </p>
             </div>

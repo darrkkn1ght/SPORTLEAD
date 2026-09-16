@@ -6,6 +6,7 @@ import { INQUIRY_TYPES } from '@/lib/constants';
 import { COUNTRY_OPTIONS, updatePhoneWithCountry } from '@/lib/countries';
 import { useFormDraft } from '@/lib/useFormDraft';
 import { CheckCircle2, Send, AlertCircle, Clock, Shield } from 'lucide-react';
+import { trackEvent } from '@/lib/analytics';
 
 export default function ContactForm() {
   const [loading, setLoading] = useState(false);
@@ -92,10 +93,11 @@ export default function ContactForm() {
         referenceId: data.referenceId,
         message: data.message,
       });
+      trackEvent('Contact Submitted', { referenceId: data.referenceId });
       clearDraft();
       setFormData(INITIAL_CONTACT_FORM);
     } catch (err: any) {
-      setGeneralError(err.message || 'Something went wrong. Please try again.');
+      setGeneralError(err.message || 'An unexpected error occurred. Please try again.');
     } finally {
       setLoading(false);
     }
@@ -108,10 +110,10 @@ export default function ContactForm() {
           <CheckCircle2 size={36} />
         </div>
         <h3 className="text-2xl sm:text-3xl font-bold text-charcoal mb-3 tracking-tight">
-          Inquiry Successfully Dispatched
+          Message Received
         </h3>
         <p className="text-sm sm:text-base text-charcoal/70 mb-6 max-w-md mx-auto leading-relaxed">
-          Thank you for reaching out to SportLead Africa. Our team has received your message and will respond via your preferred contact channel.
+          Thank you for contacting SportLead Africa. Our team has received your message and will respond via your preferred contact method.
         </p>
 
         <div className="bg-warm-gray rounded-2xl p-4 max-w-sm mx-auto mb-8 border border-warm-border text-xs text-charcoal/80 flex items-center justify-between">
@@ -270,7 +272,7 @@ export default function ContactForm() {
         />
 
         <FormField
-          label="Preferred Contact Channel"
+          label="Preferred Contact Method"
           name="preferredContact"
           type="select"
           value={formData.preferredContact}

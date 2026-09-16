@@ -3,6 +3,8 @@ import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { motion } from "framer-motion";
 
+import { trackEvent } from "@/lib/analytics";
+
 export default function ClosingCTA() {
   return (
     <section className="py-32 bg-charcoal relative overflow-hidden">
@@ -15,14 +17,20 @@ export default function ClosingCTA() {
           className="max-w-4xl"
         >
           <h2 className="text-4xl md:text-5xl lg:text-6xl text-white font-bold tracking-tight leading-tight mb-8">
-            Have a sport-sector challenge, facility need or institutional project to develop?
+            Have a sport sector challenge, facility need or institutional project to develop?
           </h2>
           <p className="text-xl md:text-2xl text-gray-400 font-light mb-12">
             Let us discuss the problem and determine the right next step.
           </p>
 
           <div className="flex items-center gap-6">
-            <Button variant="primary" size="lg" href="/discuss-a-project" className="px-10 py-6 text-lg font-bold tracking-wide bg-brand-green text-white hover:bg-brand-green-light border-none rounded-full">
+            <Button
+              variant="primary"
+              size="lg"
+              href="/discuss-a-project"
+              onClick={() => trackEvent('Discuss a Project', { location: 'closing_cta' })}
+              className="px-10 py-6 text-lg font-bold tracking-wide bg-brand-green text-white hover:bg-brand-green-light border-none rounded-full"
+            >
               Discuss a Project
             </Button>
           </div>

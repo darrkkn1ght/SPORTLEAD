@@ -13,9 +13,14 @@ interface MobileNavProps {
   onClose: () => void;
 }
 
+function slugify(text: string): string {
+  return text.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+}
+
 export default function MobileNav({ isOpen, onClose }: MobileNavProps) {
   const pathname = usePathname();
-  const [expandedItems, setExpandedItems] = useState<string[]>([]);
+  // Single active accordion state ensures only one section is open at a time
+  const [expandedItem, setExpandedItem] = useState<string | null>(null);
 
   useEffect(() => {
     if (isOpen) {
@@ -28,87 +33,132 @@ export default function MobileNav({ isOpen, onClose }: MobileNavProps) {
     };
   }, [isOpen]);
 
+  // Close accordion and mobile nav on pathname change
+  useEffect(() => {
+    setExpandedItem(null);
+  }, [pathname]);
+
   const toggleExpand = (label: string) => {
-    setExpandedItems((prev) =>
-      prev.includes(label)
-        ? prev.filter((item) => item !== label)
-        : [...prev, label]
-    );
+    setExpandedItem((prev) => (prev === label ? null : label));
   };
 
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-[60] bg-white/98 backdrop-blur-md flex flex-col transition-opacity duration-300">
+    <div
+      role="dialog"
+      aria-modal="true"
+      aria-label="Mobile Navigation Menu"
+      className="fixed inset-0 z-[60] bg-white/98 backdrop-blur-md flex flex-col transition-opacity duration-300"
+    >
       <div className="flex items-center justify-between p-6 border-b border-warm-border">
-        <div className="flex items-center gap-2.5">
+        <Link
+          href="/"
+          onClick={onClose}
+          className="flex items-center gap-2.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-green rounded-lg"
+        >
           <span className="text-charcoal font-bold text-xl tracking-wider uppercase">
             SportLead Africa
           </span>
           <AfricaEmblem size={26} />
-        </div>
+        </Link>
         <button
           onClick={onClose}
-          className="text-charcoal p-2 focus:outline-none hover:text-brand-green transition-colors"
-          aria-label="Close menu"
+          className="text-charcoal p-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-green rounded-lg hover:text-brand-green transition-colors"
+          aria-label="Close navigation menu"
         >
           <X size={24} />
         </button>
       </div>
 
       <div className="flex-1 overflow-y-auto p-6">
-        <nav className="flex flex-col gap-2">
-          {NAV_ITEMS.map((item) => (
-            <div key={item.label}>
-              <div className="flex items-center justify-between">
-                <Link
-                  href={item.href}
-                  onClick={onClose}
-                  className={`block py-3 text-lg font-semibold transition-colors ${pathname === item.href ? 'text-brand-green' : 'text-charcoal hover:text-brand-green'
+        <nav className="flex flex-col gap-2" aria-label="Mobile Navigation">
+          {NAV_ITEMS.map((item) => {
+            const hasChildren = Boolean(item.children && item.children.length > 0);
+            const isExpanded = expandedItem === item.label;
+            const isItemActive =
+              pathname === item.href ||
+              (pathname.startsWith(item.href) && item.href !== '/');
+            const slug = slugify(item.label);
+
+            return (
+              <div key={item.label} className="border-b border-warm-border/50 pb-2">
+                <div className="flex items-center justify-between">
+                  {/* Parent item is also a clickable link */}
+                  <Link
+                    href={item.href}
+                    onClick={onClose}
+                    className={`block py-3 text-lg font-semibold transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-green rounded ${
+                      isItemActive
+                        ? 'text-brand-green font-bold'
+                        : 'text-charcoal hover:text-brand-green'
                     }`}
-                >
-                  {item.label}
-                </Link>
-                {item.children && (
-                  <button
-                    onClick={() => toggleExpand(item.label)}
-                    className="p-3 text-charcoal focus:outline-none hover:text-brand-green"
-                    aria-label={`Toggle ${item.label}`}
                   >
-                    <ChevronDown
-                      size={20}
-                      className={`transition-transform ${expandedItems.includes(item.label) ? 'rotate-180' : ''
+                    {item.label}
+                  </Link>
+
+                  {/* Dropdown accordion trigger button */}
+                  {hasChildren && (
+                    <button
+                      type="button"
+                      id={`mobile-trigger-${slug}`}
+                      aria-haspopup="true"
+                      aria-expanded={isExpanded}
+                      aria-controls={`mobile-accordion-${slug}`}
+                      aria-label={`Toggle ${item.label} submenu`}
+                      onClick={() => toggleExpand(item.label)}
+                      className="p-3 text-charcoal focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-green rounded-lg hover:text-brand-green"
+                    >
+                      <ChevronDown
+                        size={20}
+                        className={`transition-transform duration-200 ${
+                          isExpanded ? 'rotate-180 text-brand-green' : ''
                         }`}
-                    />
-                  </button>
+                      />
+                    </button>
+                  )}
+                </div>
+
+                {/* Accordion content: only one open at a time */}
+                {hasChildren && item.children && isExpanded && (
+                  <div
+                    id={`mobile-accordion-${slug}`}
+                    role="region"
+                    aria-labelledby={`mobile-trigger-${slug}`}
+                    className="pl-4 flex flex-col gap-2 border-l-2 border-brand-green/30 ml-2 mt-1 mb-3 animate-in fade-in slide-in-from-top-1 duration-150"
+                  >
+                    {item.children.map((child) => {
+                      const isChildActive = pathname === child.href;
+                      return (
+                        <Link
+                          key={child.label}
+                          href={child.href}
+                          onClick={onClose}
+                          className={`block py-2 text-sm font-medium transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-green rounded ${
+                            isChildActive
+                              ? 'text-brand-green font-bold bg-brand-green-muted/50 px-2 rounded'
+                              : 'text-gray-600 hover:text-brand-green'
+                          }`}
+                        >
+                          {child.label}
+                        </Link>
+                      );
+                    })}
+                  </div>
                 )}
               </div>
-
-              {item.children && expandedItems.includes(item.label) && (
-                <div className="pl-4 flex flex-col gap-2 border-l-2 border-brand-green/20 ml-2 mt-2 mb-4">
-                  {item.children.map((child) => (
-                    <Link
-                      key={child.label}
-                      href={child.href}
-                      onClick={onClose}
-                      className={`block py-2 text-base transition-colors ${pathname === child.href
-                          ? 'text-brand-green'
-                          : 'text-gray-500 hover:text-charcoal'
-                        }`}
-                    >
-                      {child.label}
-                    </Link>
-                  ))}
-                </div>
-              )}
-            </div>
-          ))}
+            );
+          })}
         </nav>
       </div>
 
       <div className="p-6 border-t border-warm-border bg-warm-gray mt-auto">
         <div onClick={onClose}>
-          <Button variant="primary" href="/discuss-a-project" className="w-full justify-center bg-brand-green text-white hover:bg-brand-green-light rounded-full font-bold">
+          <Button
+            variant="primary"
+            href="/discuss-a-project"
+            className="w-full justify-center bg-brand-green text-white hover:bg-brand-green-light rounded-full font-bold py-3.5 shadow-sm"
+          >
             Discuss a Project
           </Button>
         </div>

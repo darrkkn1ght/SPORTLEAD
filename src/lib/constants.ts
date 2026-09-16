@@ -28,9 +28,9 @@ export const NAV_ITEMS: NavItem[] = [
     href: '/partner-with-us',
     children: [
       { label: 'Commission a Project', href: '/discuss-a-project' },
-      { label: 'Fund a Facility Project', href: '/partner-with-us#fund' },
-      { label: 'Join Our Expert Network', href: '/partner-with-us#expert-network' },
-      { label: 'Institutional Partnerships', href: '/partner-with-us#institutional' },
+      { label: 'Fund a Facility Project', href: '/partner-with-us/fund-a-facility' },
+      { label: 'Join Our Expert Network', href: '/expert-network/apply' },
+      { label: 'Institutional Partnerships', href: '/partner-with-us/institutional-partnership' },
     ],
   },
   { label: 'Contact', href: '/contact' },
@@ -40,14 +40,14 @@ export const SERVICE_PILLARS: ServicePillar[] = [
   {
     id: 'infrastructure',
     title: 'Sport Infrastructure Planning & Development',
-    description: 'Feasibility, concept development, technical planning, rehabilitation, redevelopment and project-delivery support for pitches, courts, stadia, sport complexes and related facilities.',
+    description: 'Feasibility, concept development, technical planning, rehabilitation, redevelopment and project delivery support for pitches, courts, stadia, sport complexes and related facilities.',
     icon: 'Building',
     href: '/services/infrastructure',
   },
   {
     id: 'auditing',
     title: 'Sport Facility Auditing & Improvement',
-    description: 'Structured assessment of facility condition, safety, accessibility, operations, maintenance and improvement priorities, with practical recommendations for better use and long-term value.',
+    description: 'Structured assessment of facility condition, safety, accessibility, operations, maintenance and improvement priorities, with practical recommendations for better use and long term value.',
     icon: 'ClipboardCheck',
     href: '/services/auditing',
   },
@@ -61,7 +61,7 @@ export const SERVICE_PILLARS: ServicePillar[] = [
   {
     id: 'strategy',
     title: 'Strategy & Institutional Development',
-    description: 'Strategic plans, organisational reviews, operating models, growth frameworks, institutional reform and long-term development plans.',
+    description: 'Strategic plans, organisational reviews, operating models, growth frameworks, institutional reform and long term development plans.',
     icon: 'Target',
     href: '/services/strategy',
   },
@@ -75,7 +75,7 @@ export const SERVICE_PILLARS: ServicePillar[] = [
   {
     id: 'project-management',
     title: 'Sport Project Development & Management',
-    description: 'Project concept development, stakeholder coordination, technical-team assembly, implementation management, reporting and evaluation.',
+    description: 'Project concept development, stakeholder coordination, technical team assembly, implementation management, reporting and evaluation.',
     icon: 'Users',
     href: '/services/project-management',
   },
@@ -169,7 +169,7 @@ export const VALUES: ValueItem[] = [
     description: 'We work from the realities of each institution and market rather than assuming one African context fits another.',
   },
   {
-    title: 'Long-Term Value',
+    title: 'Long Term Value',
     description: 'We favour solutions that strengthen institutional capability and create value beyond the immediate assignment.',
   },
   {
@@ -198,7 +198,6 @@ export const SERVICE_OPTIONS = [
   'Strategy & Institutional Development',
   'Competition & Event Management',
   'Sport Project Development & Management',
-  'Multiple / Not Sure',
 ];
 
 export const ORGANISATION_TYPES = [
@@ -231,6 +230,21 @@ export const BUDGET_RANGES = [
   'Prefer not to say',
 ];
 
+export const PREFERRED_CONTACT_OPTIONS = [
+  'Email',
+  'Phone',
+  'WhatsApp',
+];
+
+export const HOW_HEARD_OPTIONS = [
+  'Professional referral / recommendation',
+  'Direct industry outreach',
+  'Conference or industry event',
+  'Online search',
+  'Social media or publication',
+  'Other',
+];
+
 export const TIMELINE_OPTIONS = [
   'Immediate (within 1 month)',
   'Short-term (1–3 months)',
@@ -243,26 +257,26 @@ export const TIMELINE_OPTIONS = [
 export const PARTNER_ROUTES = [
   {
     title: 'Commission a Project',
-    description: 'For organisations that need a facility audit, advisory engagement, infrastructure assignment, governance or strategy work, competition/event management, or broader sport-project support.',
+    description: 'For organisations that need a facility audit, advisory engagement, infrastructure assignment, governance or strategy work, competition management or broader sport project support.',
     href: '/discuss-a-project',
     icon: 'Building',
   },
   {
     title: 'Fund a Facility Project',
-    description: 'For companies, foundations, philanthropists, investors and other funders interested in supporting a defined sport-facility or infrastructure project.',
-    href: '/contact',
+    description: 'For companies, foundations, philanthropists, investors and other funders interested in supporting a defined sport facility or infrastructure project.',
+    href: '/partner-with-us/fund-a-facility',
     icon: 'Target',
   },
   {
     title: 'Join Our Expert Network',
-    description: 'For qualified individual specialists, technical firms and professional organisations interested in contributing to SportLead Africa project teams.',
-    href: '/contact',
+    description: 'For qualified individual specialists and technical professionals interested in contributing to SportLead Africa project teams.',
+    href: '/expert-network/apply',
     icon: 'Users',
   },
   {
     title: 'Institutional Partnerships',
-    description: 'For universities, associations, federations, government bodies, NGOs, professional bodies and other institutions interested in longer-term collaboration.',
-    href: '/contact',
+    description: 'For universities, associations, federations, government institutions, NGOs, professional bodies and other organisations interested in longer term collaboration with SportLead Africa.',
+    href: '/partner-with-us/institutional-partnership',
     icon: 'Globe',
   },
 ];

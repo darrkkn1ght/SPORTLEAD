@@ -97,6 +97,7 @@ export function generateProjectInquiryAdminEmail(data: any): { subject: string; 
           <tr><th>Email Address:</th><td><a href="mailto:${data.email}">${data.email}</a></td></tr>
           <tr><th>Telephone:</th><td>${data.telephone || 'Not provided'}</td></tr>
           <tr><th>Country / Base:</th><td>${data.country}</td></tr>
+          <tr><th>Preferred Contact Method:</th><td>${data.preferredContact || 'Email'}</td></tr>
         </table>
 
         <div class="section-title">Project Parameters</div>
@@ -107,6 +108,9 @@ export function generateProjectInquiryAdminEmail(data: any): { subject: string; 
           <tr><th>Estimated Timeline:</th><td>${data.timeline || 'Flexible / Scoping phase'}</td></tr>
           <tr><th>Budget Envelope:</th><td>${data.budget || 'Undisclosed'}</td></tr>
           <tr><th>Current Stage:</th><td>${data.projectStage || 'Inception / Discovery'}</td></tr>
+          <tr><th>Key Stakeholders:</th><td>${data.stakeholders || 'None stated'}</td></tr>
+          <tr><th>Relevant Document:</th><td>${data.documentName || (data.documentFile ? data.documentFile.originalName : 'None attached')}</td></tr>
+          <tr><th>How Heard:</th><td>${data.howHeard || 'Not specified'}</td></tr>
         </table>
 
         <div class="section-title">Project Brief & Description</div>
@@ -155,7 +159,7 @@ export function generateProjectInquiryClientReceipt(data: any): { subject: strin
         
         <div class="highlight-box">
           <strong style="color: #0D4A2B; display: block; margin-bottom: 4px;">What Happens Next:</strong>
-          <span style="font-size: 14px; color: #2D3748;">Our senior practice leadership conducts technical reviews within <strong>48 hours</strong>. A practice specialist will follow up directly to discuss scoping requirements or schedule an introductory advisory session.</span>
+          <span style="font-size: 14px; color: #2D3748;">A practice specialist will follow up directly to discuss your project inquiry.</span>
         </div>
 
         <p>If you have urgent documents or technical briefs to append, you may reply directly to this message or write to <a href="mailto:${SITE_EMAIL}" style="color: #0D4A2B; font-weight: 600;">${SITE_EMAIL}</a>.</p>
@@ -192,17 +196,185 @@ export function generateContactAdminEmail(data: any): { subject: string; html: s
     </head>
     <body>
       <div class="card">
-        <h2>New General Inquiry</h2>
+        <h2>New Contact Inquiry</h2>
         <table>
           <tr><th>From:</th><td>${data.name}</td></tr>
-          <tr><th>Email:</th><td><a href="mailto:${data.email}">${data.email}</a></td></tr>
+          <tr><th>Role / Title:</th><td>${data.role || 'N/A'}</td></tr>
           <tr><th>Organisation:</th><td>${data.organisation || 'N/A'}</td></tr>
+          <tr><th>Email Address:</th><td><a href="mailto:${data.email}">${data.email}</a></td></tr>
+          <tr><th>Telephone / WhatsApp:</th><td>${data.telephone || 'N/A'}</td></tr>
+          <tr><th>Country:</th><td>${data.country || 'N/A'}</td></tr>
           <tr><th>Inquiry Type:</th><td><strong>${data.inquiryType}</strong></td></tr>
           <tr><th>Subject:</th><td>${data.subject}</td></tr>
           <tr><th>Preferred Contact:</th><td>${data.preferredContact}</td></tr>
         </table>
         <div style="font-weight: 700; font-size: 12px; text-transform: uppercase; color: #666; margin-bottom: 6px;">Message</div>
         <div class="message-box">${data.message.replace(/\n/g, '<br/>')}</div>
+      </div>
+    </body>
+    </html>
+  `;
+  return { subject, html };
+}
+
+export function generateFacilityFundingAdminEmail(data: any): { subject: string; html: string } {
+  const subject = `[Facility Funding Inquiry] ${data.organisationName} — ${data.facilityType}`;
+  const html = `
+    <!DOCTYPE html>
+    <html>
+    <head>
+      <meta charset="utf-8">
+      <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6; color: #121514; background: #FAFAF8; padding: 24px; }
+        .card { background: #fff; border: 1px solid #E5E5DE; border-radius: 14px; max-width: 640px; margin: 0 auto; padding: 32px; }
+        h2 { font-size: 20px; color: #0D4A2B; margin-top: 0; border-bottom: 2px solid #0D4A2B; padding-bottom: 8px; }
+        table { width: 100%; border-collapse: collapse; margin-bottom: 20px; }
+        th { text-align: left; font-size: 12px; color: #666; padding: 6px 0; width: 35%; }
+        td { font-size: 14px; padding: 6px 0; font-weight: 500; }
+        .message-box { background: #F4F4F0; padding: 16px; border-radius: 8px; font-size: 14px; }
+      </style>
+    </head>
+    <body>
+      <div class="card">
+        <h2>Facility Funding Project Inquiry</h2>
+        <table>
+          <tr><th>Organisation / Funder:</th><td>${data.organisationName}</td></tr>
+          <tr><th>Contact Person:</th><td>${data.contactPerson}</td></tr>
+          <tr><th>Email Address:</th><td><a href="mailto:${data.email}">${data.email}</a></td></tr>
+          <tr><th>Telephone / WhatsApp:</th><td>${data.telephone || 'Not provided'}</td></tr>
+          <tr><th>Country:</th><td>${data.country}</td></tr>
+          <tr><th>Geographic Area:</th><td>${data.geographicArea}</td></tr>
+          <tr><th>Facility / Project Type:</th><td>${data.facilityType}</td></tr>
+          <tr><th>Intended Form of Support:</th><td>${data.intendedSupport}</td></tr>
+          <tr><th>Funding Range:</th><td>${data.fundingRange || 'Undisclosed / Flexible'}</td></tr>
+          <tr><th>Preferred Partnership Model:</th><td>${data.partnershipModel}</td></tr>
+          <tr><th>Timeline:</th><td>${data.timeline}</td></tr>
+          <tr><th>Supporting Document:</th><td>${data.documentName || 'None attached'}</td></tr>
+        </table>
+        <div style="font-weight: 700; font-size: 12px; text-transform: uppercase; color: #666; margin-bottom: 6px;">Message / Narrative</div>
+        <div class="message-box">${data.message.replace(/\n/g, '<br/>')}</div>
+      </div>
+    </body>
+    </html>
+  `;
+  return { subject, html };
+}
+
+export function generateFacilityFundingClientReceipt(data: any): { subject: string; html: string } {
+  const subject = `SportLead Africa: Facility Funding Inquiry Received [Ref #${(data.id || '').slice(0, 8)}]`;
+  const html = `
+    <!DOCTYPE html>
+    <html>
+    <head>
+      <meta charset="utf-8">
+      <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6; color: #121514; background: #FAFAF8; padding: 24px; }
+        .card { background: #ffffff; border: 1px solid #E5E5DE; border-radius: 16px; max-width: 600px; margin: 0 auto; padding: 36px; }
+        .brand { font-size: 20px; font-weight: 800; color: #0D4A2B; letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 24px; }
+        h2 { font-size: 22px; color: #121514; margin: 0 0 16px 0; }
+        p { font-size: 15px; color: #444; line-height: 1.7; margin-bottom: 16px; }
+        .highlight-box { background: #EBF5EF; border-left: 4px solid #0D4A2B; padding: 16px 20px; border-radius: 6px; margin: 24px 0; }
+        .footer { font-size: 12px; color: #888; border-top: 1px solid #EEE; padding-top: 20px; margin-top: 32px; }
+      </style>
+    </head>
+    <body>
+      <div class="card">
+        <div class="brand">SportLead Africa</div>
+        <h2>Facility Funding Inquiry Acknowledged</h2>
+        <p>Dear ${data.contactPerson},</p>
+        <p>Thank you for submitting a facility funding inquiry on behalf of <strong>${data.organisationName}</strong>.</p>
+        <div class="highlight-box">
+          <strong style="color: #0D4A2B; display: block; margin-bottom: 4px;">What Happens Next:</strong>
+          <span style="font-size: 14px; color: #2D3748;">A practice specialist will follow up to discuss facility funding opportunities.</span>
+        </div>
+        <p>Inquiry Reference ID: <strong>${data.id}</strong></p>
+        <div class="footer">
+          SportLead Africa • Building Better Sport Systems Across Africa<br/>
+          Headquarters: ${HEADQUARTERS} • <a href="https://sportleadafrica.com" style="color: #666;">sportleadafrica.com</a>
+        </div>
+      </div>
+    </body>
+    </html>
+  `;
+  return { subject, html };
+}
+
+export function generateInstitutionalPartnershipAdminEmail(data: any): { subject: string; html: string } {
+  const subject = `[Institutional Partnership Inquiry] ${data.institutionName} — ${data.collaborationArea}`;
+  const html = `
+    <!DOCTYPE html>
+    <html>
+    <head>
+      <meta charset="utf-8">
+      <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6; color: #121514; background: #FAFAF8; padding: 24px; }
+        .card { background: #fff; border: 1px solid #E5E5DE; border-radius: 14px; max-width: 640px; margin: 0 auto; padding: 32px; }
+        h2 { font-size: 20px; color: #0D4A2B; margin-top: 0; border-bottom: 2px solid #0D4A2B; padding-bottom: 8px; }
+        table { width: 100%; border-collapse: collapse; margin-bottom: 20px; }
+        th { text-align: left; font-size: 12px; color: #666; padding: 6px 0; width: 35%; }
+        td { font-size: 14px; padding: 6px 0; font-weight: 500; }
+        .message-box { background: #F4F4F0; padding: 16px; border-radius: 8px; font-size: 14px; margin-bottom: 12px; }
+      </style>
+    </head>
+    <body>
+      <div class="card">
+        <h2>Institutional Partnership Inquiry</h2>
+        <table>
+          <tr><th>Institution Name:</th><td>${data.institutionName}</td></tr>
+          <tr><th>Institution Type:</th><td>${data.institutionType}</td></tr>
+          <tr><th>Contact Person:</th><td>${data.contactPerson}</td></tr>
+          <tr><th>Role / Title:</th><td>${data.role}</td></tr>
+          <tr><th>Email Address:</th><td><a href="mailto:${data.email}">${data.email}</a></td></tr>
+          <tr><th>Telephone / WhatsApp:</th><td>${data.telephone || 'Not provided'}</td></tr>
+          <tr><th>Country:</th><td>${data.country}</td></tr>
+          <tr><th>Collaboration Area:</th><td>${data.collaborationArea}</td></tr>
+          <tr><th>Expected Duration:</th><td>${data.duration}</td></tr>
+          <tr><th>Existing Initiative:</th><td>${data.existingInitiative || 'None'}</td></tr>
+          <tr><th>Supporting Document:</th><td>${data.documentName || 'None attached'}</td></tr>
+        </table>
+        <div style="font-weight: 700; font-size: 12px; text-transform: uppercase; color: #666; margin-bottom: 6px;">Proposed Objectives</div>
+        <div class="message-box">${data.objectives.replace(/\n/g, '<br/>')}</div>
+        <div style="font-weight: 700; font-size: 12px; text-transform: uppercase; color: #666; margin-bottom: 6px;">Message</div>
+        <div class="message-box">${data.message.replace(/\n/g, '<br/>')}</div>
+      </div>
+    </body>
+    </html>
+  `;
+  return { subject, html };
+}
+
+export function generateInstitutionalPartnershipClientReceipt(data: any): { subject: string; html: string } {
+  const subject = `SportLead Africa: Institutional Partnership Inquiry Received [Ref #${(data.id || '').slice(0, 8)}]`;
+  const html = `
+    <!DOCTYPE html>
+    <html>
+    <head>
+      <meta charset="utf-8">
+      <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6; color: #121514; background: #FAFAF8; padding: 24px; }
+        .card { background: #ffffff; border: 1px solid #E5E5DE; border-radius: 16px; max-width: 600px; margin: 0 auto; padding: 36px; }
+        .brand { font-size: 20px; font-weight: 800; color: #0D4A2B; letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 24px; }
+        h2 { font-size: 22px; color: #121514; margin: 0 0 16px 0; }
+        p { font-size: 15px; color: #444; line-height: 1.7; margin-bottom: 16px; }
+        .highlight-box { background: #EBF5EF; border-left: 4px solid #0D4A2B; padding: 16px 20px; border-radius: 6px; margin: 24px 0; }
+        .footer { font-size: 12px; color: #888; border-top: 1px solid #EEE; padding-top: 20px; margin-top: 32px; }
+      </style>
+    </head>
+    <body>
+      <div class="card">
+        <div class="brand">SportLead Africa</div>
+        <h2>Institutional Partnership Inquiry Acknowledged</h2>
+        <p>Dear ${data.contactPerson},</p>
+        <p>Thank you for reaching out regarding institutional partnership collaboration between <strong>${data.institutionName}</strong> and SportLead Africa.</p>
+        <div class="highlight-box">
+          <strong style="color: #0D4A2B; display: block; margin-bottom: 4px;">What Happens Next:</strong>
+          <span style="font-size: 14px; color: #2D3748;">A practice specialist will follow up to discuss institutional partnership opportunities.</span>
+        </div>
+        <p>Inquiry Reference ID: <strong>${data.id}</strong></p>
+        <div class="footer">
+          SportLead Africa • Building Better Sport Systems Across Africa<br/>
+          Headquarters: ${HEADQUARTERS} • <a href="https://sportleadafrica.com" style="color: #666;">sportleadafrica.com</a>
+        </div>
       </div>
     </body>
     </html>

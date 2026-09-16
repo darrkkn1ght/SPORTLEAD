@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { Button } from '@/components/ui';
 import { MapPin, ArrowRight } from '@/components/ui/Icon';
 import type { ExpertProfile } from '@/types';
@@ -24,11 +25,15 @@ export function ExpertCard({ expert }: ExpertCardProps) {
       {/* Top row: Photograph + Discipline badge */}
       <div className="flex items-start gap-4 mb-5">
         {expert.photograph ? (
-          <img
-            src={expert.photograph}
-            alt={expert.fullName}
-            className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl object-cover border border-warm-border shrink-0 shadow-sm"
-          />
+          <div className="relative w-16 h-16 sm:w-20 sm:h-20 rounded-2xl overflow-hidden border border-warm-border shrink-0 shadow-sm">
+            <Image
+              src={expert.photograph}
+              alt={expert.fullName}
+              fill
+              sizes="80px"
+              className="object-cover"
+            />
+          </div>
         ) : (
           <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-gradient-to-br from-charcoal-light to-charcoal text-brand-gold font-bold text-lg sm:text-xl flex items-center justify-center shrink-0 border border-warm-border shadow-sm">
             {initials || 'SL'}

@@ -6,11 +6,57 @@ import { SITE_EMAIL } from '@/lib/constants';
 
 export async function POST(request: Request) {
   try {
-    const rawBody = await request.json();
+    const contentType = request.headers.get('content-type') || '';
+    let rawBody: Record<string, any> = {};
+    let documentFileMeta: { originalName: string; size: number } | undefined = undefined;
 
-    // Honeypot bot protection
-    if (rawBody.honeypot) {
-      return NextResponse.json({ success: true, message: 'Inquiry received' });
+    if (contentType.includes('multipart/form-data')) {
+      const formData = await request.formData();
+
+      // Honeypot bot protection
+      const honeypot = formData.get('honeypot');
+      if (honeypot && String(honeypot).length > 0) {
+        return NextResponse.json({ success: true, message: 'Inquiry received' });
+      }
+
+      // Check document file (optional)
+      const doc = formData.get('documentFile');
+      if (doc && doc instanceof File && doc.size > 0) {
+        const ext = doc.name.substring(doc.name.lastIndexOf('.')).toLowerCase();
+        if (!['.pdf', '.doc', '.docx'].includes(ext)) {
+          return NextResponse.json(
+            { success: false, error: 'Validation failed', errors: { documentFile: ['Document must be a PDF, DOC, or DOCX file'] } },
+            { status: 422 }
+          );
+        }
+        if (doc.size > 10 * 1024 * 1024) {
+          return NextResponse.json(
+            { success: false, error: 'Validation failed', errors: { documentFile: ['Document file exceeds the 10MB limit'] } },
+            { status: 422 }
+          );
+        }
+        documentFileMeta = { originalName: doc.name, size: doc.size };
+      }
+
+      formData.forEach((value, key) => {
+        if (key === 'documentFile') return;
+        if (key === 'privacyConsent') {
+          rawBody[key] = value === 'true' || value === 'on' || value === '1';
+        } else {
+          rawBody[key] = typeof value === 'string' ? value : '';
+        }
+      });
+
+      if (documentFileMeta && !rawBody.documentName) {
+        rawBody.documentName = documentFileMeta.originalName;
+      }
+    } else {
+      rawBody = await request.json();
+
+      // Honeypot bot protection
+      if (rawBody.honeypot) {
+        return NextResponse.json({ success: true, message: 'Inquiry received' });
+      }
     }
 
     // Schema validation via Zod
@@ -30,6 +76,7 @@ export async function POST(request: Request) {
       ...validatedData,
       id: crypto.randomUUID(),
       createdAt: new Date().toISOString(),
+      documentFile: documentFileMeta,
     };
 
     // 1. Dispatch Senior Practice Alert Email
@@ -53,7 +100,7 @@ export async function POST(request: Request) {
 
     return NextResponse.json({
       success: true,
-      message: 'Your project mandate brief has been registered. Our senior practice leadership will review and respond within 48 hours.',
+      message: 'A practice specialist will follow up directly to discuss your project inquiry.',
       referenceId: record.id,
       timestamp: record.createdAt,
     });

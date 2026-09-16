@@ -1,9 +1,11 @@
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import Image from 'next/image';
 import { Container, Button } from '@/components/ui';
 import { Icon } from '@/components/ui/Icon';
 import { SERVICE_DETAILS, SERVICE_SLUGS, type ServiceDetail } from '@/lib/service-details';
+import { DiscussServiceButton } from '@/components/services/DiscussServiceCTA';
 
 interface PageProps {
   params: {
@@ -24,10 +26,28 @@ export function generateMetadata({ params }: PageProps): Metadata {
   return {
     title: `${service.title} | SportLead Africa`,
     description: service.heroIntro,
+    alternates: {
+      canonical: `https://sportleadafrica.com/services/${service.slug}`,
+    },
     openGraph: {
       title: `${service.title} | SportLead Africa`,
       description: service.heroIntro,
       url: `https://sportleadafrica.com/services/${service.slug}`,
+      siteName: 'SportLead Africa',
+      images: [
+        {
+          url: '/images/og-image.jpg',
+          width: 1200,
+          height: 630,
+          alt: `${service.title} — SportLead Africa`,
+        },
+      ],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: `${service.title} | SportLead Africa`,
+      description: service.heroIntro,
+      images: ['/images/og-image.jpg'],
     },
   };
 }
@@ -70,10 +90,13 @@ export default function ServicePage({ params }: PageProps) {
 
           {/* Hero Image Frame */}
           <div className="mt-12 rounded-3xl overflow-hidden border border-warm-border shadow-card aspect-[16/8] sm:aspect-[21/9] relative bg-charcoal">
-            <img
+            <Image
               src={service.heroImage}
               alt={service.heroImageAlt}
-              className="w-full h-full object-cover opacity-90"
+              fill
+              priority
+              sizes="(max-width: 1024px) 100vw, 1200px"
+              className="object-cover opacity-90"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-charcoal/50 to-transparent pointer-events-none" />
           </div>
@@ -235,15 +258,7 @@ export default function ServicePage({ params }: PageProps) {
               Ready to scope requirements, request an audit, or discuss your organisation&apos;s project? Connect with our advisory practice.
             </p>
             <div className="flex flex-wrap items-center justify-center gap-4">
-              <Link href={`/discuss-a-project?service=${service.slug}`}>
-                <Button
-                  variant="primary"
-                  size="lg"
-                  className="bg-brand-green text-white hover:bg-brand-green-light rounded-full px-10 py-4 font-bold text-base shadow-lg"
-                >
-                  Discuss This Service
-                </Button>
-              </Link>
+              <DiscussServiceButton slug={service.slug} title={service.title} />
               <Link href="/services">
                 <Button
                   variant="outline-light"

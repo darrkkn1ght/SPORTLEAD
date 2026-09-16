@@ -4,8 +4,27 @@ import { Container } from '@/components/ui';
 import { SITE_NAME, SITE_EMAIL, HEADQUARTERS } from '@/lib/constants';
 
 export const metadata: Metadata = {
-  title: 'Privacy Policy | SportLead Africa',
-  description: 'Information on data handling, confidentiality, and privacy practices at SportLead Africa.',
+  title: 'Privacy Policy | Data Protection | SportLead Africa',
+  description:
+    'Privacy Policy and data processing terms for SportLead Africa client and partner information.',
+  alternates: {
+    canonical: 'https://sportleadafrica.com/privacy',
+  },
+  openGraph: {
+    title: 'Privacy Policy | Data Protection | SportLead Africa',
+    description:
+      'Privacy Policy and data processing terms for SportLead Africa client and partner information.',
+    url: 'https://sportleadafrica.com/privacy',
+    siteName: 'SportLead Africa',
+    images: [{ url: '/images/og-image.jpg', width: 1200, height: 630, alt: 'SportLead Africa Privacy Policy' }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Privacy Policy | Data Protection | SportLead Africa',
+    description:
+      'Privacy Policy and data processing terms for SportLead Africa client and partner information.',
+    images: ['/images/og-image.jpg'],
+  },
 };
 
 export default function PrivacyPage() {
@@ -49,7 +68,7 @@ export default function PrivacyPage() {
 
             <div>
               <h2 className="text-xl font-bold text-charcoal mb-3">2. Information We Collect</h2>
-              <p className="mb-3">We collect information strictly necessary to assess project briefs and evaluate expert fellowship applications:</p>
+              <p className="mb-3">We collect information strictly necessary to assess project briefs and evaluate expert network applications:</p>
               <ul className="list-disc pl-6 space-y-2 text-sm text-gray-600">
                 <li><strong>Identity &amp; Contact:</strong> Name, professional title, organisation, official email address, telephone/WhatsApp number, country, and base city.</li>
                 <li><strong>Project Briefs:</strong> Organisational type, project location, facility specifications, stage of development, estimated budget envelopes, and scope descriptions.</li>
@@ -74,7 +93,7 @@ export default function PrivacyPage() {
             <div>
               <h2 className="text-xl font-bold text-charcoal mb-3">5. Expert Directory Publication</h2>
               <p>
-                Approved Expert Network fellows consent to the publication of professional profile summaries (name, photograph, discipline, qualifications, and biography) on our directory. Personal contact numbers and direct personal email addresses are never published to public directory views.
+                Approved Expert Network specialists consent to the publication of professional profile summaries (name, photograph, discipline, qualifications, and biography) on our directory. Personal contact numbers and direct personal email addresses are never published to public directory views.
               </p>
             </div>
 

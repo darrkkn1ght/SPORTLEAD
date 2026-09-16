@@ -51,7 +51,7 @@ export async function POST(request: Request) {
           <h2 style="color: #0D4A2B;">SportLead Africa</h2>
           <p>Dear ${record.name},</p>
           <p>Thank you for contacting SportLead Africa regarding <strong>${record.subject}</strong>.</p>
-          <p>We have received your message and our communications team will respond via your preferred contact method (${record.preferredContact}) shortly.</p>
+          <p>We have received your message and our communications team will respond via your preferred contact method (${record.preferredContact}).</p>
           <p style="margin-top: 24px; font-size: 13px; color: #666;">Inquiry Reference ID: ${record.id}</p>
         </div>
       `,
@@ -60,7 +60,7 @@ export async function POST(request: Request) {
 
     return NextResponse.json({
       success: true,
-      message: 'Your inquiry has been received. Our team will contact you shortly.',
+      message: 'Your message has been received. Our team will respond via your preferred contact method.',
       referenceId: record.id,
     });
   } catch (error: any) {

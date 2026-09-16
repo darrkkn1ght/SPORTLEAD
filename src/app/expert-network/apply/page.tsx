@@ -5,9 +5,27 @@ import ExpertApplicationForm from '@/components/forms/ExpertApplicationForm';
 import { ArrowLeft, CheckCircle2, ShieldCheck, Clock, Award } from 'lucide-react';
 
 export const metadata: Metadata = {
-  title: 'Apply to Join the Expert Network | SportLead Africa',
+  title: 'Apply to Join Expert Network | SportLead Africa',
   description:
-    'Submit your professional credentials and experience to join the SportLead Africa Expert Network across sport infrastructure, auditing, governance, strategy, and project management.',
+    'Are you a qualified professional whose expertise can contribute to stronger sport systems, facilities, institutions or projects across Africa? Apply to join the SportLead Africa Expert Network.',
+  alternates: {
+    canonical: 'https://sportleadafrica.com/expert-network/apply',
+  },
+  openGraph: {
+    title: 'Apply to Join Expert Network | SportLead Africa',
+    description:
+      'Are you a qualified professional whose expertise can contribute to stronger sport systems, facilities, institutions or projects across Africa? Apply to join the SportLead Africa Expert Network.',
+    url: 'https://sportleadafrica.com/expert-network/apply',
+    siteName: 'SportLead Africa',
+    images: [{ url: '/images/og-image.jpg', width: 1200, height: 630, alt: 'Apply to Join SportLead Africa Expert Network' }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Apply to Join Expert Network | SportLead Africa',
+    description:
+      'Are you a qualified professional whose expertise can contribute to stronger sport systems, facilities, institutions or projects across Africa? Apply to join the SportLead Africa Expert Network.',
+    images: ['/images/og-image.jpg'],
+  },
 };
 
 export default function ExpertApplyPage() {
@@ -25,13 +43,13 @@ export default function ExpertApplyPage() {
               Back to Expert Network Directory
             </Link>
 
-            <span className="section-label block">FELLOWSHIP &amp; TECHNICAL ADVISORY</span>
+            <span className="section-label block">EXPERT NETWORK &amp; TECHNICAL ADVISORY</span>
             <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-charcoal mb-4">
               Apply to Join the SportLead Africa Expert Network
             </h1>
             <div className="w-16 h-1 bg-brand-green rounded-full mb-6" />
             <p className="text-base sm:text-lg text-gray-600 leading-relaxed max-w-3xl">
-              We welcome qualified technical specialists, facility auditors, architects, governance advisors, competition managers, and project executives interested in contributing to sport sector assignments across Africa.
+              Are you a qualified professional whose expertise can contribute to stronger sport systems, facilities, institutions or projects across Africa? Apply to join the SportLead Africa Expert Network.
             </p>
           </div>
         </Container>

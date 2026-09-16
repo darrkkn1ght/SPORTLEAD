@@ -8,30 +8,30 @@ import type { LeaderProfile } from '@/types';
 // Founder data matching approved client copy verbatim
 const FOUNDER_DATA: LeaderProfile = {
   name: 'Dr. Joshua A. Oparachukwu',
-  role: 'Founder & Principal Consultant',
-  titleLine: 'Founder, SportLead Africa | Performance Strategist | Applied Performance Scientist | Sport Administration Expert',
-  photo: '/images/leadership/joshua-oparachukwu.jfif',
+  role: 'Founder, SportLead Africa',
+  titleLine: 'Founder, SportLead Africa │ Performance Strategist │ Applied Performance Scientist │ Sport Administration Expert',
+  photo: '/images/leadership/joshua-oparachukwu.webp',
   photoAlt: 'Dr. Joshua A. Oparachukwu — Founder, SportLead Africa',
   bio: [
     'Dr. Joshua A. Oparachukwu is a Performance Strategist, Applied Performance Scientist and Sport Administration expert working at the intersection of human performance and the systems that shape sport. He is the Founder of SportLead Africa, where his focus is on sport management, governance, institutional development, infrastructure strategy and the development of stronger systems for the delivery of sport across Africa.',
     'His academic background spans Human Kinetics, the Sociology and Psychology of Sport, Performance Psychology and Sport Administration. This combination gives his work a dual perspective: an understanding of how people perform within sport environments and how the structures, leadership systems, governance arrangements and institutions around them influence what those environments are capable of producing.',
     'His work across research, teaching, consulting and sport has included performance psychology, athlete development, organisational decision making, sport governance and applied performance systems. Through SportLead Africa, he is extending this work toward the institutional questions that sit behind sustainable sport development, including how facilities are planned and improved, how organisations are governed and administered, how strategy is developed, and how multidisciplinary expertise can be coordinated around complex sport sector projects.',
-  ],
-  qualifications: [
     "Dr. Oparachukwu holds a Bachelor's degree in Human Kinetics, a Master's degree in the Sociology and Psychology of Sport, and a PhD in Performance Psychology from the University of Ibadan, Nigeria. He is also undertaking postgraduate study in Sport Administration.",
   ],
+  qualifications: [
+    'BSc Human Kinetics',
+    'MSc Sociology and Psychology of Sport',
+    'PhD Performance Psychology (University of Ibadan, Nigeria)',
+  ],
   website: 'https://joshuaoparachukwu.com',
-  // LinkedIn profile URL — will be added when the official profile is confirmed
-  linkedin: '',
+  linkedin: 'https://www.linkedin.com/in/dr-joshua-oparachukwu',
   areas: [
     'Sport Management & Strategy',
     'Applied Performance Systems',
     'Sport Governance & Administration',
     'Infrastructure Strategy',
   ],
-  registrations: [
-    'Postgraduate Fellow in Sport Administration',
-  ],
+  registrations: [],
 };
 
 /**

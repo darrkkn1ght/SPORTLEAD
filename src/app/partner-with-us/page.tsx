@@ -1,20 +1,62 @@
 import { Metadata } from 'next';
-import Link from 'next/link';
-import { Container, Card, Button } from '@/components/ui';
+import { Container, Card } from '@/components/ui';
 import { Icon } from '@/components/ui/Icon';
 import { PARTNER_ROUTES } from '@/lib/constants';
+import { PartnerCTAButton } from '@/components/partner/PartnerCTAButton';
+import type { AnalyticsEventName } from '@/lib/analytics';
 
 export const metadata: Metadata = {
-  title: 'Partner With Us | SportLead Africa',
+  title: 'Partner With Us | Collaboration Pathways | SportLead Africa',
   description:
-    'Explore partnership opportunities with SportLead Africa across project delivery, funding, technical expertise, and institutional collaboration.',
+    'SportLead Africa works with organisations, funders, technical professionals and institutions that want to develop stronger sport facilities, systems and projects.',
+  alternates: {
+    canonical: 'https://sportleadafrica.com/partner-with-us',
+  },
+  openGraph: {
+    title: 'Partner With Us | Collaboration Pathways | SportLead Africa',
+    description:
+      'SportLead Africa works with organisations, funders, technical professionals and institutions that want to develop stronger sport facilities, systems and projects.',
+    url: 'https://sportleadafrica.com/partner-with-us',
+    siteName: 'SportLead Africa',
+    images: [
+      {
+        url: '/images/og-image.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'Partner With SportLead Africa',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Partner With Us | Collaboration Pathways | SportLead Africa',
+    description:
+      'SportLead Africa works with organisations, funders, technical professionals and institutions that want to develop stronger sport facilities, systems and projects.',
+    images: ['/images/og-image.jpg'],
+  },
 };
 
-const CTA_MAP: Record<string, { text: string; href?: string }> = {
-  'Commission a Project': { text: 'Discuss a Project', href: '/discuss-a-project' },
-  'Fund a Facility Project': { text: 'Contact Us', href: '/contact?subject=Fund+a+Facility+Project' },
-  'Join Our Expert Network': { text: 'Apply to Join', href: '/expert-network/apply' },
-  'Institutional Partnerships': { text: 'Explore Partnerships', href: '/contact?subject=Institutional+Partnership' },
+const CTA_CONFIG: Record<string, { text: string; href: string; event: AnalyticsEventName }> = {
+  'Commission a Project': {
+    text: 'Discuss a Project',
+    href: '/discuss-a-project',
+    event: 'Discuss a Project',
+  },
+  'Fund a Facility Project': {
+    text: 'Discuss Facility Funding',
+    href: '/partner-with-us/fund-a-facility',
+    event: 'Discuss Facility Funding',
+  },
+  'Join Our Expert Network': {
+    text: 'Apply to Join',
+    href: '/expert-network/apply',
+    event: 'Apply to Join Expert Network',
+  },
+  'Institutional Partnerships': {
+    text: 'Discuss an Institutional Partnership',
+    href: '/partner-with-us/institutional-partnership',
+    event: 'Discuss Institutional Partnership',
+  },
 };
 
 const ANCHOR_MAP: Record<string, string> = {
@@ -26,7 +68,7 @@ const ANCHOR_MAP: Record<string, string> = {
 
 export default function PartnerWithUsPage() {
   return (
-    <main className="bg-warm-white min-h-screen text-charcoal">
+    <main id="main-content" className="bg-warm-white min-h-screen text-charcoal">
       <section className="bg-warm-gray pt-32 pb-20 md:pb-28 border-b border-warm-border">
         <Container>
           <div className="max-w-4xl">
@@ -47,8 +89,11 @@ export default function PartnerWithUsPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
             {PARTNER_ROUTES.map((route, index) => {
               const anchorId = ANCHOR_MAP[route.title];
-              const ctaConfig = CTA_MAP[route.title];
-              const destinationHref = ctaConfig?.href || route.href;
+              const config = CTA_CONFIG[route.title] || {
+                text: 'Get in Touch',
+                href: route.href,
+                event: 'Discuss a Project' as AnalyticsEventName,
+              };
 
               return (
                 <div
@@ -58,23 +103,20 @@ export default function PartnerWithUsPage() {
                 >
                   <Card className="flex flex-col h-full bg-white border border-warm-border rounded-3xl p-8 sm:p-10 shadow-sm hover:shadow-card transition-shadow" hoverable>
                     <div className="w-14 h-14 bg-brand-green-muted text-brand-green rounded-2xl flex items-center justify-center mb-6">
-                      <Icon name={route.icon} className="w-7 h-7" />
+                      <Icon name={route.icon as any} className="w-7 h-7" />
                     </div>
-                    <h3 className="text-2xl sm:text-3xl font-bold text-charcoal mb-4 tracking-tight">
+                    <h2 className="text-2xl sm:text-3xl font-bold text-charcoal mb-4 tracking-tight">
                       {route.title}
-                    </h3>
+                    </h2>
                     <p className="text-gray-600 mb-8 flex-grow text-base sm:text-lg leading-relaxed">
                       {route.description}
                     </p>
                     <div>
-                      <Link href={destinationHref}>
-                        <Button
-                          variant="primary"
-                          className="w-full sm:w-auto bg-brand-green text-white hover:bg-brand-green-light rounded-full px-8 py-3 font-bold text-sm shadow-sm"
-                        >
-                          {ctaConfig?.text || 'Get in Touch'}
-                        </Button>
-                      </Link>
+                      <PartnerCTAButton
+                        href={config.href}
+                        text={config.text}
+                        eventName={config.event}
+                      />
                     </div>
                   </Card>
                 </div>

@@ -3,10 +3,11 @@
 import { useState, useEffect } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { Button, FormField, PhoneField } from '@/components/ui';
-import { ORGANISATION_TYPES, SERVICE_OPTIONS, PROJECT_STAGES, BUDGET_RANGES, TIMELINE_OPTIONS } from '@/lib/constants';
+import { ORGANISATION_TYPES, SERVICE_OPTIONS, PROJECT_STAGES, BUDGET_RANGES, TIMELINE_OPTIONS, PREFERRED_CONTACT_OPTIONS, HOW_HEARD_OPTIONS } from '@/lib/constants';
 import { COUNTRY_OPTIONS, updatePhoneWithCountry } from '@/lib/countries';
 import { useFormDraft } from '@/lib/useFormDraft';
-import { CheckCircle2, ArrowRight, ArrowLeft, ShieldCheck, Clock, FileText, Send, Building2, Layers, AlertCircle } from 'lucide-react';
+import { CheckCircle2, ArrowRight, ArrowLeft, ShieldCheck, Clock, FileText, Send, Building2, Layers, AlertCircle, Upload } from 'lucide-react';
+import { trackEvent } from '@/lib/analytics';
 
 const SLUG_TO_SERVICE: Record<string, string> = {
   infrastructure: 'Sport Infrastructure Planning & Development',
@@ -24,6 +25,7 @@ interface FormState {
   email: string;
   telephone: string;
   country: string;
+  preferredContact: 'Email' | 'Phone' | 'WhatsApp';
   projectLocation: string;
   organisationType: string;
   serviceRequired: string;
@@ -33,6 +35,7 @@ interface FormState {
   timeline: string;
   budget: string;
   stakeholders: string;
+  documentName: string;
   howHeard: string;
   privacyConsent: boolean;
   honeypot: string;
@@ -45,6 +48,7 @@ const INITIAL_FORM: FormState = {
   email: '',
   telephone: '',
   country: '',
+  preferredContact: 'Email',
   projectLocation: '',
   organisationType: '',
   serviceRequired: '',
@@ -54,6 +58,7 @@ const INITIAL_FORM: FormState = {
   timeline: '',
   budget: '',
   stakeholders: '',
+  documentName: '',
   howHeard: '',
   privacyConsent: false,
   honeypot: '',
@@ -66,6 +71,7 @@ export default function ProjectInquiryForm() {
   const [successData, setSuccessData] = useState<{ referenceId: string; message: string } | null>(null);
   const [fieldErrors, setFieldErrors] = useState<Record<string, string[]>>({});
   const [generalError, setGeneralError] = useState('');
+  const [documentFile, setDocumentFile] = useState<File | null>(null);
   const {
     formData,
     setFormData,
@@ -76,10 +82,12 @@ export default function ProjectInquiryForm() {
   useEffect(() => {
     const serviceParam = searchParams?.get('service');
     if (serviceParam) {
+      const decoded = decodeURIComponent(serviceParam).toLowerCase().trim();
       const matched =
         SLUG_TO_SERVICE[serviceParam] ||
+        SLUG_TO_SERVICE[decoded] ||
         SERVICE_OPTIONS.find(
-          (opt) => opt.toLowerCase() === serviceParam.toLowerCase()
+          (opt) => opt.toLowerCase() === decoded
         );
       if (matched) {
         setFormData((prev) => ({
@@ -88,7 +96,7 @@ export default function ProjectInquiryForm() {
         }));
       }
     }
-  }, [searchParams]);
+  }, [searchParams, setFormData]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value, type } = e.target;
@@ -119,6 +127,33 @@ export default function ProjectInquiryForm() {
     }
   };
 
+  const handleDocumentChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = e.target.files;
+    if (!files || files.length === 0) {
+      setDocumentFile(null);
+      setFormData(prev => ({ ...prev, documentName: '' }));
+      return;
+    }
+    const file = files[0];
+    const validExtensions = ['.pdf', '.doc', '.docx'];
+    const ext = file.name.substring(file.name.lastIndexOf('.')).toLowerCase();
+    if (!validExtensions.includes(ext)) {
+      setFieldErrors(prev => ({ ...prev, documentFile: ['Document must be a PDF, DOC, or DOCX file'] }));
+      return;
+    }
+    if (file.size > 10 * 1024 * 1024) {
+      setFieldErrors(prev => ({ ...prev, documentFile: ['File size must not exceed 10MB'] }));
+      return;
+    }
+    setDocumentFile(file);
+    setFormData(prev => ({ ...prev, documentName: file.name }));
+    setFieldErrors(prev => {
+      const next = { ...prev };
+      delete next.documentFile;
+      return next;
+    });
+  };
+
   const validateStep = (step: number): boolean => {
     const errors: Record<string, string[]> = {};
 
@@ -129,7 +164,7 @@ export default function ProjectInquiryForm() {
       if (!formData.email.trim() || !formData.email.includes('@')) errors.email = ['Valid email is required'];
       if (!formData.country.trim()) errors.country = ['Country is required'];
     } else if (step === 2) {
-      if (!formData.projectLocation.trim()) errors.projectLocation = ['City / Region is required'];
+      if (!formData.projectLocation.trim()) errors.projectLocation = ['City / project location is required'];
       if (!formData.organisationType) errors.organisationType = ['Please select organisation type'];
       if (!formData.serviceRequired) errors.serviceRequired = ['Please select primary service required'];
       if (formData.description.trim().length < 20) {
@@ -164,10 +199,17 @@ export default function ProjectInquiryForm() {
     setGeneralError('');
 
     try {
+      const submitData = new FormData();
+      Object.entries(formData).forEach(([key, val]) => {
+        submitData.append(key, String(val));
+      });
+      if (documentFile) {
+        submitData.append('documentFile', documentFile);
+      }
+
       const res = await fetch('/api/project-inquiry', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
+        body: submitData,
       });
 
       const data = await res.json();
@@ -186,8 +228,10 @@ export default function ProjectInquiryForm() {
         referenceId: data.referenceId,
         message: data.message,
       });
+      trackEvent('Project Enquiry Submitted', { referenceId: data.referenceId });
       clearDraft();
       setFormData(INITIAL_FORM);
+      setDocumentFile(null);
     } catch (err: any) {
       setGeneralError(err.message || 'An unexpected error occurred. Please try again.');
     } finally {
@@ -204,18 +248,18 @@ export default function ProjectInquiryForm() {
         </div>
 
         <span className="text-xs font-bold uppercase tracking-widest text-brand-green bg-brand-green-muted px-4 py-1.5 rounded-full inline-block mb-4">
-          Mandate Successfully Registered
+          Project Enquiry Received
         </span>
 
         <h3 className="text-3xl sm:text-4xl font-extrabold text-charcoal mb-4 tracking-tight">
-          Advisory Brief Received
+          Project Enquiry Received
         </h3>
 
         <p className="text-base sm:text-lg text-charcoal/70 max-w-xl mx-auto leading-relaxed mb-8">
-          Thank you for trusting SportLead Africa. Your project specifications have been submitted to our senior practice leadership.
+          Thank you. Your project inquiry has been received. A practice specialist will follow up directly to discuss your project inquiry.
         </p>
 
-        {/* Reference & SLA Box */}
+        {/* Reference Box */}
         <div className="bg-warm-gray rounded-2xl p-6 max-w-lg mx-auto mb-8 border border-warm-border text-left">
           <div className="flex items-center justify-between pb-4 border-b border-warm-border/60 mb-4">
             <span className="text-xs font-semibold uppercase text-gray-500">Inquiry Reference</span>
@@ -226,7 +270,7 @@ export default function ProjectInquiryForm() {
           <div className="flex items-start gap-3">
             <Clock size={18} className="text-brand-green mt-0.5 shrink-0" />
             <div className="text-xs text-charcoal/80 leading-relaxed">
-              <strong>Technical Review Timeline:</strong> Our practice team reviews all briefs within <strong>48 business hours</strong>. A confirmation receipt has been dispatched to your email address.
+              A practice specialist will follow up directly to discuss your project inquiry.
             </div>
           </div>
         </div>
@@ -239,7 +283,7 @@ export default function ProjectInquiryForm() {
           }}
           className="rounded-full px-8 py-3 border-2 border-charcoal/20 text-charcoal hover:border-charcoal text-sm font-bold"
         >
-          Submit Another Project Brief
+          Submit Another Project Enquiry
         </Button>
       </div>
     );
@@ -396,6 +440,16 @@ export default function ProjectInquiryForm() {
                 placeholder="803 000 0000"
                 error={fieldErrors.telephone?.[0]}
                 helpText="Country code auto-selects with African country or choose manually"
+              />
+              <FormField
+                label="Preferred Contact Method"
+                name="preferredContact"
+                type="select"
+                value={formData.preferredContact}
+                onChange={handleChange}
+                options={PREFERRED_CONTACT_OPTIONS.map(opt => ({ label: opt, value: opt }))}
+                required
+                error={fieldErrors.preferredContact?.[0]}
               />
             </div>
 
@@ -555,6 +609,41 @@ export default function ProjectInquiryForm() {
               rows={3}
             />
 
+            {/* Relevant Document Upload (Optional) */}
+            <div className="bg-warm-gray rounded-2xl p-6 border border-warm-border space-y-3">
+              <label className="text-sm font-semibold text-charcoal flex items-center gap-2">
+                <Upload size={16} className="text-brand-green" />
+                <span>Relevant Document Upload (Optional)</span>
+              </label>
+              <p className="text-xs text-gray-500">
+                Attach terms of reference, facility audits, concept briefs, or architectural plans (PDF, DOC, DOCX up to 10MB).
+              </p>
+              <input
+                type="file"
+                accept=".pdf,.doc,.docx"
+                onChange={handleDocumentChange}
+                className="w-full text-xs text-gray-500 file:mr-4 file:py-2.5 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-brand-green file:text-white hover:file:bg-brand-green-light cursor-pointer border border-warm-border rounded-xl p-2 bg-white"
+              />
+              {documentFile && (
+                <p className="text-xs text-brand-green font-medium flex items-center gap-1.5 pt-1">
+                  <FileText size={14} /> Selected: {documentFile.name} ({(documentFile.size / 1024).toFixed(0)} KB)
+                </p>
+              )}
+              {fieldErrors.documentFile && (
+                <p className="text-xs text-red-500 font-medium">{fieldErrors.documentFile[0]}</p>
+              )}
+            </div>
+
+            <FormField
+              label="How did you hear about SportLead Africa?"
+              name="howHeard"
+              type="select"
+              value={formData.howHeard}
+              onChange={handleChange}
+              options={HOW_HEARD_OPTIONS.map(h => ({ label: h, value: h }))}
+              placeholder="Select an option (optional)"
+            />
+
             {/* Confidentiality & Reassurance Box */}
             <div className="bg-warm-gray rounded-2xl p-5 border border-warm-border space-y-3">
               <div className="flex items-center gap-2 text-brand-green font-bold text-xs uppercase tracking-wider">
@@ -569,7 +658,7 @@ export default function ProjectInquiryForm() {
             {/* Privacy Checkbox */}
             <div className="pt-2">
               <FormField
-                label="I confirm the accuracy of this brief and authorize SportLead Africa to review our project data under confidentiality standards."
+                label="I confirm the accuracy of this brief and authorise SportLead Africa to review our project data under confidentiality standards."
                 name="privacyConsent"
                 type="checkbox"
                 value={formData.privacyConsent}
@@ -597,10 +686,10 @@ export default function ProjectInquiryForm() {
                 className="bg-brand-green text-white hover:bg-brand-green-light rounded-full px-10 py-4 font-bold text-sm inline-flex items-center gap-2 shadow-md hover:shadow-lg transition-all"
               >
                 {loading ? (
-                  <span>Registering Mandate...</span>
+                  <span>Submitting Project Enquiry...</span>
                 ) : (
                   <>
-                    <span>Submit Mandate Brief</span>
+                    <span>Submit Project Enquiry</span>
                     <Send size={16} />
                   </>
                 )}

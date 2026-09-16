@@ -96,6 +96,42 @@ export interface ProjectInquiryData {
   timeline: string;
   budgetRange: string;
   stakeholders: string;
+  preferredContact?: 'Email' | 'Phone' | 'WhatsApp';
+  documentName?: string;
   howHeard: string;
+  privacyConsent: boolean;
+}
+
+export interface FacilityFundingData {
+  organisationName: string;
+  contactPerson: string;
+  email: string;
+  telephone?: string;
+  country: string;
+  geographicArea: string;
+  facilityType: string;
+  intendedSupport: string;
+  fundingRange?: string;
+  partnershipModel: string;
+  timeline: string;
+  message: string;
+  documentName?: string;
+  privacyConsent: boolean;
+}
+
+export interface InstitutionalPartnershipData {
+  institutionName: string;
+  institutionType: string;
+  contactPerson: string;
+  role: string;
+  email: string;
+  telephone?: string;
+  country: string;
+  collaborationArea: string;
+  objectives: string;
+  duration: string;
+  existingInitiative?: string;
+  message: string;
+  documentName?: string;
   privacyConsent: boolean;
 }

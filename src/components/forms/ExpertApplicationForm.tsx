@@ -6,6 +6,7 @@ import { EXPERT_DISCIPLINE_CATEGORIES } from '@/lib/expert-network';
 import { COUNTRY_OPTIONS } from '@/lib/countries';
 import { useFormDraft } from '@/lib/useFormDraft';
 import { CheckCircle2, ArrowRight, ArrowLeft, Send, AlertCircle, FileText, Upload, ShieldCheck, UserCheck } from 'lucide-react';
+import { trackEvent } from '@/lib/analytics';
 
 interface FormFields {
   fullName: string;
@@ -143,6 +144,11 @@ export default function ExpertApplicationForm() {
 
     if (fileType === 'cv') {
       const file = files[0];
+      const ext = file.name.substring(file.name.lastIndexOf('.')).toLowerCase();
+      if (!['.pdf', '.doc', '.docx'].includes(ext)) {
+        setFieldErrors((prev) => ({ ...prev, cvFile: ['CV must be a PDF, DOC, or DOCX document'] }));
+        return;
+      }
       if (file.size > 5 * 1024 * 1024) {
         setFieldErrors((prev) => ({ ...prev, cvFile: ['CV file exceeds the 5MB size limit'] }));
         return;
@@ -155,8 +161,13 @@ export default function ExpertApplicationForm() {
       });
     } else if (fileType === 'photo') {
       const file = files[0];
-      if (file.size > 5 * 1024 * 1024) {
-        setFieldErrors((prev) => ({ ...prev, photoFile: ['Photo file exceeds the 5MB size limit'] }));
+      const ext = file.name.substring(file.name.lastIndexOf('.')).toLowerCase();
+      if (!['.jpg', '.jpeg', '.png', '.webp'].includes(ext)) {
+        setFieldErrors((prev) => ({ ...prev, photoFile: ['Photograph must be a JPG, JPEG, PNG, or WEBP image'] }));
+        return;
+      }
+      if (file.size > 2 * 1024 * 1024) {
+        setFieldErrors((prev) => ({ ...prev, photoFile: ['Photograph file exceeds the 2MB size limit'] }));
         return;
       }
       setPhotoFile(file);
@@ -167,12 +178,26 @@ export default function ExpertApplicationForm() {
       });
     } else if (fileType === 'certs') {
       const validCerts: File[] = [];
+      const validExtensions = ['.pdf', '.doc', '.docx'];
       for (let i = 0; i < files.length; i++) {
-        if (files[i].size <= 5 * 1024 * 1024) {
-          validCerts.push(files[i]);
+        const file = files[i];
+        const ext = file.name.substring(file.name.lastIndexOf('.')).toLowerCase();
+        if (!validExtensions.includes(ext)) {
+          setFieldErrors((prev) => ({ ...prev, certificateFiles: ['Certificates must be PDF, DOC, or DOCX documents only'] }));
+          return;
         }
+        if (file.size > 5 * 1024 * 1024) {
+          setFieldErrors((prev) => ({ ...prev, certificateFiles: ['Each certificate file must not exceed 5MB'] }));
+          return;
+        }
+        validCerts.push(file);
       }
       setCertificateFiles(validCerts);
+      setFieldErrors((prev) => {
+        const next = { ...prev };
+        delete next.certificateFiles;
+        return next;
+      });
     }
   };
 
@@ -284,6 +309,7 @@ export default function ExpertApplicationForm() {
         referenceId: data.referenceId,
         message: data.message,
       });
+      trackEvent('Expert Application Submitted', { referenceId: data.referenceId });
       clearDraft();
       setFields(INITIAL_FIELDS);
       setCvFile(null);
@@ -323,9 +349,10 @@ export default function ExpertApplicationForm() {
             </span>
           </div>
           <div className="text-xs text-gray-500 space-y-2 leading-relaxed">
-            <p><strong>Review Cadence:</strong> Expert applications are reviewed on a rolling quarterly basis.</p>
+            <p><strong>Review Cadence:</strong> Expert applications are reviewed on a rolling basis by our governance committee.</p>
+            <p><strong>Next Steps:</strong> Should your profile and disciplinary credentials align with ongoing or upcoming institutional and infrastructure assignments across Africa, a coordinator will reach out directly to schedule an introductory interview and conduct reference verification.</p>
             <p><strong>Confirmation:</strong> A confirmation email has been dispatched to your registered address with your submission details.</p>
-            <p><strong>Privacy:</strong> All submitted CVs, contact information, and references are treated with strict confidentiality.</p>
+            <p><strong>Privacy:</strong> All submitted CVs, contact details, and references are treated with strict confidentiality.</p>
           </div>
         </div>
 
@@ -718,49 +745,11 @@ export default function ExpertApplicationForm() {
               />
             </div>
 
-            <FormField
-              label="Short Professional Biography"
-              name="bio"
-              type="textarea"
-              rows={4}
-              required
-              placeholder="Provide a 2-3 paragraph professional overview of your background, career trajectory, and core contributions to the sport industry."
-              value={fields.bio}
-              onChange={handleInputChange}
-              error={fieldErrors.bio?.[0]}
-              helpText="This biography will form the foundation of your expert directory profile upon approval."
-            />
-
-            <FormField
-              label="Why Do You Want to Join SportLead Africa?"
-              name="statementOfInterest"
-              type="textarea"
-              rows={3}
-              required
-              placeholder="Explain how your expertise aligns with our mission to build stronger sport systems, institutions, and infrastructure across Africa."
-              value={fields.statementOfInterest}
-              onChange={handleInputChange}
-              error={fieldErrors.statementOfInterest?.[0]}
-            />
-
-            <FormField
-              label="Professional References"
-              name="references"
-              type="textarea"
-              rows={3}
-              required
-              placeholder="Provide at least 2 professional references (Full Name, Title, Organisation, Email, Telephone)."
-              value={fields.references}
-              onChange={handleInputChange}
-              error={fieldErrors.references?.[0]}
-              helpText="References will only be contacted after initial credential review."
-            />
-
-            {/* Document Uploads Box */}
+            {/* Document & Media Uploads (Fields 23, 24, 25) */}
             <div className="bg-warm-gray border border-warm-border rounded-2xl p-6 space-y-6">
               <h4 className="text-base font-bold text-charcoal flex items-center gap-2">
                 <Upload size={18} className="text-brand-green" />
-                Required &amp; Optional Documents (Max 5MB per file)
+                Required &amp; Optional Documents
               </h4>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -803,7 +792,7 @@ export default function ExpertApplicationForm() {
                   {fieldErrors.photoFile && (
                     <p className="text-xs text-red-500 font-medium mt-1">{fieldErrors.photoFile[0]}</p>
                   )}
-                  <p className="text-xs text-gray-400 mt-1">Accepted: High-resolution JPG or PNG up to 5MB</p>
+                  <p className="text-xs text-gray-400 mt-1">Accepted: High-resolution JPG, JPEG, PNG, or WEBP up to 2MB</p>
                 </div>
               </div>
 
@@ -814,7 +803,7 @@ export default function ExpertApplicationForm() {
                 <input
                   type="file"
                   multiple
-                  accept=".pdf,.jpg,.jpeg,.png,.webp"
+                  accept=".pdf,.doc,.docx"
                   onChange={(e) => handleFileChange(e, 'certs')}
                   className="w-full text-xs text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-brand-green-muted file:text-brand-green hover:file:bg-brand-green/20 cursor-pointer border border-warm-border rounded-xl p-2 bg-white"
                 />
@@ -823,9 +812,53 @@ export default function ExpertApplicationForm() {
                     {certificateFiles.length} file(s) selected: {certificateFiles.map((f) => f.name).join(', ')}
                   </p>
                 )}
-                <p className="text-xs text-gray-400 mt-1">Upload relevant degrees, chartered certifications, or practising licences</p>
+                {fieldErrors.certificateFiles && (
+                  <p className="text-xs text-red-500 font-medium mt-1">{fieldErrors.certificateFiles[0]}</p>
+                )}
+                <p className="text-xs text-gray-400 mt-1">Accepted: PDF, DOC, DOCX up to 5MB each</p>
               </div>
             </div>
+
+            {/* Field 26: Professional references */}
+            <FormField
+              label="Professional References"
+              name="references"
+              type="textarea"
+              rows={3}
+              required
+              placeholder="Provide at least 2 professional references (Full Name, Title, Organisation, Email, Telephone)."
+              value={fields.references}
+              onChange={handleInputChange}
+              error={fieldErrors.references?.[0]}
+              helpText="References will only be contacted after initial credential review."
+            />
+
+            {/* Field 27: Short professional biography */}
+            <FormField
+              label="Short Professional Biography"
+              name="bio"
+              type="textarea"
+              rows={4}
+              required
+              placeholder="Provide a 2-3 paragraph professional overview of your background, career trajectory, and core contributions to the sport industry."
+              value={fields.bio}
+              onChange={handleInputChange}
+              error={fieldErrors.bio?.[0]}
+              helpText="This biography will form the foundation of your expert directory profile upon approval."
+            />
+
+            {/* Field 28: Why the applicant wants to join SportLead Africa */}
+            <FormField
+              label="Why Do You Want to Join SportLead Africa?"
+              name="statementOfInterest"
+              type="textarea"
+              rows={3}
+              required
+              placeholder="Explain how your expertise aligns with our mission to build stronger sport systems, institutions, and infrastructure across Africa."
+              value={fields.statementOfInterest}
+              onChange={handleInputChange}
+              error={fieldErrors.statementOfInterest?.[0]}
+            />
           </div>
         )}
 

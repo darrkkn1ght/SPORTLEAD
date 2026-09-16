@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import Image from 'next/image';
 import { Container, Button } from '@/components/ui';
 import { MapPin, Globe, LinkedIn, ExternalLink, Shield, CheckCircle } from '@/components/ui/Icon';
 import { ArrowLeft, Clock } from 'lucide-react';
@@ -104,11 +105,15 @@ export default function ExpertProfilePage({ params }: PageProps) {
             {/* Portrait Column */}
             <div className="lg:col-span-4 flex flex-col items-center lg:items-start text-center lg:text-left">
               {expert.photograph ? (
-                <img
-                  src={expert.photograph}
-                  alt={expert.fullName}
-                  className="w-48 sm:w-56 lg:w-full aspect-[4/5] rounded-3xl object-cover border border-warm-border shadow-card mb-6"
-                />
+                <div className="relative w-48 sm:w-56 lg:w-full aspect-[4/5] rounded-3xl overflow-hidden border border-warm-border shadow-card mb-6">
+                  <Image
+                    src={expert.photograph}
+                    alt={expert.fullName}
+                    fill
+                    sizes="(max-width: 640px) 192px, (max-width: 1024px) 224px, 320px"
+                    className="object-cover"
+                  />
+                </div>
               ) : (
                 <div className="w-48 sm:w-56 lg:w-full aspect-[4/5] rounded-3xl bg-gradient-to-br from-charcoal-light to-charcoal text-brand-gold font-bold text-4xl flex items-center justify-center border border-warm-border shadow-card mb-6">
                   {initials || 'SL'}

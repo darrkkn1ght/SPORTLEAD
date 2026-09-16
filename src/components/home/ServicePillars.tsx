@@ -4,6 +4,7 @@ import { SERVICE_PILLARS } from "@/lib/constants";
 import { Icon } from "@/components/ui/Icon";
 import Link from "next/link";
 import { motion } from "framer-motion";
+import { trackEvent } from "@/lib/analytics";
 
 export default function ServicePillars() {
   return (
@@ -44,7 +45,11 @@ export default function ServicePillars() {
                 key={service.id}
                 className={`${span} group`}
               >
-                <Link href={service.href} className="block h-full">
+                <Link
+                  href={service.href}
+                  onClick={() => trackEvent('Explore Service', { service: service.title })}
+                  className="block h-full"
+                >
                   <div className="relative bg-white rounded-2xl border border-warm-border p-8 md:p-10 h-full shadow-card hover:shadow-card-hover hover:-translate-y-1 transition-all duration-300 overflow-hidden">
                     {/* Top accent line */}
                     <div className="absolute top-0 left-0 right-0 h-[3px] bg-brand-green/0 group-hover:bg-brand-green transition-colors duration-300" />
