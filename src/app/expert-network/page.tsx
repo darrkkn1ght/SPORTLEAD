@@ -7,7 +7,7 @@ import { APPROVED_EXPERTS, EXPERT_DISCIPLINE_CATEGORIES } from '@/lib/expert-net
 import { PartnerCTAButton } from '@/components/partner/PartnerCTAButton';
 
 export const metadata: Metadata = {
-  title: 'SportLead Africa Expert Network | Specialists in African Sport Development',
+  title: 'Expert Network | Specialists in African Sport Development',
   description:
     'Our Expert Network brings together qualified specialists across the disciplines required to plan, strengthen and deliver sport sector projects across Africa.',
   alternates: {
@@ -120,14 +120,14 @@ export default function ExpertNetworkPage() {
                 Specialist Profiles in Onboarding
               </h3>
               <p className="text-sm text-gray-500 leading-relaxed max-w-lg mx-auto mb-6">
-                Technical specialists, facility auditors, architects, governance advisors and project managers across Africa are currently completing credential verification. Directory profiles will display here.
+                The SportLead Africa Expert Network is currently being developed. Approved specialist profiles will be published here following our review and onboarding process.
               </p>
               <Link href="/expert-network/apply">
                 <Button
                   variant="outline"
                   className="rounded-full px-6 py-2.5 border-brand-green text-brand-green hover:bg-brand-green-muted text-xs font-bold"
                 >
-                  Submit Expert Credentials
+                  Apply
                 </Button>
               </Link>
             </div>

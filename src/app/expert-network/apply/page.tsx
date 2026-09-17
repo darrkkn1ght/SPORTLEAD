@@ -5,7 +5,7 @@ import ExpertApplicationForm from '@/components/forms/ExpertApplicationForm';
 import { ArrowLeft, CheckCircle2, ShieldCheck, Clock, Award } from 'lucide-react';
 
 export const metadata: Metadata = {
-  title: 'Apply to Join Expert Network | SportLead Africa',
+  title: 'Apply to Join Expert Network',
   description:
     'Are you a qualified professional whose expertise can contribute to stronger sport systems, facilities, institutions or projects across Africa? Apply to join the SportLead Africa Expert Network.',
   alternates: {

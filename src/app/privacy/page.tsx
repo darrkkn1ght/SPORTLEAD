@@ -4,7 +4,7 @@ import { Container } from '@/components/ui';
 import { SITE_NAME, SITE_EMAIL, HEADQUARTERS } from '@/lib/constants';
 
 export const metadata: Metadata = {
-  title: 'Privacy Policy | Data Protection | SportLead Africa',
+  title: 'Privacy Policy | Data Protection',
   description:
     'Privacy Policy and data processing terms for SportLead Africa client and partner information.',
   alternates: {
@@ -46,14 +46,6 @@ export default function PrivacyPage() {
         </Container>
       </section>
 
-      {/* Draft Disclaimer Notice */}
-      <section className="py-6 bg-brand-green-muted/50 border-b border-brand-green/10">
-        <Container>
-          <div className="max-w-4xl text-xs sm:text-sm text-brand-green-dark">
-            <strong>Draft Legal Notice:</strong> This privacy framework is published as a working administrative policy and is currently pending formal institutional legal review. Binding agreements are executed under separate client engagement contracts.
-          </div>
-        </Container>
-      </section>
 
       {/* Main Policy Content */}
       <section className="py-16 md:py-24">
@@ -108,7 +100,7 @@ export default function PrivacyPage() {
             </div>
 
             <div className="pt-8 border-t border-warm-border text-xs text-gray-400">
-              Last updated: September 2026 • Document Version: 1.0 (Draft for Advisory Operations)
+              Last updated: September 2026 • Document Version: 1.0
             </div>
           </div>
         </Container>

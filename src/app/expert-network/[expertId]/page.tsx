@@ -16,13 +16,13 @@ export function generateMetadata({ params }: PageProps): Metadata {
   const expert = getExpertById(params.expertId);
   if (!expert) {
     return {
-      title: 'Expert Profile | SportLead Africa',
+      title: 'Expert Profile',
       description: 'SportLead Africa Expert Network specialist profile.',
     };
   }
 
   return {
-    title: `${expert.fullName} — ${expert.primaryDiscipline} | SportLead Africa Expert Network`,
+    title: `${expert.fullName} — ${expert.primaryDiscipline}`,
     description: Array.isArray(expert.shortBio) ? expert.shortBio[0] : expert.shortBio,
   };
 }

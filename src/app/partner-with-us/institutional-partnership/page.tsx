@@ -5,7 +5,7 @@ import InstitutionalPartnershipForm from '@/components/forms/InstitutionalPartne
 import { ArrowLeft } from 'lucide-react';
 
 export const metadata: Metadata = {
-  title: 'Institutional Partnerships | Partner With Us | SportLead Africa',
+  title: 'Institutional Partnerships | Partner With Us',
   description:
     'For universities, associations, federations, government institutions, NGOs, professional bodies and other organisations interested in longer term collaboration with SportLead Africa.',
   alternates: {

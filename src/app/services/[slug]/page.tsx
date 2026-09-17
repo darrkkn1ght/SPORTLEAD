@@ -21,10 +21,10 @@ export function generateStaticParams() {
 
 export function generateMetadata({ params }: PageProps): Metadata {
   const service = SERVICE_DETAILS[params.slug];
-  if (!service) return { title: 'Service Not Found | SportLead Africa' };
+  if (!service) return { title: 'Service Not Found' };
 
   return {
-    title: `${service.title} | SportLead Africa`,
+    title: service.title,
     description: service.heroIntro,
     alternates: {
       canonical: `https://sportleadafrica.com/services/${service.slug}`,

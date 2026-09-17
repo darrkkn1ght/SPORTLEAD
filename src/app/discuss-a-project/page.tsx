@@ -4,7 +4,7 @@ import { Container } from '@/components/ui';
 import ProjectInquiryForm from '@/components/forms/ProjectInquiryForm';
 
 export const metadata: Metadata = {
-  title: 'Discuss a Project | Project Enquiry | SportLead Africa',
+  title: 'Discuss a Project | Project Enquiry',
   description:
     'Tell us what you are trying to develop, improve or solve. We will review the information and determine the most appropriate next conversation.',
   alternates: {

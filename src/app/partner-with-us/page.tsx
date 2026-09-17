@@ -6,7 +6,7 @@ import { PartnerCTAButton } from '@/components/partner/PartnerCTAButton';
 import type { AnalyticsEventName } from '@/lib/analytics';
 
 export const metadata: Metadata = {
-  title: 'Partner With Us | Collaboration Pathways | SportLead Africa',
+  title: 'Partner With Us | Collaboration Pathways',
   description:
     'SportLead Africa works with organisations, funders, technical professionals and institutions that want to develop stronger sport facilities, systems and projects.',
   alternates: {

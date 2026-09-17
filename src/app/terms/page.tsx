@@ -4,7 +4,7 @@ import { Container } from '@/components/ui';
 import { SITE_NAME, SITE_EMAIL } from '@/lib/constants';
 
 export const metadata: Metadata = {
-  title: 'Terms of Use | Legal Terms | SportLead Africa',
+  title: 'Terms of Use | Legal Terms',
   description:
     'Terms of use governing access to and use of the SportLead Africa advisory website and platforms.',
   alternates: {
@@ -46,14 +46,6 @@ export default function TermsPage() {
         </Container>
       </section>
 
-      {/* Draft Disclaimer Notice */}
-      <section className="py-6 bg-brand-green-muted/50 border-b border-brand-green/10">
-        <Container>
-          <div className="max-w-4xl text-xs sm:text-sm text-brand-green-dark">
-            <strong>Draft Legal Notice:</strong> These website terms of use are published as a preliminary operational draft and are pending formal legal finalisation. Formal advisory assignments are governed by definitive written client service agreements.
-          </div>
-        </Container>
-      </section>
 
       {/* Main Content */}
       <section className="py-16 md:py-24">
@@ -98,7 +90,7 @@ export default function TermsPage() {
             </div>
 
             <div className="pt-8 border-t border-warm-border text-xs text-gray-400">
-              Last updated: September 2026 • Document Version: 1.0 (Draft for Advisory Operations)
+              Last updated: September 2026 • Document Version: 1.0
             </div>
           </div>
         </Container>

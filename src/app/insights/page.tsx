@@ -4,7 +4,7 @@ import { Container, Button } from '@/components/ui';
 import { BookOpen } from 'lucide-react';
 
 export const metadata: Metadata = {
-  title: 'Insights | Sector Assessments & Analysis | SportLead Africa',
+  title: 'Insights | Sector Assessments & Analysis',
   description:
     'Original sector assessments, practical analysis, research and reports on the institutions, infrastructure and systems shaping African sport.',
   alternates: {
@@ -66,7 +66,7 @@ export default function InsightsPage() {
             </h1>
             <div className="w-20 h-1 bg-brand-green rounded-full mb-8" />
             <p className="text-lg sm:text-xl text-gray-600 leading-relaxed max-w-3xl">
-              Research, analysis and evidence shaping the future of African sport.
+              Research, analysis and evidence on African sport systems.
             </p>
           </div>
         </Container>
@@ -118,7 +118,7 @@ export default function InsightsPage() {
                     variant="outline"
                     className="rounded-full px-7 py-3.5 border-warm-border hover:bg-gray-50 font-bold text-charcoal text-xs sm:text-sm"
                   >
-                    Contact Advisory Team
+                    Contact SportLead Africa
                   </Button>
                 </Link>
               </div>

@@ -4,7 +4,7 @@ import ContactInfo from '@/components/contact/ContactInfo';
 import ContactForm from '@/components/contact/ContactForm';
 
 export const metadata: Metadata = {
-  title: 'Contact SportLead Africa | Inquiries & Advisory',
+  title: 'Contact Us | Inquiries & Advisory',
   description:
     'Contact us for general enquiries, service questions or to be directed to the appropriate project or partnership pathway.',
   alternates: {

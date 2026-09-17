@@ -10,7 +10,7 @@ const FOUNDER_DATA: LeaderProfile = {
   name: 'Dr. Joshua A. Oparachukwu',
   role: 'Founder, SportLead Africa',
   titleLine: 'Founder, SportLead Africa │ Performance Strategist │ Applied Performance Scientist │ Sport Administration Expert',
-  photo: '/images/leadership/joshua-oparachukwu.webp',
+  photo: '/images/leadership/oparachukwu.jpeg',
   photoAlt: 'Dr. Joshua A. Oparachukwu — Founder, SportLead Africa',
   bio: [
     'Dr. Joshua A. Oparachukwu is a Performance Strategist, Applied Performance Scientist and Sport Administration expert working at the intersection of human performance and the systems that shape sport. He is the Founder of SportLead Africa, where his focus is on sport management, governance, institutional development, infrastructure strategy and the development of stronger systems for the delivery of sport across Africa.',
@@ -186,7 +186,7 @@ export default function Leadership() {
         <div className="mb-14 text-center md:text-left">
           <span className="section-label">LEADERSHIP</span>
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-charcoal mb-4">
-            Practice Leadership
+            Leadership
           </h2>
           <p className="text-gray-500 text-base sm:text-lg max-w-2xl">
             Advisory capability grounded in performance science, institutional governance and sport administration.

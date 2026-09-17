@@ -5,7 +5,7 @@ import FacilityFundingForm from '@/components/forms/FacilityFundingForm';
 import { ArrowLeft } from 'lucide-react';
 
 export const metadata: Metadata = {
-  title: 'Fund a Facility Project | Partner With Us | SportLead Africa',
+  title: 'Fund a Facility Project | Partner With Us',
   description:
     'For companies, foundations, philanthropists, investors and other funders interested in supporting a defined sport facility or infrastructure project.',
   alternates: {

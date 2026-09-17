@@ -6,7 +6,7 @@ import Leadership from '@/components/about/Leadership';
 import ValuesStandards from '@/components/about/ValuesStandards';
 
 export const metadata: Metadata = {
-  title: 'About SportLead Africa | Advisory, Infrastructure & Governance',
+  title: 'About Us | Advisory, Infrastructure & Governance',
   description:
     'SportLead Africa is a sport management, infrastructure and institutional advisory organisation focused on strengthening the systems through which sport is planned, governed, organised and delivered across Africa.',
   alternates: {

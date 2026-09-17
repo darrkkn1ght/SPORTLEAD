@@ -5,7 +5,7 @@ import { Icon } from '@/components/ui/Icon';
 import { SERVICE_PILLARS } from '@/lib/constants';
 
 export const metadata: Metadata = {
-  title: 'Our Services | Advisory, Infrastructure & Governance | SportLead Africa',
+  title: 'Our Services | Advisory, Infrastructure & Governance',
   description:
     'We provide advisory, technical and project support across the institutional, operational and physical systems through which sport is delivered.',
   alternates: {
