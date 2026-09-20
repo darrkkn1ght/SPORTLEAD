@@ -92,10 +92,10 @@ export default function PrivacyPage() {
             <div>
               <h2 className="text-xl font-bold text-charcoal mb-3">6. Retention and Inquiries</h2>
               <p>
-                Information is retained for the duration of the advisory relationship or credential review cycle. To request inspection, correction, or deletion of submitted details, contact our governance office at{' '}
+                Information is retained for the duration of the advisory relationship or credential review cycle. To request inspection, correction, or deletion of submitted details, please send an email to:{' '}
                 <a href={`mailto:${SITE_EMAIL}`} className="text-brand-green font-semibold hover:underline">
                   {SITE_EMAIL}
-                </a>.
+                </a>
               </p>
             </div>
 

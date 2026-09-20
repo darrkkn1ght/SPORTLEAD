@@ -96,9 +96,7 @@ export default function ExpertNetworkPage() {
                   <h3 className="text-base font-bold text-charcoal mb-1">
                     {discipline}
                   </h3>
-                  <span className="text-xs text-gray-400 font-medium">
-                    Specialist Experts
-                  </span>
+
                 </div>
               </div>
             ))}

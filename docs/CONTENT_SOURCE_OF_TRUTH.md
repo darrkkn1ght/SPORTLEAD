@@ -193,7 +193,7 @@ Six stages, presented as a clean visual process — **not** six large competing 
 > His work across research, teaching, consulting and sport has included performance psychology, athlete development, organisational decision making, sport governance and applied performance systems. Through SportLead Africa, he is extending this work toward the institutional questions that sit behind sustainable sport development, including how facilities are planned and improved, how organisations are governed and administered, how strategy is developed, and how multidisciplinary expertise can be coordinated around complex sport sector projects.
 
 **[V] Credentials paragraph:**
-> Dr. Oparachukwu holds a Bachelor's degree in Human Kinetics, a Master's degree in the Sociology and Psychology of Sport, and a PhD in Performance Psychology from the University of Ibadan, Nigeria. He is also undertaking postgraduate study in Sport Administration.
+> Dr. Oparachukwu holds a Bachelor's degree in Human Kinetics, a Master's degree in the Sociology and Psychology of Sport, a Master's degree in Sport Administration and a PhD in Performance Psychology.
 
 Links: `joshuaoparachukwu.com` and LinkedIn.
 Build notes: professional portrait, not a casual image. This section must **not** dominate the About page.
